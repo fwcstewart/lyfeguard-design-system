@@ -53,4 +53,32 @@ describe('Input component', () => {
     expect(describedBy).toContain('custom');
     expect(describedBy).not.toContain('helper');
   });
+
+  test('renders prefix and suffix content inside the field', () => {
+    render(<Input label="Amount" prefix="£" suffix="GBP" />);
+
+    expect(screen.getByText('£')).toBeInTheDocument();
+    expect(screen.getByText('GBP')).toBeInTheDocument();
+    expect(screen.getByLabelText('Amount')).toBeInTheDocument();
+  });
+
+  test('displays a live character counter when enabled', () => {
+    render(
+      <Input
+        label="Code"
+        maxLength={6}
+        showCharacterCount
+        defaultValue="ABC"
+      />,
+    );
+
+    const input = screen.getByLabelText('Code');
+    const counter = screen.getByText('3/6');
+
+    expect(counter.id).toContain('counter');
+    expect(input).toHaveAttribute('aria-describedby', counter.id);
+
+    fireEvent.change(input, { target: { value: 'ABCDE' } });
+    expect(screen.getByText('5/6')).toBeInTheDocument();
+  });
 });

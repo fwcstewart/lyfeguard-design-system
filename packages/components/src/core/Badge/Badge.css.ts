@@ -17,7 +17,7 @@ const base = style({
   justifyContent: 'center',
   gap: vars.spacing[1] as unknown as string,
   padding: `${vars.spacing[1]} ${vars.spacing[2]}` as unknown as string,
-  borderRadius: vars.radius.round,
+  borderRadius: '6px',
   border: `1px solid ${badgeVars.outline}`,
   fontSize: vars.font.size.ui.overline,
   fontWeight: vars.font.weight.semiBold,
