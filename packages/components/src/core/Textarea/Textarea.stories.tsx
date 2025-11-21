@@ -4,7 +4,7 @@ import { vars } from '../../globals.css';
 import { Textarea } from './Textarea';
 
 const meta: Meta<typeof Textarea> = {
-  title: 'Core/Textarea',
+  title: 'Components/Textarea',
   component: Textarea,
   argTypes: {
     onChange: { action: 'changed' }
@@ -14,7 +14,7 @@ const meta: Meta<typeof Textarea> = {
 export default meta;
 type Story = StoryObj<typeof Textarea>;
 
-export const Light: Story = {
+export const Default: Story = {
   args: {
     label: 'Message',
     placeholder: 'Enter your message here',
@@ -24,18 +24,9 @@ export const Light: Story = {
   }
 };
 
-export const Dark: Story = {
-  args: {
-    label: 'Message',
-    placeholder: 'Enter your message here',
-    helperText: 'Share additional context if needed.',
-    maxLength: 120,
-    showCharacterCount: true,
-    defaultValue: 'Dark mode feedback'
-  },
+export const WithContainer: Story = {
   render: (args) => (
     <div
-      className="dark"
       style={{
         background: vars.color.theme.background,
         color: vars.color.theme.text.primary,
@@ -45,7 +36,14 @@ export const Dark: Story = {
         maxWidth: '600px'
       }}
     >
-      <Textarea {...args} />
+      <Textarea
+        label="Message"
+        placeholder="Enter your message here"
+        helperText="Share additional context if needed."
+        maxLength={120}
+        showCharacterCount={true}
+        {...args}
+      />
     </div>
   )
 };

@@ -35,6 +35,10 @@ export const headerCell = style({
   },
 });
 
+export const checkboxHeaderCell = style({
+  width: vars.spacing[8], // 40px
+});
+
 export const headerDensity = styleVariants({
   comfortable: {
     padding: `${vars.spacing[3]} ${vars.spacing[4]}` as unknown as string,

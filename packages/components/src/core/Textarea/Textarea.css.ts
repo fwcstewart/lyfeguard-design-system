@@ -27,7 +27,7 @@ export const textarea = style({
   fontSize: vars.font.size.body.base,
   lineHeight: vars.font.lineHeight.body.base,
   color: vars.color.theme.text.primary,
-  minHeight: '120px',
+  minHeight: `calc(${vars.spacing[10]} * 2)`, // 128px (64px * 2) - closest to 120px using spacing tokens
   resize: 'vertical',
   transition: `border-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, box-shadow ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
   selectors: {

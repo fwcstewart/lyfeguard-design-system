@@ -13,28 +13,7 @@ const focusRingWidth = vars.spacing[1];
 const handleOffset = `calc((${trackHeight} - ${handleSize}) / 2)`;
 const handleTranslateOn = `calc(${trackWidth} - ${trackHeight})`;
 
-export const track = style({
-  width: trackWidth,
-  height: trackHeight,
-  borderRadius: `calc(${trackHeight} / 2)`,
-  position: 'relative',
-  backgroundColor: trackColorVar,
-  transition: `background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, box-shadow ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
-});
-
-export const handle = style({
-  position: 'absolute',
-  top: handleOffset,
-  left: handleOffset,
-  width: handleSize,
-  height: handleSize,
-  borderRadius: '50%',
-  backgroundColor: handleColorVar,
-  boxShadow: vars.shadow.xs,
-  transform: `translateX(${handleTranslateVar})`,
-  transition: `transform ${vars.motion.duration.fast} ${vars.motion.easing.ease}, background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}, box-shadow ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
-});
-
+// Outer label wraps the switch and optional label text
 export const container = style({
   display: 'flex',
   alignItems: 'center',
@@ -73,9 +52,6 @@ export const container = style({
     '&:focus-visible': {
       outline: 'none',
     },
-    [`&:focus-visible ${track}`]: {
-      boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColorVar}`,
-    },
     '.dark &': {
       vars: {
         [trackColorVar]: vars.color.theme.border,
@@ -103,6 +79,35 @@ export const container = style({
       },
     },
   },
+});
+
+// Track of the switch. The background colour will change based on the
+// checked state via inline styles in the component.
+export const track = style({
+  width: trackWidth,
+  height: trackHeight,
+  borderRadius: `calc(${trackHeight} / 2)`,
+  position: 'relative',
+  backgroundColor: trackColorVar,
+  transition: `background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, box-shadow ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
+  selectors: {
+    [`${container}:focus-visible &`]: {
+      boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColorVar}`,
+    },
+  },
+});
+
+export const handle = style({
+  position: 'absolute',
+  top: handleOffset,
+  left: handleOffset,
+  width: handleSize,
+  height: handleSize,
+  borderRadius: '50%',
+  backgroundColor: handleColorVar,
+  boxShadow: vars.shadow.xs,
+  transform: `translateX(${handleTranslateVar})`,
+  transition: `transform ${vars.motion.duration.fast} ${vars.motion.easing.ease}, background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}, box-shadow ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
 });
 
 export const label = style({

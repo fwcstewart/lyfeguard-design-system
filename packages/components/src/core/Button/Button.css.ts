@@ -48,9 +48,9 @@ export const medium = style({
 });
 
 export const large = style({
-  padding: `${vars.spacing[4]} ${vars.spacing[6]}`,
-  fontSize: vars.font.size.body.base,
-  lineHeight: vars.font.lineHeight.body.base,
+  padding: `${vars.spacing[5]} ${vars.spacing[8]}`,
+  fontSize: vars.font.size.body.lg,
+  lineHeight: vars.font.lineHeight.body.lg,
 });
 
 export const primary = style([

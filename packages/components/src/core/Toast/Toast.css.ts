@@ -40,8 +40,8 @@ const borderColorVar = createVar();
 const accentColorVar = createVar();
 
 export const toastBase = style({
-  minWidth: '280px',
-  maxWidth: '420px',
+  minWidth: '280px', // 70 * 4px - not a standard spacing token, acceptable for component-specific sizing
+  maxWidth: '420px', // 105 * 4px - not a standard spacing token, acceptable for component-specific sizing
   padding: `${vars.spacing[4]} ${vars.spacing[5]}` as unknown as string,
   borderRadius: vars.radius.lg,
   fontFamily: vars.font.sans,

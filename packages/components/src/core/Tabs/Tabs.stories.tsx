@@ -3,7 +3,7 @@ import { Tabs, TabItem } from './Tabs';
 import { vars } from '../../globals.css';
 
 export default {
-  title: 'Core/Tabs',
+  title: 'Components/Tabs',
   component: Tabs,
 };
 
@@ -38,11 +38,20 @@ const darkModeTabs: TabItem[] = [
   },
 ];
 
-export const LightMode = () => <Tabs tabs={exampleTabs} />;
-
-export const DarkMode = () => (
+export const Default = () => (
   <div
-    className="dark"
+    style={{
+      background: vars.color.theme.background,
+      padding: vars.spacing[6] as unknown as string,
+      borderRadius: vars.radius.lg,
+    }}
+  >
+    <Tabs tabs={exampleTabs} />
+  </div>
+);
+
+export const WithDisabled = () => (
+  <div
     style={{
       background: vars.color.theme.background,
       padding: vars.spacing[6] as unknown as string,

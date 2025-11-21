@@ -3,7 +3,7 @@ import { Select } from './Select';
 import { vars } from '../../globals.css';
 
 const meta: Meta<typeof Select> = {
-  title: 'Core/Select',
+  title: 'Components/Select',
   component: Select,
   argTypes: {
     onChange: { action: 'changed' }
@@ -13,21 +13,9 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-export const LightMode: Story = {
-  render: () => (
-    <Select label="Country">
-      <option value="">Select a country</option>
-      <option value="uk">United Kingdom</option>
-      <option value="us">United States</option>
-      <option value="ie">Ireland</option>
-    </Select>
-  )
-};
-
-export const DarkMode: Story = {
+export const Default: Story = {
   render: () => (
     <div
-      className="dark"
       style={{
         background: vars.color.theme.background,
         color: vars.color.theme.text.primary,

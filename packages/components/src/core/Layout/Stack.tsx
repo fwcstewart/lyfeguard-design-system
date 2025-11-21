@@ -85,10 +85,13 @@ export const Stack = React.forwardRef<HTMLElement, StackProps>(
       ...style,
     };
 
+    // Type assertion needed because Component is dynamic
+    const ComponentWithRef = Component as React.ElementType;
+    
     return (
-      <Component ref={ref as React.Ref<any>} className={stackClassName} style={composedStyle} data-lyfeguard="Stack" {...props}>
+      <ComponentWithRef ref={ref} className={stackClassName} style={composedStyle} data-lyfeguard="Stack" {...props}>
         {children}
-      </Component>
+      </ComponentWithRef>
     );
   },
 );

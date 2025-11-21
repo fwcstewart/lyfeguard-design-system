@@ -14,7 +14,8 @@ export * from './core/Toast/ToastProvider';
 export { Toast } from './core/Toast/Toast';
 export type { ToastProps } from './core/Toast/Toast';
 export * from './core/Table/Table';
-export * from './core/Chart/BarChart';
+// Data Visualization Components
+export * from './core/DataVisuals';
 
 // Additional form controls and UI elements
 export * from './core/Checkbox/Checkbox';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { DateInput } from './DateInput';
 
 export default {
-  title: 'Core/DateInput',
+  title: 'Components/DateInput',
   component: DateInput,
 };
 
@@ -20,10 +20,8 @@ export const Controlled = () => {
   );
 };
 
-export const LightCalendar = () => <DateInput label="Pick a date" defaultValue="2024-06-15" />;
-
-export const DarkCalendar = () => (
-  <div className="dark" style={{ padding: 24, background: 'var(--color-neutral-900)' }}>
-    <DateInput label="Pick a date" defaultValue="2024-12-20" />
+export const WithCalendar = () => (
+  <div style={{ padding: 24, background: 'var(--color-theme-background)' }}>
+    <DateInput label="Pick a date" defaultValue="2024-06-15" />
   </div>
 );

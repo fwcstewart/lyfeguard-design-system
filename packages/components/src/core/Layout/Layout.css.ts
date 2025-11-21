@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { darkVars, vars } from '../../globals.css';
 import { breakpointQueries, resolveSpacing, spacingTokens } from './spacing';
 
@@ -95,26 +95,26 @@ export const stackRow = style({
   flexDirection: 'row',
 });
 
-export const stackWithColumnDividers = style({
-  selectors: {
-    '& > *:not(:last-child)': {
-      borderBottom: `1px solid ${vars.color.theme.border}`,
-      paddingBottom: resolveSpacing('sm'),
-    },
-    '.dark & > *:not(:last-child)': {
-      borderBottomColor: darkVars.color.theme.border,
-    },
-  },
+export const stackWithColumnDividers = style({});
+
+// Use globalStyle for selectors that target child elements
+globalStyle(`${stackWithColumnDividers} > *:not(:last-child)`, {
+  borderBottom: `1px solid ${vars.color.theme.border}`,
+  paddingBottom: resolveSpacing('sm'),
 });
 
-export const stackWithRowDividers = style({
-  selectors: {
-    '& > *:not(:last-child)': {
-      borderRight: `1px solid ${vars.color.theme.border}`,
-      paddingRight: resolveSpacing('sm'),
-    },
-    '.dark & > *:not(:last-child)': {
-      borderRightColor: darkVars.color.theme.border,
-    },
-  },
+globalStyle(`.dark ${stackWithColumnDividers} > *:not(:last-child)`, {
+  borderBottomColor: darkVars.color.theme.border,
+});
+
+export const stackWithRowDividers = style({});
+
+// Use globalStyle for selectors that target child elements
+globalStyle(`${stackWithRowDividers} > *:not(:last-child)`, {
+  borderRight: `1px solid ${vars.color.theme.border}`,
+  paddingRight: resolveSpacing('sm'),
+});
+
+globalStyle(`.dark ${stackWithRowDividers} > *:not(:last-child)`, {
+  borderRightColor: darkVars.color.theme.border,
 });

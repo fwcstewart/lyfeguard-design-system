@@ -1,15 +1,15 @@
 {
-  "/docs-176": {
+  "/docs-390": {
     "__comp": "5e95c892",
     "__context": {
       "plugin": "aba21aa0"
     }
   },
-  "/docs-37c": {
+  "/docs-215": {
     "__comp": "a7bd4aaa",
     "__props": "0058b4c6"
   },
-  "/docs-477": {
+  "/docs-b99": {
     "__comp": "a94703ab"
   },
   "/docs/components/components-overview-1f3": {
@@ -19,6 +19,10 @@
   "/docs/development/development-overview-059": {
     "__comp": "17896441",
     "content": "5aeeabc8"
+  },
+  "/docs/development/theming-token-hardening-198": {
+    "__comp": "17896441",
+    "content": "a77b6352"
   },
   "/docs/foundations/foundations-overview-613": {
     "__comp": "17896441",

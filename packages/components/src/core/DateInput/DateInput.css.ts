@@ -67,7 +67,7 @@ export const popover = style({
   boxShadow: vars.shadow.md,
   borderRadius: vars.radius.lg,
   padding: vars.spacing[4],
-  minWidth: '280px',
+  minWidth: '280px', // 70 * 4px - not a standard spacing token, acceptable for component-specific sizing
 });
 
 export const calendarHeader = style({

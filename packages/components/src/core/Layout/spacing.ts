@@ -26,13 +26,27 @@ export interface ResponsiveValue<T> {
 
 export type ResponsiveSpacing = SpacingToken | ResponsiveValue<SpacingToken>;
 
+/**
+ * Breakpoint values in pixels for use in media queries.
+ * Media queries cannot use CSS variables, so we use the actual pixel values here.
+ * These values match the breakpoints defined in packages/tokens/src/breakpoints.json
+ */
+const breakpointValues = {
+  sm: '544px',
+  md: '768px',
+  lg: '1012px',
+  xl: '1280px',
+  xxl: '1366px',
+  widescreen: '1640px',
+} as const;
+
 export const breakpointQueries: Record<Exclude<keyof ResponsiveValue<SpacingToken>, 'base'>, string> = {
-  sm: `screen and (min-width: ${vars.breakpoint.sm})`,
-  md: `screen and (min-width: ${vars.breakpoint.md})`,
-  lg: `screen and (min-width: ${vars.breakpoint.lg})`,
-  xl: `screen and (min-width: ${vars.breakpoint.xl})`,
-  xxl: `screen and (min-width: ${vars.breakpoint.xxl})`,
-  widescreen: `screen and (min-width: ${vars.breakpoint.widescreen})`,
+  sm: `screen and (min-width: ${breakpointValues.sm})`,
+  md: `screen and (min-width: ${breakpointValues.md})`,
+  lg: `screen and (min-width: ${breakpointValues.lg})`,
+  xl: `screen and (min-width: ${breakpointValues.xl})`,
+  xxl: `screen and (min-width: ${breakpointValues.xxl})`,
+  widescreen: `screen and (min-width: ${breakpointValues.widescreen})`,
 };
 
 export const defaultSpacing: SpacingToken = 'md';

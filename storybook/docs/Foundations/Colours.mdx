@@ -1,0 +1,266 @@
+import { Meta } from '@storybook/blocks';
+import React from 'react';
+import { ColorSwatch } from '../components/ColorSwatch';
+
+<Meta title="Foundations/Colours" />
+
+# Colours
+
+The Lyfeguard Design System uses a semantic colour system that adapts to light and dark themes.
+
+## Theme-Aware Colours
+
+All colours automatically adapt based on the active theme (light or dark). Use semantic colour tokens rather than hard-coding values.
+
+### Background Colours
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Background" 
+    hex="#FFFFFF" 
+    cssVar="--color-theme-background"
+    description="Main page background"
+  />
+  <ColorSwatch 
+    name="Surface" 
+    hex="#F5F5F5" 
+    cssVar="--color-theme-surface"
+    description="Card and container backgrounds"
+  />
+  <ColorSwatch 
+    name="Surface Hover" 
+    hex="#E7ECEC" 
+    cssVar="--color-theme-surface-hover"
+    description="Hover state for surfaces"
+  />
+  <ColorSwatch 
+    name="Surface Active" 
+    hex="#CFD6D6" 
+    cssVar="--color-theme-surface-active"
+    description="Active state for surfaces"
+  />
+</div>
+
+### Text Colours
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Text Primary" 
+    hex="#2E3B3B" 
+    cssVar="--color-theme-text-primary"
+    description="Primary text content"
+  />
+  <ColorSwatch 
+    name="Text Secondary" 
+    hex="#5C6969" 
+    cssVar="--color-theme-text-secondary"
+    description="Secondary text content"
+  />
+  <ColorSwatch 
+    name="Text Tertiary" 
+    hex="#8A9595" 
+    cssVar="--color-theme-text-tertiary"
+    description="Tertiary/disabled text"
+  />
+  <ColorSwatch 
+    name="Text Disabled" 
+    hex="#A0AAAA" 
+    cssVar="--color-theme-text-disabled"
+    description="Disabled state text"
+  />
+</div>
+
+### Border Colours
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Border" 
+    hex="#CFD6D6" 
+    cssVar="--color-theme-border"
+    description="Default borders"
+  />
+  <ColorSwatch 
+    name="Border Hover" 
+    hex="#B8C0C0" 
+    cssVar="--color-theme-border-hover"
+    description="Hover state borders"
+  />
+</div>
+
+## Brand Colours
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Brand 900" 
+    hex="#051A22" 
+    cssVar="--color-brand-900"
+    description="Darkest brand colour"
+  />
+  <ColorSwatch 
+    name="Brand 800" 
+    hex="#08282E" 
+    cssVar="--color-brand-800"
+    description="Dark brand variant"
+  />
+  <ColorSwatch 
+    name="Brand 500" 
+    hex="#177B9A" 
+    cssVar="--color-brand-500"
+    description="Primary brand colour"
+  />
+  <ColorSwatch 
+    name="Accent Mint" 
+    hex="#00FFB2" 
+    cssVar="--color-accent-mint"
+    description="Accent colour for highlights and focus states"
+  />
+</div>
+
+## Semantic Colours
+
+### Success
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Success 500" 
+    hex="#00FFB2" 
+    cssVar="--color-success-500"
+    description="For positive actions and confirmations"
+  />
+  <ColorSwatch 
+    name="Success 600" 
+    hex="#00E0A0" 
+    cssVar="--color-success-600"
+    description="Darker success variant"
+  />
+</div>
+
+### Warning
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Warning 500" 
+    hex="#F7B539" 
+    cssVar="--color-warning-500"
+    description="For cautionary messages"
+  />
+  <ColorSwatch 
+    name="Warning 100" 
+    hex="#FFF8E6" 
+    cssVar="--color-warning-100"
+    description="Light warning background"
+  />
+</div>
+
+### Error
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Error 500" 
+    hex="#E24C4B" 
+    cssVar="--color-error-500"
+    description="For errors and destructive actions"
+  />
+  <ColorSwatch 
+    name="Error 100" 
+    hex="#FDEDED" 
+    cssVar="--color-error-100"
+    description="Light error background"
+  />
+</div>
+
+### Info
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch 
+    name="Info 500" 
+    hex="#2AA7FF" 
+    cssVar="--color-info-500"
+    description="For informational messages"
+  />
+  <ColorSwatch 
+    name="Info 100" 
+    hex="#E4F3FF" 
+    cssVar="--color-info-100"
+    description="Light info background"
+  />
+</div>
+
+## Neutral Palette
+
+<div style={{ 
+  display: 'grid', 
+  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+  gap: '16px',
+  marginBottom: '32px'
+}}>
+  <ColorSwatch name="Neutral 0" hex="#FFFFFF" cssVar="--color-neutral-0" />
+  <ColorSwatch name="Neutral 50" hex="#F5F5F5" cssVar="--color-neutral-50" />
+  <ColorSwatch name="Neutral 100" hex="#E7ECEC" cssVar="--color-neutral-100" />
+  <ColorSwatch name="Neutral 200" hex="#CFD6D6" cssVar="--color-neutral-200" />
+  <ColorSwatch name="Neutral 300" hex="#B8C0C0" cssVar="--color-neutral-300" />
+  <ColorSwatch name="Neutral 400" hex="#A0AAAA" cssVar="--color-neutral-400" />
+  <ColorSwatch name="Neutral 500" hex="#8A9595" cssVar="--color-neutral-500" />
+  <ColorSwatch name="Neutral 600" hex="#737F7F" cssVar="--color-neutral-600" />
+  <ColorSwatch name="Neutral 700" hex="#5C6969" cssVar="--color-neutral-700" />
+  <ColorSwatch name="Neutral 800" hex="#455252" cssVar="--color-neutral-800" />
+  <ColorSwatch name="Neutral 900" hex="#2E3B3B" cssVar="--color-neutral-900" />
+</div>
+
+## Usage
+
+Always use CSS variables or the `vars` object from `globals.css`:
+
+```tsx
+import { vars } from '@lyfeguard/design-system/globals.css';
+
+// ✅ Good
+<div style={{ color: vars.color.theme.text.primary }}>
+
+// ❌ Bad
+<div style={{ color: '#000000' }}>
+```
+
+## Dark Mode
+
+All colours automatically adapt in dark mode. The design system handles theme switching transparently - just ensure you're using theme-aware tokens.

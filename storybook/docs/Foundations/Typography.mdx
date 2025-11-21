@@ -1,0 +1,391 @@
+import { Meta } from '@storybook/blocks';
+import { vars } from '../../../packages/components/src/globals.css';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+The Lyfeguard Design System uses a consistent typography scale based on design tokens.
+
+## Font Families
+
+- **Sans-serif** - Primary font family for UI elements
+- **Monospace** - For code and technical content
+
+## Headings
+
+<div style={{ 
+  display: 'flex', 
+  flexDirection: 'column', 
+  gap: '24px',
+  padding: '24px',
+  background: 'var(--color-theme-surface)',
+  borderRadius: '8px',
+  marginBottom: '24px'
+}}>
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Heading XL</div>
+    <h1 style={{
+      margin: 0,
+      fontSize: vars.font.size.heading.xl,
+      fontWeight: vars.font.weight.bold,
+      lineHeight: vars.font.lineHeight.heading.xl,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </h1>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Heading LG</div>
+    <h2 style={{
+      margin: 0,
+      fontSize: vars.font.size.heading.lg,
+      fontWeight: vars.font.weight.bold,
+      lineHeight: vars.font.lineHeight.heading.lg,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </h2>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Heading MD</div>
+    <h3 style={{
+      margin: 0,
+      fontSize: vars.font.size.heading.md,
+      fontWeight: vars.font.weight.bold,
+      lineHeight: vars.font.lineHeight.heading.md,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </h3>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Heading SM</div>
+    <h4 style={{
+      margin: 0,
+      fontSize: vars.font.size.heading.sm,
+      fontWeight: vars.font.weight.semiBold,
+      lineHeight: vars.font.lineHeight.heading.sm,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </h4>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Heading XS</div>
+    <h5 style={{
+      margin: 0,
+      fontSize: vars.font.size.heading.xs,
+      fontWeight: vars.font.weight.semiBold,
+      lineHeight: vars.font.lineHeight.heading.xs,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </h5>
+  </div>
+</div>
+
+## Body Text
+
+<div style={{ 
+  display: 'flex', 
+  flexDirection: 'column', 
+  gap: '24px',
+  padding: '24px',
+  background: 'var(--color-theme-surface)',
+  borderRadius: '8px',
+  marginBottom: '24px'
+}}>
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Body LG</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.lg,
+      fontWeight: vars.font.weight.regular,
+      lineHeight: vars.font.lineHeight.body.lg,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog. This is body large text, perfect for introductory paragraphs and important content.
+    </p>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Body Base</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.base,
+      fontWeight: vars.font.weight.regular,
+      lineHeight: vars.font.lineHeight.body.base,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog. This is the default body text size, used for most content throughout the application.
+    </p>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Body SM</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.sm,
+      fontWeight: vars.font.weight.regular,
+      lineHeight: vars.font.lineHeight.body.sm,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog. This is small body text, ideal for secondary information and captions.
+    </p>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Body XS</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.xs,
+      fontWeight: vars.font.weight.regular,
+      lineHeight: vars.font.lineHeight.body.xs,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog. This is extra small body text for fine print and metadata.
+    </p>
+  </div>
+</div>
+
+## UI Elements
+
+<div style={{ 
+  display: 'flex', 
+  flexDirection: 'column', 
+  gap: '24px',
+  padding: '24px',
+  background: 'var(--color-theme-surface)',
+  borderRadius: '8px',
+  marginBottom: '24px'
+}}>
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>UI Label</div>
+    <label style={{
+      margin: 0,
+      fontSize: vars.font.size.ui.label,
+      fontWeight: vars.font.weight.medium,
+      lineHeight: vars.font.lineHeight.ui.label,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)',
+      display: 'block'
+    }}>
+      Form Label Text
+    </label>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>UI Button</div>
+    <span style={{
+      margin: 0,
+      fontSize: vars.font.size.ui.button,
+      fontWeight: vars.font.weight.medium,
+      lineHeight: vars.font.lineHeight.ui.button,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)',
+      display: 'inline-block'
+    }}>
+      Button Text
+    </span>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>UI Overline</div>
+    <div style={{
+      margin: 0,
+      fontSize: vars.font.size.ui.overline,
+      fontWeight: vars.font.weight.medium,
+      lineHeight: vars.font.lineHeight.ui.overline,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-secondary)',
+      textTransform: 'uppercase',
+      letterSpacing: '0.5px'
+    }}>
+      Overline Text
+    </div>
+  </div>
+</div>
+
+## Font Weights
+
+<div style={{ 
+  display: 'flex', 
+  flexDirection: 'column', 
+  gap: '16px',
+  padding: '24px',
+  background: 'var(--color-theme-surface)',
+  borderRadius: '8px',
+  marginBottom: '24px'
+}}>
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Regular (400)</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.base,
+      fontWeight: vars.font.weight.regular,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </p>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Medium (500)</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.base,
+      fontWeight: vars.font.weight.medium,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </p>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Semi-bold (600)</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.base,
+      fontWeight: vars.font.weight.semiBold,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </p>
+  </div>
+  
+  <div>
+    <div style={{ 
+      fontSize: '12px', 
+      color: 'var(--color-theme-text-secondary)',
+      marginBottom: '8px',
+      fontFamily: vars.font.sans
+    }}>Bold (700)</div>
+    <p style={{
+      margin: 0,
+      fontSize: vars.font.size.body.base,
+      fontWeight: vars.font.weight.bold,
+      fontFamily: vars.font.sans,
+      color: 'var(--color-theme-text-primary)'
+    }}>
+      The quick brown fox jumps over the lazy dog
+    </p>
+  </div>
+</div>
+
+## Usage
+
+Always use typography tokens:
+
+```tsx
+import { vars } from '@lyfeguard/design-system/globals.css';
+
+// ✅ Good
+<h1 style={{
+  fontSize: vars.font.size.heading.lg,
+  fontWeight: vars.font.weight.bold,
+  lineHeight: vars.font.lineHeight.heading.lg,
+  fontFamily: vars.font.sans
+}}>
+
+// ❌ Bad
+<h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>
+```
+
+## Best Practices
+
+- Use heading sizes semantically (h1, h2, etc.)
+- Maintain consistent spacing between text elements
+- Ensure sufficient contrast for readability
+- Use appropriate line heights for text blocks

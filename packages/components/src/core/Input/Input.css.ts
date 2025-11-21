@@ -24,8 +24,8 @@ export const label = style({
 
 const shake = keyframes({
   '0%, 100%': { transform: 'translateX(0)' },
-  '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-2px)' },
-  '20%, 40%, 60%, 80%': { transform: 'translateX(2px)' },
+  '10%, 30%, 50%, 70%, 90%': { transform: `translateX(calc(-1 * ${vars.spacing[1]} / 2))` }, // -2px
+  '20%, 40%, 60%, 80%': { transform: `translateX(calc(${vars.spacing[1]} / 2))` }, // 2px
 });
 
 export const input = style({

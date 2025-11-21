@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { BarChart, type BarDefinition } from './BarChart';
-import { vars } from '../../globals.css';
+import { vars } from '../../../globals.css';
 
 const meta: Meta<typeof BarChart> = {
-  title: 'Core/Charts/BarChart',
+  title: 'DataVisuals/BarChart',
   component: BarChart,
 };
 
@@ -27,7 +27,7 @@ const stackedBars: BarDefinition[] = [
   { key: 'revenue', label: 'Revenue', colorSlot: 'success' },
 ];
 
-export const LightMode: Story = {
+export const Default: Story = {
   args: {
     data: monthlyResults,
     xKey: 'month',
@@ -35,13 +35,8 @@ export const LightMode: Story = {
     width: 560,
     height: 320,
   },
-};
-
-export const DarkMode: Story = {
-  args: LightMode.args,
   render: (args) => (
     <div
-      className="dark"
       style={{
         background: vars.color.theme.background,
         color: vars.color.theme.text.primary,
@@ -75,3 +70,42 @@ export const CustomPalette: Story = {
     height: 360,
   },
 };
+
+export const Stacked: Story = {
+  args: {
+    data: quarterlyPerformance,
+    xKey: 'quarter',
+    bars: [
+      { key: 'revenue', label: 'Revenue', colorSlot: 'success', stackId: '1' },
+      { key: 'expenses', label: 'Expenses', colorSlot: 'warning', stackId: '1' },
+      { key: 'investment', label: 'Investment', colorSlot: 'accent', stackId: '1' },
+    ],
+    width: 640,
+    height: 360,
+  },
+};
+
+export const Responsive: Story = {
+  args: {
+    data: monthlyResults,
+    xKey: 'month',
+    bars: stackedBars,
+    height: 320,
+    responsive: true,
+  },
+  render: (args) => (
+    <div
+      style={{
+        background: vars.color.theme.background,
+        color: vars.color.theme.text.primary,
+        padding: vars.spacing[6] as unknown as string,
+        borderRadius: vars.radius.md,
+        width: '100%',
+        maxWidth: 800,
+      }}
+    >
+      <BarChart {...args} />
+    </div>
+  ),
+};
+

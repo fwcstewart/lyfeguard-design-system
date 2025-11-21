@@ -7,7 +7,7 @@ import { vars } from '../../globals.css';
 import { ToastVariant } from './types';
 
 const meta: Meta<typeof Toast> = {
-  title: 'Core/Toast',
+  title: 'Components/Toast',
   component: Toast,
 };
 
@@ -65,118 +65,10 @@ const ToastDemoInner: React.FC = () => {
   );
 };
 
-export const Basic: Story = {
-  render: () => {
-    const [open, setOpen] = React.useState(false);
-    return (
-      <div style={{ padding: vars.spacing[5] }}>
-        <Button onClick={() => setOpen(true)}>Show Toast</Button>
-        <Toast open={open} onClose={() => setOpen(false)} variant="success">
-          This is a basic toast notification.
-        </Toast>
-      </div>
-    );
-  },
-};
-
-export const Variants: Story = {
-  render: () => {
-    const [open, setOpen] = React.useState<string | null>(null);
-    return (
-      <div
-        style={{
-          padding: vars.spacing[5],
-          display: 'flex',
-          flexDirection: 'column',
-          gap: vars.spacing[3],
-        }}
-      >
-        <div style={{ display: 'flex', gap: vars.spacing[2], flexWrap: 'wrap' }}>
-          <Button onClick={() => setOpen('info')}>Info</Button>
-          <Button onClick={() => setOpen('success')}>Success</Button>
-          <Button onClick={() => setOpen('warning')}>Warning</Button>
-          <Button onClick={() => setOpen('error')}>Error</Button>
-        </div>
-        <Toast
-          open={open === 'info'}
-          onClose={() => setOpen(null)}
-          variant="info"
-        >
-          This is an info toast.
-        </Toast>
-        <Toast
-          open={open === 'success'}
-          onClose={() => setOpen(null)}
-          variant="success"
-        >
-          Operation completed successfully!
-        </Toast>
-        <Toast
-          open={open === 'warning'}
-          onClose={() => setOpen(null)}
-          variant="warning"
-        >
-          Please review this action.
-        </Toast>
-        <Toast
-          open={open === 'error'}
-          onClose={() => setOpen(null)}
-          variant="error"
-        >
-          An error occurred.
-        </Toast>
-      </div>
-    );
-  },
-};
-
-export const WithProvider: Story = {
+export const Default: Story = {
   render: () => (
     <ToastProvider>
       <ToastDemoInner />
     </ToastProvider>
-  ),
-};
-
-const StatusShowcase: React.FC<{ className?: string; style?: React.CSSProperties }> = ({ className, style }) => (
-  <div
-    className={className}
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: vars.spacing[3],
-      padding: vars.spacing[5],
-      background: vars.color.theme.surface,
-      color: vars.color.theme.text.primary,
-      borderRadius: vars.radius.lg,
-      ...style,
-    }}
-  >
-    {variantOrder.map((variant) => (
-      <Toast key={variant} open onClose={() => {}} variant={variant} duration={0}>
-        {variant === 'info' && 'Information update with helpful context.'}
-        {variant === 'success' && 'Success toast confirming the action completed.'}
-        {variant === 'warning' && 'Warning toast to review your changes.'}
-        {variant === 'error' && 'Error toast describing what needs attention.'}
-      </Toast>
-    ))}
-  </div>
-);
-
-export const LightAndDarkStatuses: Story = {
-  render: () => (
-    <div
-      style={{
-        display: 'grid',
-        gap: vars.spacing[4],
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-      }}
-    >
-      <StatusShowcase />
-      <StatusShowcase
-        className="dark"
-        style={{ background: vars.color.theme.surface, color: vars.color.theme.text.primary }}
-      />
-    </div>
   ),
 };

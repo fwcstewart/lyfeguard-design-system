@@ -4,7 +4,7 @@ import { Checkbox } from './Checkbox';
 import { vars } from '../../globals.css';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Core/Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
 };
 
@@ -12,26 +12,9 @@ export default meta;
 
 type Story = StoryObj<typeof Checkbox>;
 
-export const LightSurface: Story = {
+export const Default: Story = {
   render: () => (
     <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: vars.spacing[3] as unknown as string,
-      }}
-    >
-      <Checkbox label="Unchecked" />
-      <Checkbox label="Checked" defaultChecked />
-      <Checkbox label="Disabled" disabled />
-    </div>
-  ),
-};
-
-export const DarkSurface: Story = {
-  render: () => (
-    <div
-      className="dark"
       style={{
         background: vars.color.theme.background,
         color: vars.color.theme.text.primary,
@@ -42,9 +25,9 @@ export const DarkSurface: Story = {
         borderRadius: vars.radius.md,
       }}
     >
-      <Checkbox label="Checked on dark" defaultChecked />
-      <Checkbox label="Unchecked on dark" />
-      <Checkbox label="Disabled on dark" disabled />
+      <Checkbox label="Unchecked" />
+      <Checkbox label="Checked" defaultChecked />
+      <Checkbox label="Disabled" disabled />
     </div>
   ),
 };

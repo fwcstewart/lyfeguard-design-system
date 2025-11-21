@@ -17,8 +17,8 @@
   },
   "sidebar": "docs",
   "previous": {
-    "title": "Development",
-    "permalink": "/docs/development/development-overview"
+    "title": "Theming & token hardening",
+    "permalink": "/docs/development/theming-token-hardening"
   },
   "next": {
     "title": "Governance",

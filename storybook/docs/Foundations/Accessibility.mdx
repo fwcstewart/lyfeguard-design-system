@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Accessibility" />
+
+# Accessibility
+
+Accessibility is a core principle of the Lyfeguard Design System. All components are designed to meet WCAG 2.1 Level AA standards.
+
+## Keyboard Navigation
+
+All interactive components support full keyboard navigation:
+- Use `Tab` to move between interactive elements
+- Use `Enter` or `Space` to activate buttons and controls
+- Use arrow keys to navigate within groups (radio buttons, tabs, etc.)
+- Use `Escape` to close modals and dismiss notifications
+
+## Focus Management
+
+- All interactive elements have visible focus indicators
+- Focus is managed appropriately in modals and dialogs
+- Focus traps prevent users from tabbing outside modal contexts
+
+## ARIA Attributes
+
+Components include appropriate ARIA attributes:
+- `aria-label` for icon-only buttons
+- `aria-describedby` for helper text
+- `aria-expanded` for collapsible content
+- `role` attributes where semantic HTML isn't sufficient
+
+## Screen Reader Support
+
+- All form inputs have associated labels
+- Status messages are announced appropriately
+- Loading states are communicated to assistive technologies
+- Error messages are clearly associated with their inputs
+
+## Color Contrast
+
+All text meets WCAG AA contrast requirements:
+- Normal text: 4.5:1 contrast ratio
+- Large text: 3:1 contrast ratio
+- Interactive elements: 3:1 contrast ratio
+
+## Testing
+
+When using components, ensure:
+- All functionality is accessible via keyboard
+- Screen readers can navigate and understand the interface
+- Color is not the only means of conveying information
+- Focus indicators are visible and clear
+

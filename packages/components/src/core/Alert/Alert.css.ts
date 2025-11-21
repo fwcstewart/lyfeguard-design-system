@@ -4,7 +4,7 @@ import { vars } from '../../globals.css';
 const fadeIn = keyframes({
   '0%': {
     opacity: 0,
-    transform: 'translateY(-8px)',
+    transform: `translateY(calc(-1 * ${vars.spacing[2]}))`, // -8px
   },
   '100%': {
     opacity: 1,
@@ -34,22 +34,22 @@ export const base = style({
 export const variants = styleVariants({
   info: {
     background: vars.color.status.info.surface,
-    borderLeft: `4px solid ${vars.color.status.info.border}`,
+    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.info.border}`, // 4px
     color: vars.color.status.info.text,
   },
   success: {
     background: vars.color.status.success.surface,
-    borderLeft: `4px solid ${vars.color.status.success.border}`,
+    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.success.border}`, // 4px
     color: vars.color.status.success.text,
   },
   warning: {
     background: vars.color.status.warning.surface,
-    borderLeft: `4px solid ${vars.color.status.warning.border}`,
+    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.warning.border}`, // 4px
     color: vars.color.status.warning.text,
   },
   error: {
     background: vars.color.status.error.surface,
-    borderLeft: `4px solid ${vars.color.status.error.border}`,
+    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.error.border}`, // 4px
     color: vars.color.status.error.text,
   },
 });

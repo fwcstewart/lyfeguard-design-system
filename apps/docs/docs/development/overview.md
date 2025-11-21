@@ -71,12 +71,13 @@ function App() {
 }
 ```
 
-When the `.dark` class is applied to the root element, the neutral palette
-is inverted and components automatically adapt to dark backgrounds while
-retaining brand and accent colours.  You can refine the dark palette by
-adjusting the token values in `globals.css.ts` or supplying custom themes in
-the `themes` directory.
-```
+When the `.dark` class is applied to the root element, the theme switches to
+a dark colour scheme.  The dark theme uses brand colours for backgrounds and
+surfaces: the page background uses `brand-900` (a deep teal), while component
+surfaces use `brand-500` at 20% opacity for a subtle tinted appearance.  Text
+colours are inverted to maintain contrast, and components automatically adapt
+their styling.  You can refine the dark palette by adjusting the token values
+in `globals.css.ts` or supplying custom themes in the `themes` directory.
 
 ## Building the packages
 

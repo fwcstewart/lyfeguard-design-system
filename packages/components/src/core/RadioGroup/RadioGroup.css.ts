@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
 const controlSize = vars.spacing[4];
@@ -26,12 +26,6 @@ export const option = style({
   selectors: {
     '&[data-disabled="true"]': {
       cursor: 'not-allowed',
-    },
-    '&[data-disabled="true"] span': {
-      color: vars.color.theme.text.disabled,
-    },
-    '.dark &[data-disabled="true"] span': {
-      color: vars.color.theme.text.disabled,
     },
   },
 });
@@ -114,6 +108,11 @@ export const optionLabel = style({
   fontSize: vars.font.size.body.sm,
   lineHeight: vars.font.lineHeight.body.sm,
   color: vars.color.theme.text.primary,
+});
+
+// Style the label when inside a disabled option
+globalStyle(`${option}[data-disabled="true"] ${optionLabel}`, {
+  color: vars.color.theme.text.disabled,
 });
 
 export const helperText = style({

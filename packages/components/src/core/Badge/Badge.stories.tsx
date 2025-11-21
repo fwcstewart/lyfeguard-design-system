@@ -3,7 +3,7 @@ import React from 'react';
 import { Badge } from './Badge';
 
 const meta: Meta<typeof Badge> = {
-  title: 'Core/Badge',
+  title: 'Components/Badge',
   component: Badge,
 };
 
@@ -11,74 +11,35 @@ export default meta;
 
 type Story = StoryObj<typeof Badge>;
 
-const Wrapper: React.FC<React.PropsWithChildren<{ dark?: boolean }>> = ({ dark, children }) => (
+const Wrapper: React.FC<React.PropsWithChildren> = ({ children }) => (
   <div
-    className={dark ? 'dark' : undefined}
-    style={{ display: 'flex', gap: '12px', padding: '12px', background: dark ? '#0e1821' : '#fff' }}
+    style={{ display: 'flex', gap: '12px', padding: '12px', background: 'var(--color-theme-surface)' }}
   >
     {children}
   </div>
 );
 
-export const LightTheme: Story = {
+export const Default: Story = {
   render: () => (
-    <Wrapper>
-      <Badge variant="primary">Primary</Badge>
-      <Badge variant="success">Success</Badge>
-      <Badge variant="warning">Warning</Badge>
-      <Badge variant="error">Error</Badge>
-      <Badge variant="info">Info</Badge>
-    </Wrapper>
-  ),
-};
-
-export const DarkTheme: Story = {
-  render: () => (
-    <Wrapper dark>
-      <Badge variant="primary">Primary</Badge>
-      <Badge variant="success">Success</Badge>
-      <Badge variant="warning">Warning</Badge>
-      <Badge variant="error">Error</Badge>
-      <Badge variant="info">Info</Badge>
-    </Wrapper>
-  ),
-};
-
-export const Appearances: Story = {
-  render: () => (
-    <div style={{ display: 'grid', gap: '12px' }}>
-      <Wrapper>
-        <Badge appearance="pill" variant="success">
-          Pill
-        </Badge>
-        <Badge appearance="solid" variant="success">
-          Solid
-        </Badge>
-        <Badge appearance="outline" variant="success">
-          Outline
-        </Badge>
-      </Wrapper>
-      <Wrapper dark>
-        <Badge appearance="pill" variant="error">
-          Pill
-        </Badge>
-        <Badge appearance="solid" variant="error">
-          Solid
-        </Badge>
-        <Badge appearance="outline" variant="error">
-          Outline
-        </Badge>
-      </Wrapper>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-theme-text-secondary)' }}>Variants</p>
+        <Wrapper>
+          <Badge variant="primary">Primary</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+          <Badge variant="info">Info</Badge>
+        </Wrapper>
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-theme-text-secondary)' }}>Appearances</p>
+        <Wrapper>
+          <Badge appearance="pill" variant="success">Pill</Badge>
+          <Badge appearance="solid" variant="success">Solid</Badge>
+          <Badge appearance="outline" variant="success">Outline</Badge>
+        </Wrapper>
+      </div>
     </div>
-  ),
-};
-
-export const WithScreenReaderText: Story = {
-  render: () => (
-    <Wrapper>
-      <Badge variant="info" srText="Sync status: updated">
-        Synced
-      </Badge>
-    </Wrapper>
   ),
 };

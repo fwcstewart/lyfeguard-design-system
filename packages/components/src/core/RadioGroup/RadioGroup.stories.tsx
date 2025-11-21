@@ -4,7 +4,7 @@ import { RadioGroup, RadioOption } from './RadioGroup';
 import { vars } from '../../globals.css';
 
 const meta: Meta<typeof RadioGroup> = {
-  title: 'Core/RadioGroup',
+  title: 'Components/RadioGroup',
   component: RadioGroup,
 };
 
@@ -16,15 +16,33 @@ const options: RadioOption[] = [
   { value: 'amex', label: 'American Express' },
 ];
 
-export const Light: StoryObj<typeof RadioGroup> = {
+export const Default: StoryObj<typeof RadioGroup> = {
   render: () => (
-    <RadioGroup
-      name="cards"
-      label="Payment Method"
-      helperText="Select the card you prefer to use for checkout."
-      options={options}
-      defaultValue="visa"
-    />
+    <div
+      style={{
+        background: vars.color.theme.background,
+        color: vars.color.theme.text.primary,
+        padding: vars.spacing[6] as unknown as string,
+        display: 'inline-flex',
+        flexDirection: 'column',
+        gap: vars.spacing[3],
+      }}
+    >
+      <RadioGroup
+        name="cards"
+        label="Payment Method"
+        helperText="Select the card you prefer to use for checkout."
+        options={options}
+        defaultValue="visa"
+      />
+      <RadioGroup
+        name="cards-disabled"
+        label="Disabled group"
+        helperText="Disabled radios inherit theme styles."
+        options={options.map((option) => ({ ...option, disabled: true }))}
+        defaultValue="visa"
+      />
+    </div>
   ),
 };
 
@@ -42,35 +60,4 @@ export const Controlled: StoryObj<typeof RadioGroup> = {
       />
     );
   },
-};
-
-export const Dark: StoryObj<typeof RadioGroup> = {
-  render: () => (
-    <div
-      className="dark"
-      style={{
-        background: vars.color.theme.background,
-        color: vars.color.theme.text.primary,
-        padding: vars.spacing[6] as unknown as string,
-        display: 'inline-flex',
-        flexDirection: 'column',
-        gap: vars.spacing[3],
-      }}
-    >
-      <RadioGroup
-        name="cards-dark"
-        label="Payment Method"
-        helperText="Dark theme tokens adjust the ring and dot."
-        options={options}
-        defaultValue="mastercard"
-      />
-      <RadioGroup
-        name="cards-dark-disabled"
-        label="Disabled group"
-        helperText="Disabled radios inherit dark theme styles."
-        options={options.map((option) => ({ ...option, disabled: true }))}
-        defaultValue="visa"
-      />
-    </div>
-  ),
 };

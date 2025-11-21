@@ -3,8 +3,14 @@ import path from 'path';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 const config: StorybookConfig = {
-  stories: ['../packages/components/src/**/*.stories.@(ts|tsx|mdx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  stories: [
+    '../storybook/docs/**/*.mdx',
+    '../packages/components/src/**/*.stories.@(ts|tsx)',
+  ],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+  ],
   framework: {
     name: '@storybook/react-vite',
     options: {}

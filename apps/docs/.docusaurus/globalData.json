@@ -21,6 +21,11 @@
               "sidebar": "docs"
             },
             {
+              "id": "development/theming-token-hardening",
+              "path": "/docs/development/theming-token-hardening",
+              "sidebar": "docs"
+            },
+            {
               "id": "foundations/foundations-overview",
               "path": "/docs/foundations/foundations-overview",
               "sidebar": "docs"

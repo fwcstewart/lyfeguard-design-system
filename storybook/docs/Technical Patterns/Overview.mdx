@@ -1,0 +1,86 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Technical Patterns/Overview" />
+
+# Technical Patterns
+
+Technical patterns provide reusable solutions for common implementation challenges.
+
+## Theme Management
+
+The design system uses a theme provider pattern:
+
+```tsx
+import { ThemeProvider } from '@lyfeguard/design-system';
+
+<ThemeProvider theme="light">
+  <YourApp />
+</ThemeProvider>
+```
+
+Themes automatically apply CSS variables that all components use.
+
+## Token Usage
+
+Always import tokens from the design system:
+
+```tsx
+import { vars } from '@lyfeguard/design-system/globals.css';
+
+// Use tokens, never hard-code values
+<div style={{ 
+  padding: vars.spacing[4],
+  color: vars.color.theme.text.primary 
+}}>
+```
+
+## Component Composition
+
+Components are designed to be composed:
+
+```tsx
+<Card>
+  <Stack gap="md">
+    <h3>Title</h3>
+    <p>Content</p>
+    <Button>Action</Button>
+  </Stack>
+</Card>
+```
+
+## Form Patterns
+
+Forms should use proper labeling and error handling:
+
+```tsx
+<Stack gap="md">
+  <Input 
+    label="Email"
+    helperText="We'll never share your email"
+    error={errors.email}
+  />
+  <Button type="submit">Submit</Button>
+</Stack>
+```
+
+## Responsive Patterns
+
+Use responsive props for breakpoint-specific values:
+
+```tsx
+<Stack 
+  gap={{ base: 'sm', md: 'lg' }}
+  padding={{ base: 'md', lg: 'xl' }}
+>
+  Content
+</Stack>
+```
+
+## Accessibility Patterns
+
+- Always provide labels for form inputs
+- Use semantic HTML elements
+- Ensure keyboard navigation works
+- Test with screen readers
+- Maintain proper focus management
+

@@ -92,9 +92,9 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
     const [cursorDate, setCursorDate] = useState<Date>(selectedDate || new Date());
 
     const popoverRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = React.useRef<HTMLInputElement | null>(null) as React.MutableRefObject<HTMLInputElement | null>;
 
-    const mergedRef = (node: HTMLInputElement) => {
+    const mergedRef = (node: HTMLInputElement | null) => {
       inputRef.current = node;
       if (typeof ref === 'function') {
         ref(node);

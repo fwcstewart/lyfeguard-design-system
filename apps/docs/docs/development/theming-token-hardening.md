@@ -39,7 +39,7 @@ Use this per-component list to drive refactors. Each item assumes token-first st
 - **Badge**: Map all variants to semantic tokens; verify pill radii and spacing respect radius/spacing tokens and add dark-mode snapshots.
 - **Button**: Tokenize all shadows/overlays, expand focus ring tokens, and document interaction states in stories; add accessibility tests for focus handling.
 - **Card**: Use elevation tokens for resting/hover states; add dark-surface stories and interaction tests for header/footer slots.
-- **Chart**: Bind palette and gridlines to tokens; include dark-theme demos and snapshot tests for colour blindness-friendly schemes.
+- **DataVisuals (AreaChart, BarChart, LineChart, PieChart)**: Charts have been modernized with improved styling, animations and full token integration.  All chart components are located in `core/DataVisuals/` and use design system tokens for colours, typography and spacing.  Include dark-theme demos and snapshot tests for colour blindness-friendly schemes.
 - **Checkbox**: Ensure checkmark, hover, and focus styles reference tokens; add RTL stories and keyboard interaction tests.
 - **DateInput**: Tokenize calendar popover shadows/borders; verify dark popover contrast and write tests for keyboard navigation.
 - **FileUpload**: Replace any literal drop-zone colours with tokens; add stories for drag-over states in both themes and tests for accessible announcements.

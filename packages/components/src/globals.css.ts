@@ -7,7 +7,9 @@ import { createGlobalTheme, globalStyle } from '@vanilla-extract/css';
 // Define theme CSS variables that will be overridden in dark mode
 globalStyle(':root', {
   vars: {
+    // Page background - the base background color for the entire page/viewport
     '--color-theme-background': 'var(--color-neutral-0)',
+    // Component background - used for cards, modals, and other elevated surfaces
     '--color-theme-surface': 'var(--color-neutral-50)',
     '--color-theme-surfaceHover': 'var(--color-neutral-100)',
     '--color-theme-surfaceActive': 'var(--color-neutral-200)',
@@ -39,17 +41,19 @@ globalStyle(':root', {
 
 globalStyle('.dark', {
   vars: {
-    '--color-theme-background': 'var(--color-neutral-900)',
-    '--color-theme-surface': 'var(--color-neutral-850, var(--color-neutral-800))',
-    '--color-theme-surfaceHover': 'var(--color-neutral-800)',
-    '--color-theme-surfaceActive': 'var(--color-neutral-700)',
-    '--color-theme-border': 'var(--color-neutral-700)',
-    '--color-theme-borderHover': 'var(--color-neutral-600)',
+    // Page background - the base background color for the entire page/viewport
+    '--color-theme-background': 'var(--color-brand-900)', // #051A22 - matches dark theme definition in color.json
+    // Component background - used for cards, modals, and other elevated surfaces
+    '--color-theme-surface': 'var(--color-brand-500_20)', // rgba(23,123,154,0.2) - #177B9A at 20% opacity - matches dark theme definition in color.json
+    '--color-theme-surfaceHover': 'var(--color-brand-500_30)', // rgba(23,123,154,0.3) - matches dark theme definition in color.json
+    '--color-theme-surfaceActive': 'var(--color-brand-500_40)', // rgba(23,123,154,0.4) - closest match to 0.35 in color.json
+    '--color-theme-border': 'var(--color-brand-500_40)', // rgba(23,123,154,0.4) - matches dark theme definition in color.json
+    '--color-theme-borderHover': 'var(--color-brand-500_50)', // rgba(23,123,154,0.5) - matches dark theme definition in color.json
     '--color-theme-text-primary': 'var(--color-neutral-0)',
     '--color-theme-text-secondary': 'var(--color-neutral-100)',
     '--color-theme-text-tertiary': 'var(--color-neutral-300)',
     '--color-theme-text-disabled': 'var(--color-neutral-500)',
-    '--color-theme-overlay': 'color-mix(in srgb, var(--color-neutral-900) 90%, transparent)',
+    '--color-theme-overlay': 'color-mix(in srgb, var(--color-brand-900) 85%, transparent)', // rgba(5,26,34,0.85) - matches dark theme definition in color.json
     '--color-status-info-surface': 'var(--color-info-500_15)',
     '--color-status-info-border': 'var(--color-info-500)',
     '--color-status-info-text': 'var(--color-info-500)',

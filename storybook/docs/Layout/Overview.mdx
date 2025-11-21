@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Layout/Overview" />
+
+# Layout
+
+Layout primitives provide the foundation for building consistent, responsive interfaces.
+
+## Layout Components
+
+- **Container** - Constrains content width and centers it on the page
+- **Stack** - Vertical or horizontal stacking with consistent spacing
+- **Grid** - Flexible grid system with configurable columns
+- **GridItem** - Controls how many columns an item spans
+
+## Spacing System
+
+All layout components use the design system's spacing tokens for consistent rhythm:
+- Use semantic spacing tokens (xs, sm, md, lg, xl)
+- Spacing adapts responsively across breakpoints
+- Dividers use theme-aware border colours
+
+## Responsive Design
+
+Layout components support responsive values:
+- Base values apply to all screen sizes
+- Override at specific breakpoints (sm, md, lg, xl, xxl, widescreen)
+- Breakpoints align with the design system's token system
+
+## Best Practices
+
+- Use Stack for simple vertical or horizontal layouts
+- Use Grid for complex multi-column layouts
+- Combine Stack and Grid for nested layouts
+- Always use spacing tokens, never hard-code values
+- Test layouts at different screen sizes
+

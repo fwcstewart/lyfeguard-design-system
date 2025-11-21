@@ -166,8 +166,7 @@ export function Table<T>({
         <tr>
           {selectable && (
             <th
-              className={`${s.headerCell} ${s.headerDensity[densityKey]}`}
-              style={{ width: '40px' }}
+              className={`${s.headerCell} ${s.headerDensity[densityKey]} ${s.checkboxHeaderCell}`}
             >
               {selectable === 'multiple' && (
                 <input

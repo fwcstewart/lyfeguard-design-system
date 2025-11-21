@@ -1,0 +1,27 @@
+{
+  "id": "development/theming-token-hardening",
+  "title": "Theming & token hardening",
+  "description": "Action plan to strengthen dark mode, enforce token-first styling, and raise every component to an exceptional standard.",
+  "source": "@site/docs/development/theming-token-hardening.md",
+  "sourceDirName": "development",
+  "slug": "/development/theming-token-hardening",
+  "permalink": "/docs/development/theming-token-hardening",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "theming-token-hardening",
+    "title": "Theming & token hardening",
+    "description": "Action plan to strengthen dark mode, enforce token-first styling, and raise every component to an exceptional standard."
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Development",
+    "permalink": "/docs/development/development-overview"
+  },
+  "next": {
+    "title": "Foundations Overview",
+    "permalink": "/docs/foundations/foundations-overview"
+  }
+}

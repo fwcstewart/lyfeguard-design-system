@@ -13,7 +13,7 @@ const fadeIn = keyframes({
 const slideUp = keyframes({
   '0%': {
     opacity: 0,
-    transform: 'translateY(20px) scale(0.96)',
+    transform: `translateY(${vars.spacing[5]}) scale(0.96)`, // 20px
   },
   '100%': {
     opacity: 1,
@@ -28,7 +28,7 @@ const slideDown = keyframes({
   },
   '100%': {
     opacity: 0,
-    transform: 'translateY(20px) scale(0.96)',
+    transform: `translateY(${vars.spacing[5]}) scale(0.96)`, // 20px
   },
 });
 
@@ -58,7 +58,7 @@ export const modal = style({
   borderRadius: vars.radius.xl,
   padding: 0,
   width: '100%',
-  maxWidth: '560px',
+  maxWidth: '560px', // Using fixed value for modal max-width (14 * spacing[10])
   maxHeight: '90vh',
   boxShadow: vars.shadow.xl,
   display: 'flex',
@@ -87,12 +87,13 @@ export const header = style({
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   gap: vars.spacing[4] as unknown as string,
-  minHeight: '60px',
+  minHeight: vars.spacing[10], // 64px - closest spacing token to 60px
   color: vars.color.theme.text.primary,
   fontFamily: vars.font.sans,
+  background: vars.color.theme.surface, // Component background
   selectors: {
     '.dark &': {
-      background: vars.color.theme.surface,
+      background: vars.color.theme.surface, // Component background
       borderBottom: `1px solid ${vars.color.theme.border}`,
     },
   },
@@ -123,9 +124,9 @@ export const closeButton = style({
   cursor: 'pointer',
   color: vars.color.theme.text.secondary,
   padding: vars.spacing[2] as unknown as string,
-  width: '32px',
-  height: '32px',
-  minWidth: '32px',
+  width: vars.spacing[7], // 32px
+  height: vars.spacing[7], // 32px
+  minWidth: vars.spacing[7], // 32px
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -168,9 +169,10 @@ export const content = style({
   fontSize: vars.font.size.body.base,
   lineHeight: vars.font.lineHeight.body.base,
   color: vars.color.theme.text.secondary,
+  background: vars.color.theme.surface, // Component background
   selectors: {
     '.dark &': {
-      background: vars.color.theme.surface,
+      background: vars.color.theme.surface, // Component background
       color: vars.color.theme.text.secondary,
     },
   },

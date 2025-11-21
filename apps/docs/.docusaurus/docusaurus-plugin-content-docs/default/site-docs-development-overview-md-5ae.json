@@ -21,7 +21,7 @@
     "permalink": "/docs/components/components-overview"
   },
   "next": {
-    "title": "Foundations Overview",
-    "permalink": "/docs/foundations/foundations-overview"
+    "title": "Theming & token hardening",
+    "permalink": "/docs/development/theming-token-hardening"
   }
 }

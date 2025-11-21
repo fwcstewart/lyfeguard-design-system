@@ -3,7 +3,7 @@ import React from 'react';
 import { describe, expect, it } from 'vitest';
 
 import { BarChart, DATA_COLOR_SLOTS } from './BarChart';
-import { vars } from '../../globals.css';
+import { vars } from '../../../globals.css';
 
 describe('BarChart', () => {
   const data = [
@@ -77,3 +77,4 @@ describe('BarChart', () => {
     });
   });
 });
+

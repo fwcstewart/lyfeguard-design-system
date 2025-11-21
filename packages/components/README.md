@@ -42,6 +42,7 @@ export default function Example() {
 components/
   src/
     core/         # All high‑level UI components (Buttons, Inputs, Selects, Tabs, etc.)
+      DataVisuals/ # Chart components (AreaChart, BarChart, LineChart, PieChart)
     primitives/   # Low‑level building blocks (Box, Flex, Stack)
     helpers/      # Helper functions that wrap utilities from @lyfeguard/utils
     themes/       # Theme definitions (light, dark)

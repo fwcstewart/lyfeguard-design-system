@@ -36,7 +36,10 @@ These components structure pages and navigation:
 Components for presenting data clearly:
 
 - **Table** – Flexible table supporting custom columns, custom cell rendering and row click callbacks.  Includes row hover and selection states.
-- **BarChart** – Wrapper around Recharts for simple bar charts.  Accepts custom series definitions and uses design system colours.
+- **AreaChart** – Modern area chart component built on Recharts with smooth curves, improved styling and design system colours.  Ideal for showing trends over time with filled areas.
+- **BarChart** – Modern bar chart component built on Recharts with rounded corners, better spacing and smooth animations.  Accepts custom series definitions and uses design system colours.
+- **LineChart** – Modern line chart component built on Recharts with smooth curves, enhanced dot styling and animations.  Perfect for displaying trends and comparisons over time.
+- **PieChart** – Modern pie chart component built on Recharts with improved visual design and design system colours.  Useful for showing proportional data and distributions.
 - **ProgressBar** – Horizontal progress indicator with configurable percentage.
 
 ## Feedback & Indicators

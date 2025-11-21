@@ -79,14 +79,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading ? (
           <>
-            <Spinner size={size === 'sm' ? 14 : size === 'lg' ? 20 : 16} />
+            <Spinner size={size} />
             {children && <span style={{ opacity: 0 }}>{children}</span>}
           </>
         ) : (
           <>
-            {iconLeft && <span>{iconLeft}</span>}
+            {iconLeft && <span style={{ display: 'inline-flex', alignItems: 'center', lineHeight: 1 }}>{iconLeft}</span>}
             {children}
-            {iconRight && <span>{iconRight}</span>}
+            {iconRight && <span style={{ display: 'inline-flex', alignItems: 'center', lineHeight: 1 }}>{iconRight}</span>}
           </>
         )}
       </button>

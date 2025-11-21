@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
 export const card = style({
@@ -12,11 +12,6 @@ export const card = style({
   backdropFilter: 'blur(8px)',
   transition: `box-shadow ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, transform ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, border-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
   selectors: {
-    '.dark &': {
-      background: vars.color.theme.surface,
-      borderColor: vars.color.theme.border,
-      boxShadow: vars.shadow.md,
-    },
     '&:focus-visible': {
       outline: 'none',
       boxShadow: `0 0 0 3px ${vars.color.accentMint_20}`,
@@ -24,17 +19,23 @@ export const card = style({
   },
 });
 
+globalStyle(`.dark ${card}`, {
+  background: vars.color.theme.surface,
+  borderColor: vars.color.theme.border,
+  boxShadow: vars.shadow.md,
+});
+
 export const clickable = style({
   cursor: 'pointer',
   selectors: {
     '&:hover': {
       boxShadow: vars.shadow.lg,
-      transform: 'translateY(-4px)',
+      transform: `translateY(calc(-1 * ${vars.spacing[1]}))`, // -4px
       background: vars.color.theme.surfaceHover,
       borderColor: vars.color.theme.borderHover,
     },
     '&:active': {
-      transform: 'translateY(-2px)',
+      transform: `translateY(calc(-1 * ${vars.spacing[1]} / 2))`, // -2px
       boxShadow: vars.shadow.md,
       background: vars.color.theme.surfaceActive,
     },
@@ -42,25 +43,27 @@ export const clickable = style({
       outline: 'none',
       boxShadow: `0 0 0 3px ${vars.color.accentMint_20}, ${vars.shadow.lg}`,
     },
-    '.dark &': {
-      boxShadow: vars.shadow.md,
-      background: vars.color.theme.surface,
-      selectors: {
-        '&:hover': {
-          boxShadow: vars.shadow.lg,
-          background: vars.color.theme.surfaceHover,
-          borderColor: vars.color.theme.borderHover,
-        },
-        '&:active': {
-          boxShadow: vars.shadow.md,
-          background: vars.color.theme.surfaceActive,
-        },
-        '&:focus-visible': {
-          boxShadow: `0 0 0 3px ${vars.color.accentMint_20}, ${vars.shadow.lg}`,
-        },
-      },
-    },
   },
+});
+
+globalStyle(`.dark ${clickable}`, {
+  boxShadow: vars.shadow.md,
+  background: vars.color.theme.surface,
+});
+
+globalStyle(`.dark ${clickable}:hover`, {
+  boxShadow: vars.shadow.lg,
+  background: vars.color.theme.surfaceHover,
+  borderColor: vars.color.theme.borderHover,
+});
+
+globalStyle(`.dark ${clickable}:active`, {
+  boxShadow: vars.shadow.md,
+  background: vars.color.theme.surfaceActive,
+});
+
+globalStyle(`.dark ${clickable}:focus-visible`, {
+  boxShadow: `0 0 0 3px ${vars.color.accentMint_20}, ${vars.shadow.lg}`,
 });
 
 export const header = style({

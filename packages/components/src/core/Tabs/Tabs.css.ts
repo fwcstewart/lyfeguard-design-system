@@ -4,7 +4,7 @@ import { vars } from '../../globals.css';
 const fadeIn = keyframes({
   '0%': {
     opacity: 0,
-    transform: 'translateY(4px)',
+    transform: `translateY(${vars.spacing[1]})`, // 4px
   },
   '100%': {
     opacity: 1,
@@ -35,7 +35,7 @@ export const tab = style({
   position: 'relative',
   transition: `color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
   borderRadius: `${vars.radius.md} ${vars.radius.md} 0 0`,
-  marginBottom: '-2px',
+  marginBottom: `calc(-1 * ${vars.spacing[1]} / 2)`, // -2px (half of 4px spacing)
   selectors: {
     '&[data-active="true"]': {
       color: vars.color.theme.text.primary,
@@ -44,10 +44,10 @@ export const tab = style({
     '&[data-active="true"]::after': {
       content: '""',
       position: 'absolute',
-      bottom: '-2px',
+      bottom: `calc(-1 * ${vars.spacing[1]} / 2)`, // -2px (half of 4px spacing)
       left: 0,
       right: 0,
-      height: '3px',
+      height: `calc(${vars.spacing[1]} * 0.75)`, // 3px (0.75 * 4px)
       background: vars.color.theme.borderHover,
       borderRadius: `${vars.radius.round} ${vars.radius.round} 0 0`,
       animation: `${fadeIn} ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,

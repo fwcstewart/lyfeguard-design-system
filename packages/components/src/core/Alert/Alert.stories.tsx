@@ -5,7 +5,7 @@ import { vars } from '../../globals.css';
 import { Alert, AlertProps } from './Alert';
 
 const meta: Meta<typeof Alert> = {
-  title: 'Core/Alert',
+  title: 'Components/Alert',
   component: Alert,
 };
 
@@ -45,29 +45,31 @@ Error.args = {
   children: 'Something went wrong.',
 };
 
-export const DarkModeStatuses = () => (
-  <div
-    className="dark"
-    style={{
-      background: vars.color.theme.background,
-      color: vars.color.theme.text.primary,
-      padding: vars.spacing[6] as unknown as string,
-      display: 'grid',
-      gap: vars.spacing[4],
-      maxWidth: '720px',
-    }}
-  >
-    <Alert variant="info" title="Dark Information" icon={<InfoIcon />}>
-      Informational alerts keep their clarity on dark surfaces.
-    </Alert>
-    <Alert variant="success" title="Dark Success" icon={<CheckIcon />}>
-      Success states stay legible with semantic tokens.
-    </Alert>
-    <Alert variant="warning" title="Dark Warning" icon={<WarningIcon />}>
-      Warnings maintain contrast in dark mode.
-    </Alert>
-    <Alert variant="error" title="Dark Error" icon={<CloseIcon />}>
-      Errors surface clearly for urgent attention.
-    </Alert>
-  </div>
-);
+export const AllStatuses: Story = {
+  name: 'All Statuses',
+  render: () => (
+    <div
+      style={{
+        background: vars.color.theme.background,
+        color: vars.color.theme.text.primary,
+        padding: vars.spacing[6] as unknown as string,
+        display: 'grid',
+        gap: vars.spacing[4],
+        maxWidth: '720px',
+      }}
+    >
+      <Alert variant="info" title="Information" icon={<InfoIcon />}>
+        Informational alerts keep their clarity on all surfaces.
+      </Alert>
+      <Alert variant="success" title="Success" icon={<CheckIcon />}>
+        Success states stay legible with semantic tokens.
+      </Alert>
+      <Alert variant="warning" title="Warning" icon={<WarningIcon />}>
+        Warnings maintain contrast in all themes.
+      </Alert>
+      <Alert variant="error" title="Error" icon={<CloseIcon />}>
+        Errors surface clearly for urgent attention.
+      </Alert>
+    </div>
+  ),
+};

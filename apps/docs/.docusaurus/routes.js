@@ -4,15 +4,15 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 export default [
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '176'),
+    component: ComponentCreator('/docs', '390'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '37c'),
+        component: ComponentCreator('/docs', '215'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '477'),
+            component: ComponentCreator('/docs', 'b99'),
             routes: [
               {
                 path: '/docs/components/components-overview',
@@ -23,6 +23,12 @@ export default [
               {
                 path: '/docs/development/development-overview',
                 component: ComponentCreator('/docs/development/development-overview', '059'),
+                exact: true,
+                sidebar: "docs"
+              },
+              {
+                path: '/docs/development/theming-token-hardening',
+                component: ComponentCreator('/docs/development/theming-token-hardening', '198'),
                 exact: true,
                 sidebar: "docs"
               },
