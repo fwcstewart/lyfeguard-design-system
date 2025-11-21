@@ -34,6 +34,7 @@ export * from './core/ProgressBar/ProgressBar';
 // Foundations & accessibility utilities
 export * from './core/Accessibility/SkipLink';
 export * from './core/Accessibility/VisuallyHidden';
+export * from './core/Accessibility/LiveRegion';
 
 // Layout primitives
 export * from './core/Layout/Container';

@@ -10,18 +10,21 @@ export const skipLink = style({
   top: 0,
   left: 0,
   transform: "translateY(-100%)",
-  background: vars.color.brand500,
-  color: vars.color.neutral0,
+  background: vars.color.theme.surface,
+  color: vars.color.theme.text.primary,
   padding: `${vars.spacing[3]} ${vars.spacing[4]}`,
   borderRadius: vars.radius.md,
   zIndex: 1000,
   textDecoration: "none",
   fontFamily: vars.font.sans,
   fontSize: vars.spacing[4],
+  border: `1px solid ${vars.color.theme.border}`,
+  boxShadow: `0 0 0 ${vars.spacing[1]} ${vars.color.theme.borderHover}`,
   transition: `transform ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
   selectors: {
-    '&:focus': {
-      transform: 'translateY(0)',
+    "&:focus, &:focus-visible, &[data-focus-visible='true']": {
+      transform: "translateY(0)",
+      outline: `${vars.spacing[1]} solid ${vars.color.theme.text.secondary}`,
     },
   },
 });
