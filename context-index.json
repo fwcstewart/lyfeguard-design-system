@@ -3,6 +3,7 @@
   "./apps/docs": "Docusaurus site containing design system documentation. Organised into foundations, tokens, components, patterns, development, and governance.",
   "./apps/docs/docs": "Markdown files grouped by category for the documentation site.",
   "./apps/docs/src": "Custom React components and pages used by the Docusaurus site.",
+  "./apps/docs/docs/development": "Development guides for contributors, including theming/token hardening and workflow expectations.",
   "./apps/playground": "A Vite/React application used as a sandbox to develop and test components in real scenarios.",
   "./packages": "Contains the library packages that make up the design system (tokens, components, icons, utils). Each package is versioned and published separately.",
   "./packages/tokens": "Style Dictionary definitions for design tokens (colour, spacing, typography, motion, breakpoints, etc.), scripts to build them, and generated outputs.",

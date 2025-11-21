@@ -7,10 +7,10 @@ export const topNav = style({
   justifyContent: 'space-between',
   height: '72px',
   padding: `0 ${vars.spacing[7]}` as unknown as string,
-  background: vars.color.brand900,
-  color: vars.color.neutral0,
-  borderBottom: `1px solid rgba(255, 255, 255, 0.1)`,
-  boxShadow: `0 1px 3px rgba(0, 0, 0, 0.1)`,
+  background: vars.color.theme.surface,
+  color: vars.color.theme.text.primary,
+  borderBottom: `1px solid ${vars.color.theme.border}`,
+  boxShadow: vars.shadow.sm,
 });
 
 export const left = style({
@@ -39,7 +39,7 @@ export const navLink = style({
   fontSize: vars.font.size.ui.label,
   lineHeight: vars.font.lineHeight.ui.label,
   fontWeight: vars.font.weight.medium,
-  color: vars.color.neutral0,
+  color: vars.color.theme.text.primary,
   textDecoration: 'none',
   cursor: 'pointer',
   padding: `${vars.spacing[2]} ${vars.spacing[4]}` as unknown as string,
@@ -49,7 +49,7 @@ export const navLink = style({
   selectors: {
     '&:hover': {
       color: vars.color.accentMint,
-      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      backgroundColor: vars.color.theme.surfaceHover,
     },
     '&[data-active="true"]': {
       color: vars.color.accentMint,
