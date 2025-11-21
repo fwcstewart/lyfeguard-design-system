@@ -8,10 +8,17 @@ export interface SelectProps
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, children, ...props }, ref) => {
+    const generatedId = React.useId();
+    const selectId = props.id ?? generatedId;
+
     return (
       <div className={s.wrapper} data-lyfeguard="Select">
-        {label && <label className={s.label}>{label}</label>}
-        <select ref={ref} className={s.select} {...props}>
+        {label && (
+          <label className={s.label} htmlFor={selectId}>
+            {label}
+          </label>
+        )}
+        <select id={selectId} ref={ref} className={s.select} {...props}>
           {children}
         </select>
       </div>

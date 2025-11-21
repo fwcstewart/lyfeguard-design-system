@@ -2,18 +2,18 @@ import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
-// Vitest configuration for the design-system components package.
-// This config enables jsdom environment and integrates with the
-// @vitejs/plugin-react to allow testing React components using
-// Testing Library.  By colocating this config in the package
-// directory you can run `vitest` or `npm test` from within the
-// components package.
-
 export default defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: ['./vitest.setup.ts'],
+    setupFiles: [
+      '@vanilla-extract/css/disableRuntimeStyles',
+      '@testing-library/jest-dom/vitest',
+      './vitest.setup.ts',         // keep your local setup
+      './setupTests.ts',           // if still required
+      './src/setupTests.ts',       // if still required
+      'src/testSetup.ts',          // if still required
+    ],
   },
 });

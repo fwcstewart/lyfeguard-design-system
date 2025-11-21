@@ -44,6 +44,9 @@ export const overlay = style({
   padding: vars.spacing[4] as unknown as string,
   animation: `${fadeIn} ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
   selectors: {
+    '.dark &': {
+      background: vars.color.theme.overlay,
+    },
     '&[data-exiting="true"]': {
       animation: `${fadeIn} ${vars.motion.duration.fast} ${vars.motion.easing.easeInOut} reverse`,
     },
@@ -66,6 +69,11 @@ export const modal = style({
   border: `1px solid ${vars.color.theme.border}`,
   backdropFilter: 'blur(12px)',
   selectors: {
+    '.dark &': {
+      background: vars.color.theme.surface,
+      border: `1px solid ${vars.color.theme.border}`,
+      boxShadow: vars.shadow.lg,
+    },
     '&[data-exiting="true"]': {
       animation: `${slideDown} ${vars.motion.duration.fast} ${vars.motion.easing.easeInOut}`,
     },
@@ -80,6 +88,14 @@ export const header = style({
   justifyContent: 'space-between',
   gap: vars.spacing[4] as unknown as string,
   minHeight: '60px',
+  color: vars.color.theme.text.primary,
+  fontFamily: vars.font.sans,
+  selectors: {
+    '.dark &': {
+      background: vars.color.theme.surface,
+      borderBottom: `1px solid ${vars.color.theme.border}`,
+    },
+  },
 });
 
 export const title = style({
@@ -125,8 +141,21 @@ export const closeButton = style({
       transform: 'scale(0.95)',
     },
     '&:focus-visible': {
-      outline: `2px solid ${vars.color.accentMint}`,
-      outlineOffset: '2px',
+      outline: 'none',
+      boxShadow: `0 0 0 ${vars.spacing[1]} ${vars.color.accentMint_20}`,
+      background: vars.color.theme.surfaceHover,
+      color: vars.color.theme.text.primary,
+    },
+    '.dark &': {
+      color: vars.color.theme.text.secondary,
+      selectors: {
+        '&:hover': {
+          background: vars.color.theme.surfaceActive,
+        },
+        '&:focus-visible': {
+          boxShadow: `0 0 0 ${vars.spacing[1]} ${vars.color.accentMint_30}`,
+        },
+      },
     },
   },
 });
@@ -139,6 +168,12 @@ export const content = style({
   fontSize: vars.font.size.body.base,
   lineHeight: vars.font.lineHeight.body.base,
   color: vars.color.theme.text.secondary,
+  selectors: {
+    '.dark &': {
+      background: vars.color.theme.surface,
+      color: vars.color.theme.text.secondary,
+    },
+  },
 });
 
 export const footer = style({
@@ -149,4 +184,11 @@ export const footer = style({
   alignItems: 'center',
   justifyContent: 'flex-end',
   gap: vars.spacing[3] as unknown as string,
+  fontFamily: vars.font.sans,
+  selectors: {
+    '.dark &': {
+      background: vars.color.theme.surfaceActive,
+      borderTop: `1px solid ${vars.color.theme.border}`,
+    },
+  },
 });

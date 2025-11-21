@@ -7,20 +7,27 @@ export default {
   component: Toggle,
 };
 
-export const Uncontrolled = () => <Toggle label="Enable notifications" />;
-
-export const Controlled = () => {
+export const LightTheme = () => {
   const [value, setValue] = useState(false);
   return (
-    <Toggle
-      label={value ? 'On' : 'Off'}
-      checked={value}
-      onChange={setValue}
-    />
+    <div
+      style={{
+        background: vars.color.theme.surface,
+        color: vars.color.theme.text.primary,
+        padding: vars.spacing[6] as unknown as string,
+        display: 'inline-flex',
+        flexDirection: 'column',
+        gap: vars.spacing[3],
+      }}
+    >
+      <Toggle label={value ? 'Notifications on' : 'Notifications off'} checked={value} onChange={setValue} />
+      <Toggle label="Light surface unchecked" />
+      <Toggle label="Disabled toggle" disabled />
+    </div>
   );
 };
 
-export const DarkMode = () => {
+export const DarkTheme = () => {
   const [value, setValue] = useState(true);
   return (
     <div

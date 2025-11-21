@@ -1,18 +1,68 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
-// Outer container for the progress bar
-export const bar = style({
-  width: '100%',
-  height: '8px',
-  backgroundColor: vars.color.neutral200,
-  borderRadius: vars.radius.md,
-  overflow: 'hidden',
+export const container = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: vars.spacing[1] as unknown as string,
 });
 
-// The filled portion of the bar. The width will be controlled via inline style
+export const labels = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  fontFamily: vars.font.sans,
+  fontSize: vars.font.size.ui.label,
+  lineHeight: vars.font.lineHeight.ui.label,
+  color: vars.color.theme.text.primary,
+  selectors: {
+    '.dark &': {
+      color: vars.color.theme.text.primary,
+    },
+  },
+});
+
+export const value = style({
+  color: vars.color.theme.text.secondary,
+  fontWeight: vars.font.weight.semiBold,
+  selectors: {
+    '.dark &': {
+      color: vars.color.theme.text.secondary,
+    },
+  },
+});
+
+export const bar = style({
+  width: '100%',
+  backgroundColor: vars.color.theme.surfaceActive,
+  borderRadius: vars.radius.round,
+  overflow: 'hidden',
+  selectors: {
+    '.dark &': {
+      backgroundColor: vars.color.theme.surfaceHover,
+    },
+  },
+});
+
+export const sizes = styleVariants({
+  sm: {
+    height: vars.spacing[1] as unknown as string,
+  },
+  md: {
+    height: vars.spacing[2] as unknown as string,
+  },
+  lg: {
+    height: vars.spacing[3] as unknown as string,
+  },
+});
+
 export const fill = style({
   height: '100%',
   backgroundColor: vars.color.brand500,
-  transition: 'width 0.2s ease',
+  transition: `width ${vars.motion.duration.fast} ${vars.motion.easing.easeInOut}`,
+  selectors: {
+    '.dark &': {
+      backgroundColor: vars.color.brand500,
+    },
+  },
 });

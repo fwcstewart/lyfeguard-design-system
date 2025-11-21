@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useId, useRef, useState } from 'react';
+import { VisuallyHidden } from '../Accessibility/VisuallyHidden';
 import * as s from './FileUpload.css';
 
 export interface FileUploadProps {
@@ -35,29 +36,63 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isActive, setIsActive] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
+  const [announcement, setAnnouncement] = useState('No files selected');
+  const inputId = useId();
+  const descriptionId = useId();
+  const announcementId = useId();
+
+  const updateFiles = (newFiles: File[]) => {
+    setFiles(newFiles);
+    setAnnouncement(
+      newFiles.length === 0
+        ? 'No files selected'
+        : `${newFiles.length} file${newFiles.length > 1 ? 's' : ''} ready: ${newFiles
+            .map((file) => file.name)
+            .join(', ')}`
+    );
+    onFilesSelected?.(newFiles);
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files ? Array.from(event.target.files) : [];
-    setFiles(newFiles);
-    onFilesSelected?.(newFiles);
+    updateFiles(newFiles);
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsActive(false);
     const droppedFiles = Array.from(event.dataTransfer.files);
-    setFiles(droppedFiles);
-    onFilesSelected?.(droppedFiles);
+    updateFiles(droppedFiles);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      inputRef.current?.click();
+    }
   };
 
   const openFileDialog = () => {
     inputRef.current?.click();
   };
 
+  const hasFiles = files.length > 0;
+  const helperText = multiple
+    ? 'Drag and drop files or click to browse. You can upload multiple files.'
+    : 'Drag and drop a file or click to browse from your device.';
+
   return (
     <div className={s.wrapper} data-lyfeguard="FileUpload">
-      {label && <label>{label}</label>}
+      {label && (
+        <label className={s.label} htmlFor={inputId}>
+          {label}
+        </label>
+      )}
       <div
+        role="button"
+        tabIndex={0}
+        aria-describedby={`${descriptionId} ${announcementId}`}
+        aria-label={label ?? 'Upload files'}
         className={isActive ? `${s.dropZone} ${s.dropZoneActive}` : s.dropZone}
         onDragOver={(e) => {
           e.preventDefault();
@@ -69,10 +104,15 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         }}
         onDrop={handleDrop}
         onClick={openFileDialog}
+        onKeyDown={handleKeyDown}
       >
-        <p>{files.length === 0 ? 'Drag and drop files here or click to browse' : 'Add more files'}</p>
+        <p className={s.prompt}>{hasFiles ? 'Add more files' : 'Drag and drop files here'}</p>
+        <p className={s.helper} id={descriptionId}>
+          {helperText}
+        </p>
         <input
           ref={inputRef}
+          id={inputId}
           type="file"
           multiple={multiple}
           accept={accept}
@@ -80,10 +120,13 @@ export const FileUpload: React.FC<FileUploadProps> = ({
           style={{ display: 'none' }}
         />
       </div>
-      {files.length > 0 && (
+      <VisuallyHidden aria-live="polite" id={announcementId}>
+        {announcement}
+      </VisuallyHidden>
+      {hasFiles && (
         <ul className={s.fileList}>
           {files.map((file, i) => (
-            <li key={i} className={s.fileItem}>
+            <li key={file.name ?? i} className={s.fileItem}>
               {file.name}
             </li>
           ))}

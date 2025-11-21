@@ -1,6 +1,7 @@
 import React from 'react';
 import * as s from './Layout.css';
-import { vars } from '../../globals.css';
+import { buildSpacingVars, defaultSpacing, ResponsiveSpacing } from './spacing';
+import { cx } from '../../helpers/cx';
 
 export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -9,10 +10,11 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   columns?: number;
   /**
-   * Gap between grid items. Provide a spacing token (e.g. vars.spacing[4]) or
-   * any valid CSS length. Defaults to the spacing-4 token (16px).
+   * Gap between grid items. Provide a semantic spacing token (e.g. "md")
+   * to ensure consistent rhythm across layouts. The gap supports responsive
+   * values keyed by breakpoint (sm, md, lg, xl, xxl, widescreen).
    */
-  gap?: string;
+  gap?: ResponsiveSpacing;
 }
 
 /**
@@ -20,14 +22,23 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
  * columns and the gap via props or inline styles. Each direct child of
  * Grid can specify how many columns it spans using the `GridItem` component.
  */
-export const Grid: React.FC<GridProps> = ({ columns = 12, gap = vars.spacing[4], style, children, ...props }) => {
+export const Grid: React.FC<GridProps> = ({
+  columns = 12,
+  gap = defaultSpacing,
+  style,
+  className,
+  children,
+  ...props
+}) => {
+  const spacingVars = buildSpacingVars('grid-gap', gap, defaultSpacing);
   const gridStyle: React.CSSProperties = {
     gridTemplateColumns: `repeat(${columns}, 1fr)`,
-    gap,
+    ...spacingVars,
     ...style,
   };
+
   return (
-    <div className={s.grid} style={gridStyle} data-lyfeguard="Grid" {...props}>
+    <div className={cx(s.grid, className)} style={gridStyle} data-lyfeguard="Grid" {...props}>
       {children}
     </div>
   );
