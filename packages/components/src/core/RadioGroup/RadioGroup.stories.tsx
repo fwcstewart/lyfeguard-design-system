@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
 import { RadioGroup, RadioOption } from './RadioGroup';
 import { vars } from '../../globals.css';
 
-export default {
+const meta: Meta<typeof RadioGroup> = {
   title: 'Core/RadioGroup',
   component: RadioGroup,
 };
+
+export default meta;
 
 const options: RadioOption[] = [
   { value: 'visa', label: 'Visa' },
@@ -13,46 +16,61 @@ const options: RadioOption[] = [
   { value: 'amex', label: 'American Express' },
 ];
 
-export const Uncontrolled = () => (
-  <RadioGroup name="cards" label="Payment Method" options={options} />
-);
-
-export const Controlled = () => {
-  const [value, setValue] = useState('visa');
-  return (
+export const Light: StoryObj<typeof RadioGroup> = {
+  render: () => (
     <RadioGroup
       name="cards"
       label="Payment Method"
+      helperText="Select the card you prefer to use for checkout."
       options={options}
-      value={value}
-      onChange={(v) => setValue(v)}
-    />
-  );
-};
-
-export const DarkMode = () => (
-  <div
-    className="dark"
-    style={{
-      background: vars.color.theme.background,
-      color: vars.color.theme.text.primary,
-      padding: vars.spacing[6] as unknown as string,
-      display: 'inline-flex',
-      flexDirection: 'column',
-      gap: vars.spacing[3],
-    }}
-  >
-    <RadioGroup
-      name="cards-dark"
-      label="Payment Method"
-      options={options}
-      defaultValue="mastercard"
-    />
-    <RadioGroup
-      name="cards-dark-disabled"
-      label="Disabled group"
-      options={options.map((option) => ({ ...option, disabled: true }))}
       defaultValue="visa"
     />
-  </div>
-);
+  ),
+};
+
+export const Controlled: StoryObj<typeof RadioGroup> = {
+  render: () => {
+    const [value, setValue] = useState('visa');
+    return (
+      <RadioGroup
+        name="cards-controlled"
+        label="Payment Method"
+        helperText="Changes are synced with external state."
+        options={options}
+        value={value}
+        onChange={(v) => setValue(v)}
+      />
+    );
+  },
+};
+
+export const Dark: StoryObj<typeof RadioGroup> = {
+  render: () => (
+    <div
+      className="dark"
+      style={{
+        background: vars.color.theme.background,
+        color: vars.color.theme.text.primary,
+        padding: vars.spacing[6] as unknown as string,
+        display: 'inline-flex',
+        flexDirection: 'column',
+        gap: vars.spacing[3],
+      }}
+    >
+      <RadioGroup
+        name="cards-dark"
+        label="Payment Method"
+        helperText="Dark theme tokens adjust the ring and dot."
+        options={options}
+        defaultValue="mastercard"
+      />
+      <RadioGroup
+        name="cards-dark-disabled"
+        label="Disabled group"
+        helperText="Disabled radios inherit dark theme styles."
+        options={options.map((option) => ({ ...option, disabled: true }))}
+        defaultValue="visa"
+      />
+    </div>
+  ),
+};
