@@ -4,22 +4,214 @@ import { Meta } from '@storybook/blocks';
 
 # Welcome to Lyfeguard Design System
 
-Welcome to the Lyfeguard Design System Storybook. This is your central hub for exploring our design tokens, components, and patterns.
+<div style={{
+  display: 'grid',
+  gap: '16px',
+  padding: '32px',
+  background: 'linear-gradient(135deg, var(--color-brand-500_20), var(--color-accent-mint_20))',
+  border: '1px solid var(--color-theme-border)',
+  borderRadius: '16px',
+  boxShadow: '0 20px 60px var(--color-brand-500_15)',
+}}>
+  <p style={{
+    margin: 0,
+    color: 'var(--color-theme-text-secondary)',
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
+    fontWeight: 600,
+    fontSize: '13px',
+  }}>
+    Build with clarity and confidence
+  </p>
+  <div style={{ display: 'grid', gap: '12px' }}>
+    <h2 style={{
+      margin: 0,
+      fontSize: '28px',
+      color: 'var(--color-theme-text-primary)',
+      lineHeight: 1.2,
+    }}>
+      Explore the UI toolkit, tokens, and patterns that power Lyfeguard products.
+    </h2>
+    <p style={{
+      margin: 0,
+      color: 'var(--color-theme-text-secondary)',
+      fontSize: '16px',
+      maxWidth: '780px',
+    }}>
+      Storybook is your sandbox for trying components, verifying accessibility, and sharing implementation-ready examples with the team.
+    </p>
+  </div>
+  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+    <a
+      href="?path=/docs/foundations-accessibility--docs"
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '10px 16px',
+        background: 'var(--color-theme-surface)',
+        border: '1px solid var(--color-theme-border)',
+        borderRadius: '999px',
+        color: 'var(--color-theme-text-primary)',
+        textDecoration: 'none',
+        fontWeight: 600,
+      }}
+    >
+      Accessibility essentials →
+    </a>
+    <a
+      href="?path=/docs/components-button--docs"
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '10px 16px',
+        background: 'var(--color-brand-900)',
+        border: '1px solid var(--color-brand-500_30)',
+        borderRadius: '999px',
+        color: 'var(--color-neutral-0)',
+        textDecoration: 'none',
+        fontWeight: 600,
+      }}
+    >
+      Try a component →
+    </a>
+  </div>
+</div>
 
-## What's Inside
+## How Storybook is organised
 
-- **Foundations** - Core design principles including accessibility, colours, and typography
-- **Components** - Reusable UI components with documentation and interactive examples
-- **Layout** - Layout primitives and patterns for building consistent interfaces
-- **Technical Patterns** - Advanced patterns and best practices for implementation
+<div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+  <div style={{
+    padding: '16px',
+    borderRadius: '12px',
+    background: 'var(--color-theme-surface)',
+    border: '1px solid var(--color-theme-border)',
+  }}>
+    <h3 style={{ marginTop: 0 }}>Foundations</h3>
+    <p style={{ marginTop: 0, color: 'var(--color-theme-text-secondary)' }}>
+      Guidelines for colour, typography, spacing, and accessibility. Start here to understand the system’s visual language.
+    </p>
+  </div>
+  <div style={{
+    padding: '16px',
+    borderRadius: '12px',
+    background: 'var(--color-theme-surface)',
+    border: '1px solid var(--color-theme-border)',
+  }}>
+    <h3 style={{ marginTop: 0 }}>Components</h3>
+    <p style={{ marginTop: 0, color: 'var(--color-theme-text-secondary)' }}>
+      Interactive stories for every UI building block. Each story includes controls, props, and accessibility expectations.
+    </p>
+  </div>
+  <div style={{
+    padding: '16px',
+    borderRadius: '12px',
+    background: 'var(--color-theme-surface)',
+    border: '1px solid var(--color-theme-border)',
+  }}>
+    <h3 style={{ marginTop: 0 }}>Layout</h3>
+    <p style={{ marginTop: 0, color: 'var(--color-theme-text-secondary)' }}>
+      Guidance for stacking, grids, and responsive behaviour so screens stay consistent across breakpoints.
+    </p>
+  </div>
+  <div style={{
+    padding: '16px',
+    borderRadius: '12px',
+    background: 'var(--color-theme-surface)',
+    border: '1px solid var(--color-theme-border)',
+  }}>
+    <h3 style={{ marginTop: 0 }}>Technical Patterns</h3>
+    <p style={{ marginTop: 0, color: 'var(--color-theme-text-secondary)' }}>
+      Implementation notes for themes, tokens, composition, and responsive props to keep builds predictable.
+    </p>
+  </div>
+</div>
 
-## Getting Started
+## Quick links
 
-Browse the sidebar to explore our design system. Each component includes:
-- Overview and usage guidelines
-- Interactive examples you can customize
-- Props documentation
-- Code examples
+<div style={{ display: 'grid', gap: '12px', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+  <a href="?path=/docs/foundations-colours--docs" style={{
+    textDecoration: 'none',
+    color: 'inherit',
+  }}>
+    <div style={{
+      padding: '16px',
+      borderRadius: '12px',
+      border: '1px solid var(--color-theme-border)',
+      background: 'linear-gradient(145deg, var(--color-theme-surface), var(--color-theme-surfaceHover))',
+      display: 'grid',
+      gap: '8px',
+    }}>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-tertiary)', fontSize: '13px' }}>Foundations</p>
+      <h4 style={{ margin: 0 }}>Colour tokens</h4>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
+        Explore the palette, contrast guidance, and status colours used across the product.
+      </p>
+    </div>
+  </a>
+  <a href="?path=/docs/foundations-typography--docs" style={{
+    textDecoration: 'none',
+    color: 'inherit',
+  }}>
+    <div style={{
+      padding: '16px',
+      borderRadius: '12px',
+      border: '1px solid var(--color-theme-border)',
+      background: 'linear-gradient(145deg, var(--color-theme-surface), var(--color-theme-surfaceHover))',
+      display: 'grid',
+      gap: '8px',
+    }}>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-tertiary)', fontSize: '13px' }}>Foundations</p>
+      <h4 style={{ margin: 0 }}>Typography scale</h4>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
+        Reference headings, body styles, and the font stacks that keep copy readable.
+      </p>
+    </div>
+  </a>
+  <a href="?path=/docs/layout-overview--docs" style={{
+    textDecoration: 'none',
+    color: 'inherit',
+  }}>
+    <div style={{
+      padding: '16px',
+      borderRadius: '12px',
+      border: '1px solid var(--color-theme-border)',
+      background: 'linear-gradient(145deg, var(--color-theme-surface), var(--color-theme-surfaceHover))',
+      display: 'grid',
+      gap: '8px',
+    }}>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-tertiary)', fontSize: '13px' }}>Layout</p>
+      <h4 style={{ margin: 0 }}>Responsive patterns</h4>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
+        Learn how container, stack, and grid primitives handle spacing across breakpoints.
+      </p>
+    </div>
+  </a>
+  <a href="?path=/docs/technical-patterns-overview--docs" style={{
+    textDecoration: 'none',
+    color: 'inherit',
+  }}>
+    <div style={{
+      padding: '16px',
+      borderRadius: '12px',
+      border: '1px solid var(--color-theme-border)',
+      background: 'linear-gradient(145deg, var(--color-theme-surface), var(--color-theme-surfaceHover))',
+      display: 'grid',
+      gap: '8px',
+    }}>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-tertiary)', fontSize: '13px' }}>Technical patterns</p>
+      <h4 style={{ margin: 0 }}>Token-first builds</h4>
+      <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
+        Keep implementations aligned with our token and theming strategy.
+      </p>
+    </div>
+  </a>
+</div>
 
-Use the theme toggle in the toolbar to switch between light and dark modes.
+## Tips for a better experience
 
+- Use the **Theme** toolbar control to preview light and dark modes instantly.
+- Switch preview **Backgrounds** to test components on canvas, surface, or brand-heavy backdrops.
+- Explore the **Docs** tab on each story for usage notes, props tables, and accessibility considerations.
+- Keep examples token-driven—avoid hard-coding colours or spacing in your own stories.
