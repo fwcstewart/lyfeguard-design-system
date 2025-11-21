@@ -1,15 +1,25 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
+import {
+  navigationActiveBackground,
+  navigationActiveText,
+  navigationHover,
+  navigationIndicator,
+  navigationMutedText,
+  navigationSeparator,
+  navigationSurface,
+  navigationText,
+} from './navigationTokens.css';
 
 export const topNav = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  height: '72px',
+  height: `calc(${vars.spacing[10]} + ${vars.spacing[2]})`,
   padding: `0 ${vars.spacing[7]}` as unknown as string,
-  background: vars.color.theme.surface,
-  color: vars.color.theme.text.primary,
-  borderBottom: `1px solid ${vars.color.theme.border}`,
+  background: navigationSurface,
+  color: navigationText,
+  borderBottom: `1px solid ${navigationSeparator}`,
   boxShadow: vars.shadow.sm,
 });
 
@@ -23,7 +33,7 @@ export const logo = style({
   fontSize: vars.font.size.heading.sm,
   fontWeight: vars.font.weight.bold,
   lineHeight: vars.font.lineHeight.heading.sm,
-  color: vars.color.neutral0,
+  color: navigationText,
   fontFamily: vars.font.sans,
   letterSpacing: '-0.02em',
 });
@@ -39,7 +49,7 @@ export const navLink = style({
   fontSize: vars.font.size.ui.label,
   lineHeight: vars.font.lineHeight.ui.label,
   fontWeight: vars.font.weight.medium,
-  color: vars.color.theme.text.primary,
+  color: navigationMutedText,
   textDecoration: 'none',
   cursor: 'pointer',
   padding: `${vars.spacing[2]} ${vars.spacing[4]}` as unknown as string,
@@ -48,12 +58,12 @@ export const navLink = style({
   transition: `color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
   selectors: {
     '&:hover': {
-      color: vars.color.accentMint,
-      backgroundColor: vars.color.theme.surfaceHover,
+      color: navigationText,
+      backgroundColor: navigationHover,
     },
     '&[data-active="true"]': {
-      color: vars.color.accentMint,
-      backgroundColor: vars.color.accentMint_10,
+      color: navigationActiveText,
+      backgroundColor: navigationActiveBackground,
       fontWeight: vars.font.weight.semiBold,
     },
     '&[data-active="true"]::after': {
@@ -62,12 +72,12 @@ export const navLink = style({
       bottom: '-1px',
       left: vars.spacing[4] as unknown as string,
       right: vars.spacing[4] as unknown as string,
-      height: '2px',
-      background: vars.color.accentMint,
+      height: `calc(${vars.spacing[1]} / 2)`,
+      background: navigationIndicator,
       borderRadius: vars.radius.round,
     },
     '&:focus-visible': {
-      outline: `2px solid ${vars.color.accentMint}`,
+      outline: `2px solid ${navigationIndicator}`,
       outlineOffset: '2px',
     },
   },

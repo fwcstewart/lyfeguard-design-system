@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as s from './Sidebar.css';
 
 export interface SidebarItem {
@@ -42,6 +42,7 @@ export interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlledActive, onSelect }) => {
   const [internalActive, setInternalActive] = useState(0);
   const active = controlledActive ?? internalActive;
+  const itemRefs = useRef<(HTMLAnchorElement | HTMLButtonElement | null)[]>([]);
 
   const handleSelect = (index: number, item: SidebarItem) => {
     if (controlledActive === undefined) {
@@ -53,20 +54,68 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlled
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      return;
+    }
+
+    const itemsList = itemRefs.current.filter((item) => Boolean(item?.isConnected));
+    if (!itemsList.length) {
+      return;
+    }
+
+    const activeElement = document.activeElement as HTMLElement | null;
+    const currentIndex = itemsList.findIndex((node) => node === activeElement);
+    let nextIndex = currentIndex >= 0 ? currentIndex : 0;
+
+    if (event.key === 'ArrowDown') {
+      nextIndex = (currentIndex + 1 + itemsList.length) % itemsList.length;
+    }
+
+    if (event.key === 'ArrowUp') {
+      nextIndex = (currentIndex - 1 + itemsList.length) % itemsList.length;
+    }
+
+    if (event.key === 'Home') {
+      nextIndex = 0;
+    }
+
+    if (event.key === 'End') {
+      nextIndex = itemsList.length - 1;
+    }
+
+    itemsList[nextIndex]?.focus();
+    event.preventDefault();
+  };
+
   return (
-    <aside className={s.sidebar} data-lyfeguard="Sidebar">
+    <aside className={s.sidebar} data-lyfeguard="Sidebar" role="navigation" aria-label="Sidebar navigation">
       {items.map((item, idx) => {
-        const props: React.HTMLAttributes<HTMLDivElement> = {};
+        const Element: 'a' | 'button' = item.href ? 'a' : 'button';
+        const actionProps = Element === 'a' ? { href: item.href } : { type: 'button' as const };
+
+        const onClick = (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+          if (item.onClick) {
+            event.preventDefault();
+          }
+          handleSelect(idx, item);
+        };
         return (
-          <div
+          <Element
             key={idx}
             className={s.item}
             data-active={active === idx}
-            onClick={() => handleSelect(idx, item)}
+            aria-current={active === idx ? 'page' : undefined}
+            onKeyDown={handleKeyDown}
+            onClick={onClick}
+            ref={(node: HTMLAnchorElement | HTMLButtonElement | null) => {
+              itemRefs.current[idx] = node;
+            }}
+            {...actionProps}
           >
             {item.icon && <span className={s.iconWrapper}>{item.icon}</span>}
             <span>{item.label}</span>
-          </div>
+          </Element>
         );
       })}
     </aside>
