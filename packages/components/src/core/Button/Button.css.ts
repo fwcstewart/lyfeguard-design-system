@@ -3,75 +3,136 @@ import { vars } from '../../globals.css';
 
 // Base styles shared across button variants
 export const base = style({
-  padding: `${vars.spacing[3]} ${vars.spacing[5]}`,
   fontFamily: vars.font.sans,
   borderRadius: vars.radius.md,
   cursor: 'pointer',
-  fontWeight: 600,
-  transition: 'background 0.2s ease, border 0.2s ease, color 0.2s ease',
+  fontWeight: vars.font.weight.semiBold,
+  transition: `background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, border-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, transform ${vars.motion.duration.fast} ${vars.motion.easing.ease}, box-shadow ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: vars.spacing[2] as unknown as string
+  gap: vars.spacing[2] as unknown as string,
+  border: 'none',
+  position: 'relative',
+  selectors: {
+    '&:focus-visible': {
+      outline: 'none',
+      boxShadow: `0 0 0 3px ${vars.color.brand500_20}`,
+    },
+  },
+});
+
+// Size variants
+export const small = style({
+  padding: `${vars.spacing[2]} ${vars.spacing[3]}`,
+  fontSize: vars.font.size.body.sm,
+  lineHeight: vars.font.lineHeight.body.sm,
+});
+
+export const medium = style({
+  padding: `${vars.spacing[3]} ${vars.spacing[5]}`,
+  fontSize: vars.font.size.ui.button,
+  lineHeight: vars.font.lineHeight.ui.button,
+});
+
+export const large = style({
+  padding: `${vars.spacing[4]} ${vars.spacing[6]}`,
+  fontSize: vars.font.size.body.base,
+  lineHeight: vars.font.lineHeight.body.base,
 });
 
 export const primary = style([
   base,
   {
-    background: vars.color.brand500,
-    color: vars.color.neutral0,
-    border: 'none',
+    background: vars.color.accentMint,
+    color: vars.color.brand900,
+    boxShadow: `0 1px 2px rgba(0, 0, 0, 0.05)`,
     selectors: {
-      '&:hover': { background: vars.color.brand800 },
-      '&:active': { background: vars.color.brand900 },
+      '&:hover:not(:disabled)': {
+        background: vars.color.success600,
+        boxShadow: `0 4px 12px ${vars.color.accentMint_30}`,
+        transform: 'translateY(-1px)',
+      },
+      '&:active:not(:disabled)': {
+        background: vars.color.success600,
+        transform: 'translateY(0)',
+        boxShadow: `0 1px 2px rgba(0, 0, 0, 0.05)`,
+      },
       '&:disabled': {
-        opacity: 0.6,
-        cursor: 'not-allowed'
-      }
-    }
-  }
+        opacity: 0.5,
+        cursor: 'not-allowed',
+        transform: 'none',
+      },
+      '&:focus-visible': {
+        boxShadow: `0 0 0 3px ${vars.color.accentMint_30}`,
+      },
+      '.dark &': {
+        color: vars.color.brand900,
+        boxShadow: `0 1px 2px rgba(0, 0, 0, 0.2)`,
+        selectors: {
+          '&:hover:not(:disabled)': {
+            boxShadow: `0 4px 12px ${vars.color.accentMint_40}`,
+          },
+        },
+      },
+    },
+  },
 ]);
 
 export const secondary = style([
   base,
   {
     background: 'transparent',
-    border: `1px solid ${vars.color.brand500}`,
-    color: vars.color.brand500,
+    border: `1.5px solid ${vars.color.accentMint}`,
+    color: vars.color.accentMint,
     selectors: {
-      '&:hover': {
-        background: vars.color.brand500_20
+      '&:hover:not(:disabled)': {
+        background: vars.color.accentMint_10,
+        borderColor: vars.color.success600,
+        transform: 'translateY(-1px)',
       },
-      '&:active': {
-        background: vars.color.brand500_30
+      '&:active:not(:disabled)': {
+        background: vars.color.accentMint_15,
+        transform: 'translateY(0)',
       },
       '&:disabled': {
-        opacity: 0.6,
-        cursor: 'not-allowed'
-      }
-    }
-  }
+        opacity: 0.5,
+        cursor: 'not-allowed',
+        borderColor: vars.color.theme.border,
+        color: vars.color.theme.text.disabled,
+      },
+      '&:focus-visible': {
+        boxShadow: `0 0 0 3px ${vars.color.accentMint_30}`,
+      },
+    },
+  },
 ]);
 
 export const tertiary = style([
   base,
   {
     background: 'transparent',
-    color: vars.color.brand500,
-    border: 'none',
+    color: vars.color.accentMint,
     paddingLeft: 0,
     paddingRight: 0,
     selectors: {
-      '&:hover': {
-        textDecoration: 'underline'
+      '&:hover:not(:disabled)': {
+        textDecoration: 'underline',
+        color: vars.color.success600,
       },
-      '&:active': {
-        opacity: 0.8
+      '&:active:not(:disabled)': {
+        opacity: 0.8,
+        transform: 'scale(0.98)',
       },
       '&:disabled': {
-        opacity: 0.6,
-        cursor: 'not-allowed'
-      }
-    }
-  }
+        opacity: 0.5,
+        cursor: 'not-allowed',
+        color: vars.color.theme.text.disabled,
+      },
+      '&:focus-visible': {
+        boxShadow: `0 0 0 3px ${vars.color.accentMint_30}`,
+        borderRadius: vars.radius.sm,
+      },
+    },
+  },
 ]);

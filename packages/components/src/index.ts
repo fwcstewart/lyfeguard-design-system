@@ -10,7 +10,9 @@ export * from './core/Tabs/Tabs';
 export * from './core/Navigation/TopNav';
 export * from './core/Navigation/Sidebar';
 export * from './core/Alert/Alert';
-export * from './core/Toast/Toast';
+export * from './core/Toast/ToastProvider';
+export { Toast } from './core/Toast/Toast';
+export type { ToastProps } from './core/Toast/Toast';
 export * from './core/Table/Table';
 export * from './core/Chart/BarChart';
 

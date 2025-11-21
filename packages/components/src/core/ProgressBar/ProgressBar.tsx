@@ -22,7 +22,7 @@ export interface ProgressBarProps {
 export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, height = 8 }) => {
   const clamped = Math.min(100, Math.max(0, progress));
   return (
-    <div className={s.bar} style={{ height }}>
+    <div className={s.bar} style={{ height }} data-lyfeguard="ProgressBar">
       <div className={s.fill} style={{ width: `${clamped}%` }} />
     </div>
   );

@@ -1,0 +1,27 @@
+{
+  "id": "governance/governance-overview",
+  "title": "Governance",
+  "description": "Processes for proposing changes, versioning and maintaining the design system.",
+  "source": "@site/docs/governance/overview.md",
+  "sourceDirName": "governance",
+  "slug": "/governance/governance-overview",
+  "permalink": "/docs/governance/governance-overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "governance-overview",
+    "title": "Governance",
+    "description": "Processes for proposing changes, versioning and maintaining the design system."
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Foundations Overview",
+    "permalink": "/docs/foundations/foundations-overview"
+  },
+  "next": {
+    "title": "UI Patterns",
+    "permalink": "/docs/patterns/patterns-overview"
+  }
+}

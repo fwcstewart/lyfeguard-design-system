@@ -1,0 +1,27 @@
+{
+  "id": "patterns/patterns-overview",
+  "title": "UI Patterns",
+  "description": "Guidance on common UI patterns built from Lyfeguard components.",
+  "source": "@site/docs/patterns/overview.md",
+  "sourceDirName": "patterns",
+  "slug": "/patterns/patterns-overview",
+  "permalink": "/docs/patterns/patterns-overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "patterns-overview",
+    "title": "UI Patterns",
+    "description": "Guidance on common UI patterns built from Lyfeguard components."
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Governance",
+    "permalink": "/docs/governance/governance-overview"
+  },
+  "next": {
+    "title": "Design Tokens",
+    "permalink": "/docs/tokens/tokens-overview"
+  }
+}

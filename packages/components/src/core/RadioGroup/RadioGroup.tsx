@@ -51,7 +51,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     onChange?.(event.target.value);
   };
   return (
-    <fieldset className={s.group} style={{ flexDirection: inline ? 'row' : 'column' }}>
+    <fieldset className={s.group} style={{ flexDirection: inline ? 'row' : 'column' }} data-lyfeguard="RadioGroup">
       {label && <legend className={s.label}>{label}</legend>}
       {options.map((opt) => (
         <label className={s.option} key={opt.value} style={{ flexDirection: inline ? 'row' : 'row' }}>

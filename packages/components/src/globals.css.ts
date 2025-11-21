@@ -1,17 +1,59 @@
-import { createGlobalTheme } from '@vanilla-extract/css';
+import { createGlobalTheme, globalStyle } from '@vanilla-extract/css';
 
 // Import token variables from the built CSS file. When this file is imported
 // in your consuming application, ensure you import the tokens CSS first.
 // Example: import '@lyfeguard/tokens/dist/css/tokens.css';
+
+// Define theme CSS variables that will be overridden in dark mode
+globalStyle(':root', {
+  vars: {
+    '--color-theme-background': '#FFFFFF',
+    '--color-theme-surface': '#F5F5F5',
+    '--color-theme-surfaceHover': '#E7ECEC',
+    '--color-theme-surfaceActive': '#CFD6D6',
+    '--color-theme-border': '#CFD6D6',
+    '--color-theme-borderHover': '#B8C0C0',
+    '--color-theme-text-primary': '#2E3B3B',
+    '--color-theme-text-secondary': '#5C6969',
+    '--color-theme-text-tertiary': '#8A9595',
+    '--color-theme-text-disabled': '#A0AAAA',
+    '--color-theme-overlay': 'rgba(5,26,34,0.75)',
+  },
+});
+
+globalStyle('.dark', {
+  vars: {
+    '--color-theme-background': '#051A22',
+    '--color-theme-surface': 'rgba(23,123,154,0.2)',
+    '--color-theme-surfaceHover': 'rgba(23,123,154,0.3)',
+    '--color-theme-surfaceActive': 'rgba(23,123,154,0.35)',
+    '--color-theme-border': 'rgba(23,123,154,0.4)',
+    '--color-theme-borderHover': 'rgba(23,123,154,0.5)',
+    '--color-theme-text-primary': '#FFFFFF',
+    '--color-theme-text-secondary': '#FFFFFF',
+    '--color-theme-text-tertiary': '#E7ECEC',
+    '--color-theme-text-disabled': '#8A9595',
+    '--color-theme-overlay': 'rgba(5,26,34,0.85)',
+  },
+});
 
 export const vars = createGlobalTheme(':root', {
   color: {
     brand900: 'var(--color-brand-900)',
     brand800: 'var(--color-brand-800)',
     brand500: 'var(--color-brand-500)',
+    brand500_15: 'var(--color-brand-500_15)',
     brand500_20: 'var(--color-brand-500_20)',
+    brand500_25: 'var(--color-brand-500_25)',
     brand500_30: 'var(--color-brand-500_30)',
+    brand500_40: 'var(--color-brand-500_40)',
+    brand500_50: 'var(--color-brand-500_50)',
     accentMint: 'var(--color-accent-mint)',
+    accentMint_10: 'var(--color-accent-mint_10)',
+    accentMint_15: 'var(--color-accent-mint_15)',
+    accentMint_20: 'var(--color-accent-mint_20)',
+    accentMint_30: 'var(--color-accent-mint_30)',
+    accentMint_40: 'var(--color-accent-mint_40)',
     neutral0: 'var(--color-neutral-0)',
     neutral50: 'var(--color-neutral-50)',
     neutral100: 'var(--color-neutral-100)',
@@ -25,12 +67,31 @@ export const vars = createGlobalTheme(':root', {
     neutral900: 'var(--color-neutral-900)',
     success500: 'var(--color-success-500)',
     success600: 'var(--color-success-600)',
+    success500_15: 'var(--color-success-500_15)',
     warning500: 'var(--color-warning-500)',
     warning100: 'var(--color-warning-100)',
+    warning500_15: 'var(--color-warning-500_15)',
     error500: 'var(--color-error-500)',
     error100: 'var(--color-error-100)',
+    error500_15: 'var(--color-error-500_15)',
     info500: 'var(--color-info-500)',
-    info100: 'var(--color-info-100)'
+    info100: 'var(--color-info-100)',
+    info500_15: 'var(--color-info-500_15)',
+    theme: {
+      background: 'var(--color-theme-background)',
+      surface: 'var(--color-theme-surface)',
+      surfaceHover: 'var(--color-theme-surfaceHover)',
+      surfaceActive: 'var(--color-theme-surfaceActive)',
+      border: 'var(--color-theme-border)',
+      borderHover: 'var(--color-theme-borderHover)',
+      text: {
+        primary: 'var(--color-theme-text-primary)',
+        secondary: 'var(--color-theme-text-secondary)',
+        tertiary: 'var(--color-theme-text-tertiary)',
+        disabled: 'var(--color-theme-text-disabled)',
+      },
+      overlay: 'var(--color-theme-overlay)',
+    },
   },
   spacing: {
     0: 'var(--spacing-0)',
@@ -54,7 +115,64 @@ export const vars = createGlobalTheme(':root', {
     round: '9999px'
   },
   font: {
-    sans: 'var(--font-family-sans)'
+    sans: 'var(--font-family-sans)',
+    size: {
+      heading: {
+        xl: 'var(--font-size-heading-xl)',
+        lg: 'var(--font-size-heading-lg)',
+        md: 'var(--font-size-heading-md)',
+        sm: 'var(--font-size-heading-sm)',
+        xs: 'var(--font-size-heading-xs)'
+      },
+      body: {
+        lg: 'var(--font-size-body-lg)',
+        base: 'var(--font-size-body-base)',
+        sm: 'var(--font-size-body-sm)',
+        xs: 'var(--font-size-body-xs)'
+      },
+      ui: {
+        label: 'var(--font-size-ui-label)',
+        button: 'var(--font-size-ui-button)',
+        overline: 'var(--font-size-ui-overline)'
+      }
+    },
+    weight: {
+      regular: 'var(--font-weight-regular)',
+      medium: 'var(--font-weight-medium)',
+      semiBold: 'var(--font-weight-semiBold)',
+      bold: 'var(--font-weight-bold)'
+    },
+    lineHeight: {
+      heading: {
+        xl: 'var(--font-line-height-heading-xl)',
+        lg: 'var(--font-line-height-heading-lg)',
+        md: 'var(--font-line-height-heading-md)',
+        sm: 'var(--font-line-height-heading-sm)',
+        xs: 'var(--font-line-height-heading-xs)'
+      },
+      body: {
+        lg: 'var(--font-line-height-body-lg)',
+        base: 'var(--font-line-height-body-base)',
+        sm: 'var(--font-line-height-body-sm)',
+        xs: 'var(--font-line-height-body-xs)'
+      },
+      ui: {
+        label: 'var(--font-line-height-ui-label)',
+        button: 'var(--font-line-height-ui-button)',
+        overline: 'var(--font-line-height-ui-overline)'
+      }
+    }
+  },
+  /**
+   * Shadow tokens define elevation levels for cards, modals and overlays.
+   * Light shadows provide subtle depth while heavier shadows communicate focus.
+   */
+  shadow: {
+    xs: 'var(--shadow-xs)',
+    sm: 'var(--shadow-sm)',
+    md: 'var(--shadow-md)',
+    lg: 'var(--shadow-lg)',
+    xl: 'var(--shadow-xl)'
   },
   /**
    * Motion tokens define durations and easing curves for animations and
@@ -115,9 +233,18 @@ export const darkVars = createGlobalTheme('.dark', {
     brand900: 'var(--color-brand-900)',
     brand800: 'var(--color-brand-800)',
     brand500: 'var(--color-brand-500)',
+    brand500_15: 'var(--color-brand-500_15)',
     brand500_20: 'var(--color-brand-500_20)',
+    brand500_25: 'var(--color-brand-500_25)',
     brand500_30: 'var(--color-brand-500_30)',
+    brand500_40: 'var(--color-brand-500_40)',
+    brand500_50: 'var(--color-brand-500_50)',
     accentMint: 'var(--color-accent-mint)',
+    accentMint_10: 'var(--color-accent-mint_10)',
+    accentMint_15: 'var(--color-accent-mint_15)',
+    accentMint_20: 'var(--color-accent-mint_20)',
+    accentMint_30: 'var(--color-accent-mint_30)',
+    accentMint_40: 'var(--color-accent-mint_40)',
     // Invert the neutral palette for dark backgrounds.  Lighter values
     // become darker and vice versa.  This simple inversion provides a
     // reasonable baseline; refine these values in your token definitions
@@ -135,12 +262,31 @@ export const darkVars = createGlobalTheme('.dark', {
     neutral900: 'var(--color-neutral-0)',
     success500: 'var(--color-success-500)',
     success600: 'var(--color-success-600)',
+    success500_15: 'var(--color-success-500_15)',
     warning500: 'var(--color-warning-500)',
     warning100: 'var(--color-warning-100)',
+    warning500_15: 'var(--color-warning-500_15)',
     error500: 'var(--color-error-500)',
     error100: 'var(--color-error-100)',
+    error500_15: 'var(--color-error-500_15)',
     info500: 'var(--color-info-500)',
-    info100: 'var(--color-info-100)'
+    info100: 'var(--color-info-100)',
+    info500_15: 'var(--color-info-500_15)',
+    theme: {
+      background: 'var(--color-theme-background)',
+      surface: 'var(--color-theme-surface)',
+      surfaceHover: 'var(--color-theme-surfaceHover)',
+      surfaceActive: 'var(--color-theme-surfaceActive)',
+      border: 'var(--color-theme-border)',
+      borderHover: 'var(--color-theme-borderHover)',
+      text: {
+        primary: 'var(--color-theme-text-primary)',
+        secondary: 'var(--color-theme-text-secondary)',
+        tertiary: 'var(--color-theme-text-tertiary)',
+        disabled: 'var(--color-theme-text-disabled)',
+      },
+      overlay: 'var(--color-theme-overlay)',
+    },
   },
   spacing: {
     0: 'var(--spacing-0)',
@@ -164,7 +310,64 @@ export const darkVars = createGlobalTheme('.dark', {
     round: '9999px'
   },
   font: {
-    sans: 'var(--font-family-sans)'
+    sans: 'var(--font-family-sans)',
+    size: {
+      heading: {
+        xl: 'var(--font-size-heading-xl)',
+        lg: 'var(--font-size-heading-lg)',
+        md: 'var(--font-size-heading-md)',
+        sm: 'var(--font-size-heading-sm)',
+        xs: 'var(--font-size-heading-xs)'
+      },
+      body: {
+        lg: 'var(--font-size-body-lg)',
+        base: 'var(--font-size-body-base)',
+        sm: 'var(--font-size-body-sm)',
+        xs: 'var(--font-size-body-xs)'
+      },
+      ui: {
+        label: 'var(--font-size-ui-label)',
+        button: 'var(--font-size-ui-button)',
+        overline: 'var(--font-size-ui-overline)'
+      }
+    },
+    weight: {
+      regular: 'var(--font-weight-regular)',
+      medium: 'var(--font-weight-medium)',
+      semiBold: 'var(--font-weight-semiBold)',
+      bold: 'var(--font-weight-bold)'
+    },
+    lineHeight: {
+      heading: {
+        xl: 'var(--font-line-height-heading-xl)',
+        lg: 'var(--font-line-height-heading-lg)',
+        md: 'var(--font-line-height-heading-md)',
+        sm: 'var(--font-line-height-heading-sm)',
+        xs: 'var(--font-line-height-heading-xs)'
+      },
+      body: {
+        lg: 'var(--font-line-height-body-lg)',
+        base: 'var(--font-line-height-body-base)',
+        sm: 'var(--font-line-height-body-sm)',
+        xs: 'var(--font-line-height-body-xs)'
+      },
+      ui: {
+        label: 'var(--font-line-height-ui-label)',
+        button: 'var(--font-line-height-ui-button)',
+        overline: 'var(--font-line-height-ui-overline)'
+      }
+    }
+  },
+  /**
+   * Shadow tokens define elevation levels for cards, modals and overlays.
+   * Light shadows provide subtle depth while heavier shadows communicate focus.
+   */
+  shadow: {
+    xs: 'var(--shadow-xs)',
+    sm: 'var(--shadow-sm)',
+    md: 'var(--shadow-md)',
+    lg: 'var(--shadow-lg)',
+    xl: 'var(--shadow-xl)'
   },
   motion: {
     duration: {

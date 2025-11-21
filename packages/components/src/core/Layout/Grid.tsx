@@ -27,7 +27,7 @@ export const Grid: React.FC<GridProps> = ({ columns = 12, gap = vars.spacing[4],
     ...style,
   };
   return (
-    <div className={s.grid} style={gridStyle} {...props}>
+    <div className={s.grid} style={gridStyle} data-lyfeguard="Grid" {...props}>
       {children}
     </div>
   );

@@ -41,6 +41,7 @@ export const Toggle: React.FC<ToggleProps> = ({ checked, onChange, label, ...pro
       type="button"
       onClick={handleToggle}
       className={s.container}
+      data-lyfeguard="Toggle"
       {...props}
     >
       <span

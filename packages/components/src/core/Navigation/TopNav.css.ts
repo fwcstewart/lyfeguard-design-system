@@ -5,39 +5,70 @@ export const topNav = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  height: '64px',
+  height: '72px',
   padding: `0 ${vars.spacing[7]}` as unknown as string,
   background: vars.color.brand900,
   color: vars.color.neutral0,
+  borderBottom: `1px solid rgba(255, 255, 255, 0.1)`,
+  boxShadow: `0 1px 3px rgba(0, 0, 0, 0.1)`,
 });
 
 export const left = style({
   display: 'flex',
   alignItems: 'center',
-  gap: vars.spacing[4] as unknown as string,
+  gap: vars.spacing[6] as unknown as string,
 });
 
 export const logo = style({
-  fontSize: '20px',
-  fontWeight: 600,
+  fontSize: vars.font.size.heading.sm,
+  fontWeight: vars.font.weight.bold,
+  lineHeight: vars.font.lineHeight.heading.sm,
   color: vars.color.neutral0,
+  fontFamily: vars.font.sans,
+  letterSpacing: '-0.02em',
 });
 
 export const navLinks = style({
   display: 'flex',
   alignItems: 'center',
-  gap: vars.spacing[5] as unknown as string,
+  gap: vars.spacing[1] as unknown as string,
 });
 
 export const navLink = style({
   fontFamily: vars.font.sans,
-  fontSize: '14px',
+  fontSize: vars.font.size.ui.label,
+  lineHeight: vars.font.lineHeight.ui.label,
+  fontWeight: vars.font.weight.medium,
   color: vars.color.neutral0,
   textDecoration: 'none',
   cursor: 'pointer',
+  padding: `${vars.spacing[2]} ${vars.spacing[4]}` as unknown as string,
+  borderRadius: vars.radius.md,
+  position: 'relative',
+  transition: `color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
   selectors: {
     '&:hover': {
       color: vars.color.accentMint,
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    },
+    '&[data-active="true"]': {
+      color: vars.color.accentMint,
+      backgroundColor: vars.color.accentMint_10,
+      fontWeight: vars.font.weight.semiBold,
+    },
+    '&[data-active="true"]::after': {
+      content: '""',
+      position: 'absolute',
+      bottom: '-1px',
+      left: vars.spacing[4] as unknown as string,
+      right: vars.spacing[4] as unknown as string,
+      height: '2px',
+      background: vars.color.accentMint,
+      borderRadius: vars.radius.round,
+    },
+    '&:focus-visible': {
+      outline: `2px solid ${vars.color.accentMint}`,
+      outlineOffset: '2px',
     },
   },
 });

@@ -9,7 +9,7 @@ export interface TextareaProps
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, ...props }, ref) => {
     return (
-      <div className={s.wrapper}>
+      <div className={s.wrapper} data-lyfeguard="Textarea">
         {label && <label className={s.label}>{label}</label>}
         <textarea ref={ref} className={s.textarea} {...props} />
       </div>

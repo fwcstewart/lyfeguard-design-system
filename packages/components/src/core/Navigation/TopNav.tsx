@@ -14,6 +14,10 @@ export interface NavLinkItem {
    * Click handler for the link. Overrides default link behaviour.
    */
   onClick?: () => void;
+  /**
+   * Whether this link is currently active
+   */
+  isActive?: boolean;
 }
 
 export interface TopNavProps {
@@ -42,7 +46,7 @@ export interface TopNavProps {
  */
 export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', links = [], actions }) => {
   return (
-    <header className={s.topNav}>
+    <header className={s.topNav} data-lyfeguard="TopNav">
       <div className={s.left}>
         {brand ? <div className={s.logo}>{brand}</div> : <div className={s.logo}>{brandName}</div>}
         <nav className={s.navLinks}>
@@ -59,6 +63,7 @@ export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', 
                 key={idx}
                 href={link.href || '#'}
                 className={s.navLink}
+                data-active={link.isActive}
                 {...props}
               >
                 {link.label}

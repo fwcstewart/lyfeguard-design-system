@@ -1,0 +1,27 @@
+{
+  "id": "foundations/foundations-overview",
+  "title": "Foundations Overview",
+  "description": "Core foundations, principles and philosophy of the Lyfeguard design system.",
+  "source": "@site/docs/foundations/overview.md",
+  "sourceDirName": "foundations",
+  "slug": "/foundations/foundations-overview",
+  "permalink": "/docs/foundations/foundations-overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "foundations-overview",
+    "title": "Foundations Overview",
+    "description": "Core foundations, principles and philosophy of the Lyfeguard design system."
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Development",
+    "permalink": "/docs/development/development-overview"
+  },
+  "next": {
+    "title": "Governance",
+    "permalink": "/docs/governance/governance-overview"
+  }
+}

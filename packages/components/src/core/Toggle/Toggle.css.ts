@@ -28,12 +28,13 @@ export const handle = style({
   height: '16px',
   borderRadius: '50%',
   backgroundColor: vars.color.neutral0,
-  boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
-  transition: 'transform 0.2s ease',
+  boxShadow: vars.shadow.xs,
+  transition: `transform ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
 });
 
 export const label = style({
   fontFamily: vars.font.sans,
-  fontSize: '14px',
+  fontSize: vars.font.size.ui.label,
+  lineHeight: vars.font.lineHeight.ui.label,
   color: vars.color.neutral900,
 });

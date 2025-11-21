@@ -1,0 +1,58 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "components/components-overview",
+          "docs": [
+            {
+              "id": "components/components-overview",
+              "path": "/docs/components/components-overview",
+              "sidebar": "docs"
+            },
+            {
+              "id": "development/development-overview",
+              "path": "/docs/development/development-overview",
+              "sidebar": "docs"
+            },
+            {
+              "id": "foundations/foundations-overview",
+              "path": "/docs/foundations/foundations-overview",
+              "sidebar": "docs"
+            },
+            {
+              "id": "governance/governance-overview",
+              "path": "/docs/governance/governance-overview",
+              "sidebar": "docs"
+            },
+            {
+              "id": "patterns/patterns-overview",
+              "path": "/docs/patterns/patterns-overview",
+              "sidebar": "docs"
+            },
+            {
+              "id": "tokens/tokens-overview",
+              "path": "/docs/tokens/tokens-overview",
+              "sidebar": "docs"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "docs": {
+              "link": {
+                "path": "/docs/components/components-overview",
+                "label": "components/components-overview"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

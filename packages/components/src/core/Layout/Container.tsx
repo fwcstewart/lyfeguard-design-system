@@ -28,7 +28,7 @@ export const Container: React.FC<ContainerProps> = ({ maxWidth, fluid = false, s
     ...style,
   };
   return (
-    <div className={s.container} style={computedStyle} {...props}>
+    <div className={s.container} style={computedStyle} data-lyfeguard="Container" {...props}>
       {children}
     </div>
   );

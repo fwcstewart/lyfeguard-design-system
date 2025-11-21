@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 
 // Import tokens so CSS variables are available globally
 import '@lyfeguard/tokens/dist/css/tokens.css';

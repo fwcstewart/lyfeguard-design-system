@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as s from './Toast.css';
-
-export type ToastVariant = 'info' | 'success' | 'warning' | 'error';
+import type { ToastVariant } from './ToastProvider';
 
 export interface ToastProps {
   /**
@@ -47,7 +46,7 @@ export const Toast: React.FC<ToastProps> = ({ open, onClose, children, variant =
   }, [internalOpen, duration, onClose]);
   if (!internalOpen) return null;
   return (
-    <div className={s.container}>
+    <div className={s.container} data-lyfeguard="Toast">
       <div className={[s.toastBase, s.variants[variant]].join(' ')} role="status">
         <div className={s.message}>{children}</div>
         <button

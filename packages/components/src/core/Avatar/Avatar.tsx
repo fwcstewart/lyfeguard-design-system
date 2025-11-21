@@ -39,6 +39,7 @@ export const Avatar: React.FC<AvatarProps> = ({ src, name, size = 32, background
     <div
       className={s.container}
       style={{ width: size, height: size, backgroundColor: backgroundColor ?? vars.color.brand500 }}
+      data-lyfeguard="Avatar"
     >
       {src ? (
         // eslint-disable-next-line @next/next/no-img-element

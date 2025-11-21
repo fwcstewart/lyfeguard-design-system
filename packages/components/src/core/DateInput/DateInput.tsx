@@ -18,7 +18,7 @@ export interface DateInputProps
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
   ({ label, ...props }, ref) => {
     return (
-      <div className={s.wrapper}>
+      <div className={s.wrapper} data-lyfeguard="DateInput">
         {label && <label className={s.label}>{label}</label>}
         <input ref={ref} type="date" className={s.input} {...props} />
       </div>

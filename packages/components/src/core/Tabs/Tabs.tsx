@@ -40,13 +40,15 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultIndex = 0, onChange }) 
   };
 
   return (
-    <div>
+    <div data-lyfeguard="Tabs">
       <div className={styles.tabList} role="tablist">
         {tabs.map((tab, index) => (
           <button
             key={index}
+            id={`tab-${index}`}
             role="tab"
             aria-selected={activeIndex === index}
+            aria-controls={`tabpanel-${index}`}
             data-active={activeIndex === index}
             className={styles.tab}
             onClick={() => handleSelect(index)}
@@ -56,7 +58,12 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultIndex = 0, onChange }) 
           </button>
         ))}
       </div>
-      <div role="tabpanel" style={{ marginTop: '16px' }}>
+      <div
+        role="tabpanel"
+        id={`tabpanel-${activeIndex}`}
+        className={styles.tabPanel}
+        aria-labelledby={`tab-${activeIndex}`}
+      >
         {tabs[activeIndex]?.content}
       </div>
     </div>

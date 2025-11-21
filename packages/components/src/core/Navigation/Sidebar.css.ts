@@ -4,32 +4,51 @@ import { vars } from '../../globals.css';
 export const sidebar = style({
   display: 'flex',
   flexDirection: 'column',
-  width: '264px',
+  width: '280px',
   background: vars.color.brand900,
   color: vars.color.neutral0,
-  padding: `${vars.spacing[6]} 0` as unknown as string,
+  padding: `${vars.spacing[5]} 0` as unknown as string,
+  borderRight: `1px solid rgba(255, 255, 255, 0.1)`,
 });
 
 export const item = style({
   display: 'flex',
   alignItems: 'center',
   gap: vars.spacing[3] as unknown as string,
-  height: '44px',
-  padding: `0 ${vars.spacing[5]}` as unknown as string,
+  minHeight: '48px',
+  padding: `${vars.spacing[3]} ${vars.spacing[5]}` as unknown as string,
   fontFamily: vars.font.sans,
-  fontSize: '14px',
-  color: vars.color.neutral0,
+  fontSize: vars.font.size.ui.label,
+  lineHeight: vars.font.lineHeight.ui.label,
+  fontWeight: vars.font.weight.medium,
+  color: 'rgba(255, 255, 255, 0.8)',
   cursor: 'pointer',
-  borderLeft: `3px solid transparent`,
+  borderLeft: `4px solid transparent`,
+  transition: `background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, border-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, transform ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
+  margin: `0 ${vars.spacing[2]}` as unknown as string,
+  borderRadius: vars.radius.md,
+  position: 'relative',
   selectors: {
     '&[data-active="true"]': {
-      background: `${vars.color.brand500_20}`,
+      background: vars.color.accentMint_15,
       borderLeftColor: vars.color.accentMint,
-      color: vars.color.neutral0,
+      color: vars.color.accentMint,
+      fontWeight: vars.font.weight.semiBold,
     },
-    '&:hover': {
-      background: `${vars.color.brand500_20}`,
+    '&:hover:not([data-active="true"])': {
+      background: 'rgba(255, 255, 255, 0.08)',
       color: vars.color.neutral0,
+      transform: 'translateX(4px)',
+    },
+    '&[data-active="true"]:hover': {
+      background: vars.color.accentMint_20,
+    },
+    '&:active': {
+      transform: 'translateX(2px) scale(0.98)',
+    },
+    '&:focus-visible': {
+      outline: `2px solid ${vars.color.accentMint}`,
+      outlineOffset: '2px',
     },
   },
 });
@@ -37,7 +56,14 @@ export const item = style({
 export const iconWrapper = style({
   width: '20px',
   height: '20px',
+  minWidth: '20px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  flexShrink: 0,
+  selectors: {
+    [`${item}[data-active="true"] &`]: {
+      color: vars.color.accentMint,
+    },
+  },
 });

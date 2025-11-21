@@ -19,7 +19,7 @@ export const GridItem: React.FC<GridItemProps> = ({ span = 1, style, children, .
     ...style,
   };
   return (
-    <div style={itemStyle} {...props}>
+    <div style={itemStyle} data-lyfeguard="GridItem" {...props}>
       {children}
     </div>
   );

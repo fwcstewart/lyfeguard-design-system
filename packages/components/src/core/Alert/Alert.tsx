@@ -25,7 +25,7 @@ export interface AlertProps {
 export const Alert: React.FC<AlertProps> = ({ variant = 'info', title, children }) => {
   const variantClass = s.variants[variant];
   return (
-    <div className={[s.base, variantClass].join(' ')} role="alert">
+    <div className={[s.base, variantClass].join(' ')} role="alert" data-lyfeguard="Alert">
       <div>
         {title && <div className={s.title}>{title}</div>}
         <div className={s.message}>{children}</div>

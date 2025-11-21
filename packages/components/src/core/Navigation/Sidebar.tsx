@@ -54,7 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlled
   };
 
   return (
-    <aside className={s.sidebar}>
+    <aside className={s.sidebar} data-lyfeguard="Sidebar">
       {items.map((item, idx) => {
         const props: React.HTMLAttributes<HTMLDivElement> = {};
         return (

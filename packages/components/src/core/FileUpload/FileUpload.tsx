@@ -55,7 +55,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   return (
-    <div className={s.wrapper}>
+    <div className={s.wrapper} data-lyfeguard="FileUpload">
       {label && <label>{label}</label>}
       <div
         className={isActive ? `${s.dropZone} ${s.dropZoneActive}` : s.dropZone}

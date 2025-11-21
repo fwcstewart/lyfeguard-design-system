@@ -20,7 +20,7 @@ export default function Home(): JSX.Element {
           products.
         </p>
         <p>
-          <Link className="button button--primary button--lg" to="/docs/introduction">
+          <Link className="button button--primary button--lg" to="/docs/foundations/overview">
             Get Started
           </Link>
         </p>

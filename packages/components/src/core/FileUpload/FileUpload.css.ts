@@ -15,9 +15,10 @@ export const dropZone = style({
   backgroundColor: vars.color.neutral50,
   color: vars.color.neutral700,
   fontFamily: vars.font.sans,
-  fontSize: '14px',
+  fontSize: vars.font.size.body.sm,
+  lineHeight: vars.font.lineHeight.body.sm,
   cursor: 'pointer',
-  transition: 'background-color 0.2s ease, border-color 0.2s ease',
+  transition: `background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}, border-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
 });
 
 export const dropZoneActive = style({
@@ -30,7 +31,8 @@ export const fileList = style({
   margin: 0,
   padding: 0,
   fontFamily: vars.font.sans,
-  fontSize: '14px',
+  fontSize: vars.font.size.body.sm,
+  lineHeight: vars.font.lineHeight.body.sm,
   color: vars.color.neutral800,
 });
 

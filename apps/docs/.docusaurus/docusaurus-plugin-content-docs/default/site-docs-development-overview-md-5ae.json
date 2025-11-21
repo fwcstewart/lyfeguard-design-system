@@ -1,0 +1,27 @@
+{
+  "id": "development/development-overview",
+  "title": "Development",
+  "description": "How to install, build and contribute to the Lyfeguard design system.",
+  "source": "@site/docs/development/overview.md",
+  "sourceDirName": "development",
+  "slug": "/development/development-overview",
+  "permalink": "/docs/development/development-overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "development-overview",
+    "title": "Development",
+    "description": "How to install, build and contribute to the Lyfeguard design system."
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Components",
+    "permalink": "/docs/components/components-overview"
+  },
+  "next": {
+    "title": "Foundations Overview",
+    "permalink": "/docs/foundations/foundations-overview"
+  }
+}

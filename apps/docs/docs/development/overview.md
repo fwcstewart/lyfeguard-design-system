@@ -149,7 +149,7 @@ exports, Storybook stories (`Component.stories.tsx`) and tests
 `components/`, `hooks/` and `utils/` subdirectories respectively.  Use
 PascalCase for component names and folders, camelCase for props, `use…` for
 hook names, and UPPER_SNAKE_CASE for constants.  See the **Component
-Structure & Implementation Guidelines** section in [`AGENTS.md`](../../../../AGENTS.md)
+Structure & Implementation Guidelines** section in the root `AGENTS.md` file for a detailed description and recommended implementation order.
 for a detailed description and recommended implementation order.
 
 ## Contribution workflow

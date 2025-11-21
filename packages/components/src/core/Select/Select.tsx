@@ -9,7 +9,7 @@ export interface SelectProps
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, children, ...props }, ref) => {
     return (
-      <div className={s.wrapper}>
+      <div className={s.wrapper} data-lyfeguard="Select">
         {label && <label className={s.label}>{label}</label>}
         <select ref={ref} className={s.select} {...props}>
           {children}

@@ -22,7 +22,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputClass = error ? `${s.input} ${s.inputError}` : s.input;
 
     return (
-      <div className={s.wrapper}>
+      <div className={s.wrapper} data-lyfeguard="Input">
         {label && <label className={s.label}>{label}</label>}
         <input ref={ref} className={inputClass} {...props} />
         {error ? (

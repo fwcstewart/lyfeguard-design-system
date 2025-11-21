@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import * as s from './Table.css';
+
+export type SortDirection = 'asc' | 'desc' | null;
 
 export interface Column<T> {
   /**
@@ -14,6 +16,14 @@ export interface Column<T> {
    * Custom cell renderer. Receives the full row and returns a React node.
    */
   cell?: (row: T) => React.ReactNode;
+  /**
+   * Whether this column is sortable. Defaults to false.
+   */
+  sortable?: boolean;
+  /**
+   * Custom sort function. If not provided, uses default string/number comparison.
+   */
+  sortFn?: (a: T, b: T) => number;
 }
 
 export interface TableProps<T> {
@@ -29,38 +39,213 @@ export interface TableProps<T> {
    * Callback fired when a row is clicked.
    */
   onRowClick?: (row: T, index: number) => void;
+  /**
+   * Enable row selection. 'single' allows one row, 'multiple' allows many.
+   */
+  selectable?: 'single' | 'multiple';
+  /**
+   * Selected row indices (for controlled selection).
+   */
+  selectedRows?: number[];
+  /**
+   * Callback fired when selection changes. Receives array of selected row indices.
+   */
+  onSelectionChange?: (selectedIndices: number[]) => void;
+  /**
+   * Initial sort column index and direction.
+   */
+  defaultSort?: { columnIndex: number; direction: SortDirection };
 }
 
 /**
- * Simple data table. Accepts an array of column definitions and rows and renders
- * a tabular view. Supports custom cell renderers and row click handling.
+ * Enhanced data table with sorting and row selection capabilities.
+ *
+ * Supports column sorting (click headers), single/multiple row selection,
+ * and custom cell renderers.
  */
-export function Table<T>({ columns, data, onRowClick }: TableProps<T>) {
+export function Table<T>({
+  columns,
+  data,
+  onRowClick,
+  selectable,
+  selectedRows: controlledSelectedRows,
+  onSelectionChange,
+  defaultSort,
+}: TableProps<T>) {
+  const [sortColumn, setSortColumn] = useState<number | null>(
+    defaultSort?.columnIndex ?? null
+  );
+  const [sortDirection, setSortDirection] = useState<SortDirection>(
+    defaultSort?.direction ?? null
+  );
+  const [internalSelectedRows, setInternalSelectedRows] = useState<number[]>([]);
+
+  const selectedRows = controlledSelectedRows ?? internalSelectedRows;
+  const setSelectedRows = onSelectionChange ?? setInternalSelectedRows;
+
+  const sortedData = useMemo(() => {
+    if (sortColumn === null || sortDirection === null) {
+      return data;
+    }
+
+    const column = columns[sortColumn];
+    if (!column?.sortable && !column?.sortFn) {
+      return data;
+    }
+
+    const sorted = [...data];
+    sorted.sort((a, b) => {
+      if (column.sortFn) {
+        return column.sortFn(a, b);
+      }
+
+      const aValue = column.accessor ? a[column.accessor] : '';
+      const bValue = column.accessor ? b[column.accessor] : '';
+
+      // Handle null/undefined
+      if (aValue == null && bValue == null) return 0;
+      if (aValue == null) return 1;
+      if (bValue == null) return -1;
+
+      // Compare values
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return aValue - bValue;
+      }
+
+      return String(aValue).localeCompare(String(bValue));
+    });
+
+    return sortDirection === 'desc' ? sorted.reverse() : sorted;
+  }, [data, sortColumn, sortDirection, columns]);
+
+  const handleSort = (columnIndex: number) => {
+    const column = columns[columnIndex];
+    if (!column?.sortable && !column?.sortFn) return;
+
+    if (sortColumn === columnIndex) {
+      // Cycle: asc -> desc -> null
+      if (sortDirection === 'asc') {
+        setSortDirection('desc');
+      } else if (sortDirection === 'desc') {
+        setSortDirection(null);
+        setSortColumn(null);
+      }
+    } else {
+      setSortColumn(columnIndex);
+      setSortDirection('asc');
+    }
+  };
+
+  const handleRowSelect = (rowIndex: number, event: React.MouseEvent) => {
+    if (!selectable) return;
+
+    event.stopPropagation();
+
+    if (selectable === 'single') {
+      setSelectedRows(selectedRows.includes(rowIndex) ? [] : [rowIndex]);
+    } else {
+      // multiple
+      setSelectedRows(
+        selectedRows.includes(rowIndex)
+          ? selectedRows.filter((i) => i !== rowIndex)
+          : [...selectedRows, rowIndex]
+      );
+    }
+  };
+
   return (
-    <table className={s.table}>
+    <table className={s.table} data-lyfeguard="Table">
       <thead>
         <tr>
-          {columns.map((col, idx) => (
-            <th key={idx} className={s.headerCell}>
-              {col.header}
+          {selectable && (
+            <th className={s.headerCell} style={{ width: '40px' }}>
+              {selectable === 'multiple' && (
+                <input
+                  type="checkbox"
+                  checked={
+                    sortedData.length > 0 &&
+                    selectedRows.length === sortedData.length
+                  }
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedRows(sortedData.map((_, i) => i));
+                    } else {
+                      setSelectedRows([]);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  aria-label="Select all rows"
+                />
+              )}
             </th>
-          ))}
+          )}
+          {columns.map((col, idx) => {
+            const isSortable = col.sortable || !!col.sortFn;
+            const isSorted = sortColumn === idx;
+            const currentDirection = isSorted ? sortDirection : null;
+
+            return (
+              <th
+                key={idx}
+                className={`${s.headerCell} ${isSortable ? s.sortable : ''} ${
+                  isSorted ? s.sorted : ''
+                }`}
+                onClick={() => isSortable && handleSort(idx)}
+                aria-sort={
+                  currentDirection === 'asc'
+                    ? 'ascending'
+                    : currentDirection === 'desc'
+                    ? 'descending'
+                    : 'none'
+                }
+              >
+                <div className={s.headerContent}>
+                  {col.header}
+                  {isSortable && (
+                    <span className={s.sortIndicator}>
+                      {currentDirection === 'asc' ? '↑' : currentDirection === 'desc' ? '↓' : '⇅'}
+                    </span>
+                  )}
+                </div>
+              </th>
+            );
+          })}
         </tr>
       </thead>
       <tbody>
-        {data.map((row, rowIndex) => (
-          <tr
-            key={rowIndex}
-            className={s.row}
-            onClick={() => onRowClick?.(row, rowIndex)}
-          >
-            {columns.map((col, colIndex) => (
-              <td key={colIndex} className={s.cell}>
-                {col.cell ? col.cell(row) : (col.accessor ? String(row[col.accessor] ?? '') : null)}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {sortedData.map((row, rowIndex) => {
+          const isSelected = selectedRows.includes(rowIndex);
+          return (
+            <tr
+              key={rowIndex}
+              className={`${s.row} ${isSelected ? s.selected : ''} ${
+                onRowClick ? s.clickable : ''
+              }`}
+              onClick={() => onRowClick?.(row, rowIndex)}
+            >
+              {selectable && (
+                <td className={s.cell} onClick={(e) => handleRowSelect(rowIndex, e)}>
+                  <input
+                    type={selectable === 'single' ? 'radio' : 'checkbox'}
+                    checked={isSelected}
+                    onChange={() => {}} // Handled by row click
+                    onClick={(e) => e.stopPropagation()}
+                    aria-label={`Select row ${rowIndex + 1}`}
+                  />
+                </td>
+              )}
+              {columns.map((col, colIndex) => (
+                <td key={colIndex} className={s.cell}>
+                  {col.cell
+                    ? col.cell(row)
+                    : col.accessor
+                    ? String(row[col.accessor] ?? '')
+                    : null}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

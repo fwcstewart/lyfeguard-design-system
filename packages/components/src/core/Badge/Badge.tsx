@@ -16,24 +16,12 @@ export interface BadgeProps {
  * Badge component
  *
  * Displays a small, coloured pill for status indicators, tags and metadata.
+ * Provides clear visual hierarchy with refined styling and smooth transitions.
  */
 export const Badge: React.FC<BadgeProps> = ({ variant = 'primary', children }) => {
-  let className: string;
-  switch (variant) {
-    case 'success':
-      className = s.success;
-      break;
-    case 'warning':
-      className = s.warning;
-      break;
-    case 'error':
-      className = s.error;
-      break;
-    case 'info':
-      className = s.info;
-      break;
-    default:
-      className = s.primary;
-  }
-  return <span className={className}>{children}</span>;
+  return (
+    <span className={s.variants[variant]} data-lyfeguard="Badge">
+      {children}
+    </span>
+  );
 };

@@ -1,0 +1,23 @@
+{
+  "id": "tokens/tokens-overview",
+  "title": "Design Tokens",
+  "description": "The single source of truth for raw design values such as colours, spacing and typography.",
+  "source": "@site/docs/tokens/overview.md",
+  "sourceDirName": "tokens",
+  "slug": "/tokens/tokens-overview",
+  "permalink": "/docs/tokens/tokens-overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "tokens-overview",
+    "title": "Design Tokens",
+    "description": "The single source of truth for raw design values such as colours, spacing and typography."
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "UI Patterns",
+    "permalink": "/docs/patterns/patterns-overview"
+  }
+}

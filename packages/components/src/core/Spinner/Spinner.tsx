@@ -14,5 +14,5 @@ export interface SpinnerProps {
  * customised.
  */
 export const Spinner: React.FC<SpinnerProps> = ({ size = 24 }) => {
-  return <span className={s.spinner} style={{ width: size, height: size }} />;
+  return <span className={s.spinner} style={{ width: size, height: size }} data-lyfeguard="Spinner" />;
 };

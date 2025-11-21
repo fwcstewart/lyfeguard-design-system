@@ -23,28 +23,36 @@ export const radio = style({
   appearance: 'none',
   width: '16px',
   height: '16px',
-  border: `1px solid ${vars.color.neutral400}`,
+  border: `1.5px solid ${vars.color.theme.border}`,
   borderRadius: '50%',
-  backgroundColor: vars.color.neutral0,
+  backgroundColor: vars.color.theme.surface,
   display: 'grid',
   placeContent: 'center',
-  transition: 'background-color 0.2s ease, border-color 0.2s ease',
+  transition: `background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}, border-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
   selectors: {
+    '&:hover:not(:disabled)': {
+      borderColor: vars.color.theme.borderHover,
+    },
     '&:checked': {
-      borderColor: vars.color.brand500,
+      borderColor: vars.color.accentMint,
     },
     '&:checked::after': {
       content: '',
       width: '8px',
       height: '8px',
       borderRadius: '50%',
-      backgroundColor: vars.color.brand500,
+      backgroundColor: vars.color.accentMint,
+    },
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed',
     },
   },
 });
 
 export const label = style({
   fontFamily: vars.font.sans,
-  fontSize: '14px',
-  color: vars.color.neutral900,
+  fontSize: vars.font.size.ui.label,
+  lineHeight: vars.font.lineHeight.ui.label,
+  color: vars.color.theme.text.primary,
 });

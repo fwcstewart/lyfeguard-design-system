@@ -20,7 +20,7 @@ export interface CheckboxProps
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, ...props }, ref) => {
     return (
-      <label className={s.container}>
+      <label className={s.container} data-lyfeguard="Checkbox">
         <input ref={ref} type="checkbox" className={s.checkbox} {...props} />
         {label && <span className={s.label}>{label}</span>}
       </label>
