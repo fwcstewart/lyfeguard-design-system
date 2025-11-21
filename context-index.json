@@ -1,0 +1,18 @@
+{
+  "./apps": "Top-level directory containing end-user applications built from the design system, such as the docs site and playground.",
+  "./apps/docs": "Docusaurus site containing design system documentation. Organised into foundations, tokens, components, patterns, development, and governance.",
+  "./apps/docs/docs": "Markdown files grouped by category for the documentation site.",
+  "./apps/docs/src": "Custom React components and pages used by the Docusaurus site.",
+  "./apps/playground": "A Vite/React application used as a sandbox to develop and test components in real scenarios.",
+  "./packages": "Contains the library packages that make up the design system (tokens, components, icons, utils). Each package is versioned and published separately.",
+  "./packages/tokens": "Style Dictionary definitions for design tokens (colour, spacing, typography, motion, breakpoints, etc.), scripts to build them, and generated outputs.",
+  "./packages/components": "Core React component library built with TypeScript and Vanilla Extract. Contains primitives, core components, themes and helper functions.",
+  "./packages/icons": "A collection of reusable SVG icons exported as React components.",
+  "./packages/utils": "Shared utility functions (e.g. class name combiners, number/date formatters, ID generators).",
+  "./storybook": "Configuration for Storybook, used to develop and preview components in isolation.",
+  "./.github": "GitHub workflows and issue templates governing CI, releases and component proposals.",
+  "./.changeset": "Changeset configuration and changelog entries used by semantic-release.",
+  "./AGENTS.md": "Manual for AI agents describing mission, tech stack, coding style and contribution workflow.",
+  "./.cursorrules": "Enforced rules for agentic AI contributors (Always/Never list).",
+  "./.cursorignore": "Specifies patterns of files/directories to ignore when building context for AI agents (e.g. build artefacts, lockfiles)."
+}

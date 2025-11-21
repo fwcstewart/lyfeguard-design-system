@@ -1,0 +1,25 @@
+module.exports = {
+  source: ["src/**/*.json"],
+  platforms: {
+    css: {
+      transformGroup: "css",
+      buildPath: "dist/css/",
+      files: [
+        {
+          destination: "tokens.css",
+          format: "css/variables"
+        }
+      ]
+    },
+    js: {
+      transformGroup: "js",
+      buildPath: "dist/js/",
+      files: [
+        {
+          destination: "tokens.js",
+          format: "javascript/es6"
+        }
+      ]
+    }
+  }
+};

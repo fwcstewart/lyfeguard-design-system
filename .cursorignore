@@ -1,0 +1,45 @@
+# Files and directories to ignore when building AI context
+# These patterns reduce noise and prevent leaking sensitive or irrelevant data to agentic tools.
+
+# Lock files and package manager caches
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+**/.npm
+
+# Build outputs and caches
+**/dist
+**/build
+**/.next
+**/.cache
+**/.turbo
+**/node_modules
+**/storybook-static
+**/coverage
+
+# Generated token and component artefacts
+packages/tokens/dist
+packages/components/dist
+
+# Archives and tarballs
+**/*.tgz
+**/*.zip
+
+# Environment files
+**/.env
+**/.env.*
+
+# Legacy or archived code
+**/v1-archive
+**/legacy
+
+# Binary assets (images, PDFs, docs) that are not used in code
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.svg
+**/*.pdf
+
+# Exclude storybook build artefacts
+storybook-static

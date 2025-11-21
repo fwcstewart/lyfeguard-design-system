@@ -1,0 +1,9 @@
+{
+  "name": "@lyfeguard/icons",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Placeholder package for a future Lyfeguard icon library.",
+  "main": "src/index.ts",
+  "files": ["src"],
+  "dependencies": {}
+}

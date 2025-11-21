@@ -1,0 +1,27 @@
+# Cursor Rules for Lyfeguard Design System
+
+This file defines specific behaviours for agentic AI contributors.  These rules override or clarify guidelines in `AGENTS.md` to ensure consistency and reduce noise.  Violating a rule may result in your contribution being rejected.
+
+## ALWAYS
+
+* **Use TypeScript interfaces** for component props and exported data structures.  Interfaces are open to extension and encourage clear contracts.
+* **Import tokens** via the `vars` object from `globals.css.ts` or via CSS variables.  Tokens should never be duplicated or hard‑coded.
+* **Write JSDoc comments** above every exported function, component and utility describing its purpose and edge cases.
+* **Maintain accessibility**: implement ARIA roles and attributes, provide keyboard navigation and ensure focus management.
+* **Include tests** for each new component, hook or utility.  Tests should cover expected behaviour and error handling.
+* **Update documentation** in `apps/docs` whenever you add or modify tokens, components or utilities.
+* **Follow semantic versioning**: update or create a changeset when your changes impact the public API.
+
+* **Follow the component structure and implementation order** described in `AGENTS.md`.  Ensure each new component has a clear folder layout (`Component.tsx`, `Component.css.ts`, optional `types.ts` and `constants.ts`, `index.ts`, tests, stories) and that types are defined before implementation.
+* **Use meaningful naming conventions**.  Component folders and files should use PascalCase; hooks start with `use`; constants are UPPER_SNAKE_CASE; boolean props begin with `is` or `has`.
+* **Add `data-lyfeguard` attributes** to the root element of each component to aid testing and query selection.
+
+## NEVER
+
+* **Never commit lock files** (`package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`) into the design system packages.  They introduce noise and are environment‑specific.
+* **Never commit build artefacts** (directories like `dist`, `build`, `.next`, `storybook-static` or compiled token outputs) to source control.
+* **Never hard‑code colours, spacing or typography values** in CSS or components.  Always reference tokens.
+* **Never leave TODO or FIXME comments** in committed code.  Use GitHub issues to track work instead.
+* **Never expose secrets or credentials** in code or docs.  Use environment variables and provide `.env.example` files when necessary.
+* **Never modify generated files** in `dist` or `token` output.  Make changes in the source and rebuild.
+* **Never reference deprecated or legacy code** (e.g. archived versions).  If you need context, explicitly note it in your PR description.

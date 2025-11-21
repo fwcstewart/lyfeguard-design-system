@@ -1,0 +1,3 @@
+# Changesets
+
+This folder is used by the [Changesets](https://github.com/changesets/changesets) tool to track version updates and changelog entries.  If you decide to adopt Changesets instead of semantic‑release, you can run `npx changeset` to create a new changeset and specify which packages are affected.  The changeset files will be stored here and processed by CI to bump versions and generate release notes.

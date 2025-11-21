@@ -1,0 +1,9 @@
+{
+  "layout": {
+    "grid": {
+      "columns": { "value": 12 },
+      "gutter": { "value": "16px" },
+      "containerMaxWidth": { "value": "1024px" }
+    }
+  }
+}

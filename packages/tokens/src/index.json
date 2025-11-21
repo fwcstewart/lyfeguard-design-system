@@ -1,0 +1,9 @@
+{
+  "_comment": "This file aggregates tokens for documentation purposes. Style Dictionary reads all JSON files in the src directory so you typically don't need to import anything here.",
+  "color": {},
+  "spacing": {},
+  "typography": {},
+  "breakpoints": {},
+  "motion": {},
+  "layout": {}
+}

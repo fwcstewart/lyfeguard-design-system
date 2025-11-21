@@ -1,0 +1,23 @@
+{
+  "name": "lyfeguard-design-system-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Lyfeguard Design System Monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "storybook"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "story": "storybook dev -p 6006"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
