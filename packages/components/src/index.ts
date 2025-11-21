@@ -5,7 +5,7 @@ export * from './core/Textarea/Textarea';
 export * from './core/Card/Card';
 export * from './core/Modal/Modal';
 export * from './core/Accordion/Accordion';
-export * from './core/Filters/Filters';
+export * from './core/Filters';
 
 // New components added in the MVP extension
 export * from './core/Tabs/Tabs';
