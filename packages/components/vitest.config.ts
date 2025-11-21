@@ -1,5 +1,6 @@
-import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { defineConfig } from 'vitest/config';
 
 // Vitest configuration for the design-system components package.
 // This config enables jsdom environment and integrates with the
@@ -9,7 +10,7 @@ import react from '@vitejs/plugin-react';
 // components package.
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), vanillaExtractPlugin()],
   test: {
     environment: 'jsdom',
     globals: true,
