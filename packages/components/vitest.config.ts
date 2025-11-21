@@ -12,10 +12,11 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 // components package.
 
 export default defineConfig({
-  plugins: [vanillaExtractPlugin(), react()],
+  plugins: [react(), vanillaExtractPlugin()],
   test: {
     environment: 'jsdom',
     globals: true,
+    setupFiles: ['@testing-library/jest-dom/vitest'],
     setupFiles: ['./vitest.setup.ts'],
     setupFiles: ['./setupTests.ts'],
     setupFiles: ['@testing-library/jest-dom/vitest'],
