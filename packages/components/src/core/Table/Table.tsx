@@ -55,6 +55,10 @@ export interface TableProps<T> {
    * Initial sort column index and direction.
    */
   defaultSort?: { columnIndex: number; direction: SortDirection };
+  /**
+   * Controls vertical density of table cells. Defaults to `comfortable`.
+   */
+  density?: 'comfortable' | 'compact';
 }
 
 /**
@@ -71,6 +75,7 @@ export function Table<T>({
   selectedRows: controlledSelectedRows,
   onSelectionChange,
   defaultSort,
+  density = 'comfortable',
 }: TableProps<T>) {
   const [sortColumn, setSortColumn] = useState<number | null>(
     defaultSort?.columnIndex ?? null
@@ -118,6 +123,8 @@ export function Table<T>({
     return sortDirection === 'desc' ? sorted.reverse() : sorted;
   }, [data, sortColumn, sortDirection, columns]);
 
+  const densityKey = density;
+
   const handleSort = (columnIndex: number) => {
     const column = columns[columnIndex];
     if (!column?.sortable && !column?.sortFn) return;
@@ -136,7 +143,7 @@ export function Table<T>({
     }
   };
 
-  const handleRowSelect = (rowIndex: number, event: React.MouseEvent) => {
+  const handleRowSelect = (rowIndex: number, event: React.SyntheticEvent) => {
     if (!selectable) return;
 
     event.stopPropagation();
@@ -158,7 +165,10 @@ export function Table<T>({
       <thead>
         <tr>
           {selectable && (
-            <th className={s.headerCell} style={{ width: '40px' }}>
+            <th
+              className={`${s.headerCell} ${s.headerDensity[densityKey]}`}
+              style={{ width: '40px' }}
+            >
               {selectable === 'multiple' && (
                 <input
                   type="checkbox"
@@ -184,16 +194,25 @@ export function Table<T>({
             const isSorted = sortColumn === idx;
             const currentDirection = isSorted ? sortDirection : null;
 
-            return (
-              <th
-                key={idx}
-                className={`${s.headerCell} ${isSortable ? s.sortable : ''} ${
-                  isSorted ? s.sorted : ''
-                }`}
-                onClick={() => isSortable && handleSort(idx)}
-                aria-sort={
-                  currentDirection === 'asc'
-                    ? 'ascending'
+          return (
+            <th
+              key={idx}
+              scope="col"
+              className={`${s.headerCell} ${s.headerDensity[densityKey]} ${
+                isSortable ? s.sortable : ''
+              } ${isSorted ? s.sorted : ''}`}
+              onClick={() => isSortable && handleSort(idx)}
+              onKeyDown={(event) => {
+                if (!isSortable) return;
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  handleSort(idx);
+                }
+              }}
+              tabIndex={isSortable ? 0 : undefined}
+              aria-sort={
+                currentDirection === 'asc'
+                  ? 'ascending'
                     : currentDirection === 'desc'
                     ? 'descending'
                     : 'none'
@@ -224,18 +243,20 @@ export function Table<T>({
               onClick={() => onRowClick?.(row, rowIndex)}
             >
               {selectable && (
-                <td className={s.cell} onClick={(e) => handleRowSelect(rowIndex, e)}>
+                <td
+                  className={`${s.cell} ${s.cellDensity[densityKey]}`}
+                  onClick={(e) => handleRowSelect(rowIndex, e)}
+                >
                   <input
                     type={selectable === 'single' ? 'radio' : 'checkbox'}
                     checked={isSelected}
-                    onChange={() => {}} // Handled by row click
-                    onClick={(e) => e.stopPropagation()}
+                    onChange={(e) => handleRowSelect(rowIndex, e)}
                     aria-label={`Select row ${rowIndex + 1}`}
                   />
                 </td>
               )}
               {columns.map((col, colIndex) => (
-                <td key={colIndex} className={s.cell}>
+                <td key={colIndex} className={`${s.cell} ${s.cellDensity[densityKey]}`}>
                   {col.cell
                     ? col.cell(row)
                     : col.accessor
