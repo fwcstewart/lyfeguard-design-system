@@ -12,8 +12,22 @@ export const container = style({
   width: '100%',
   marginLeft: 'auto',
   marginRight: 'auto',
-  paddingLeft: resolveSpacing('xl'),
-  paddingRight: resolveSpacing('xl'),
+  paddingLeft: resolveSpacing('md'),
+  paddingRight: resolveSpacing('md'),
+  '@media': {
+    [breakpointQueries.md]: {
+      paddingLeft: resolveSpacing('lg'),
+      paddingRight: resolveSpacing('lg'),
+    },
+    [breakpointQueries.lg]: {
+      paddingLeft: resolveSpacing('xl'),
+      paddingRight: resolveSpacing('xl'),
+    },
+    [breakpointQueries.widescreen]: {
+      paddingLeft: resolveSpacing('2xl'),
+      paddingRight: resolveSpacing('2xl'),
+    },
+  },
 });
 
 /**

@@ -44,11 +44,14 @@ globalStyle('.dark', {
     // Page background - the base background color for the entire page/viewport
     '--color-theme-background': 'var(--color-brand-900)', // #051A22 - matches dark theme definition in color.json
     // Component background - used for cards, modals, and other elevated surfaces
-    '--color-theme-surface': 'var(--color-brand-500_20)', // rgba(23,123,154,0.2) - #177B9A at 20% opacity - matches dark theme definition in color.json
-    '--color-theme-surfaceHover': 'var(--color-brand-500_30)', // rgba(23,123,154,0.3) - matches dark theme definition in color.json
-    '--color-theme-surfaceActive': 'var(--color-brand-500_40)', // rgba(23,123,154,0.4) - closest match to 0.35 in color.json
-    '--color-theme-border': 'var(--color-brand-500_40)', // rgba(23,123,154,0.4) - matches dark theme definition in color.json
-    '--color-theme-borderHover': 'var(--color-brand-500_50)', // rgba(23,123,154,0.5) - matches dark theme definition in color.json
+    '--color-theme-surface':
+      'color-mix(in srgb, var(--color-brand-500) 18%, var(--color-brand-900))',
+    '--color-theme-surfaceHover':
+      'color-mix(in srgb, var(--color-brand-500) 28%, var(--color-brand-900))',
+    '--color-theme-surfaceActive':
+      'color-mix(in srgb, var(--color-brand-500) 36%, var(--color-brand-900))',
+    '--color-theme-border': 'color-mix(in srgb, var(--color-brand-500) 40%, var(--color-brand-900))',
+    '--color-theme-borderHover': 'color-mix(in srgb, var(--color-brand-500) 52%, var(--color-brand-900))',
     '--color-theme-text-primary': 'var(--color-neutral-0)',
     '--color-theme-text-secondary': 'var(--color-neutral-100)',
     '--color-theme-text-tertiary': 'var(--color-neutral-300)',
@@ -482,4 +485,20 @@ export const darkVars = createGlobalTheme('.dark', {
     gridGutter: 'var(--layout-grid-gutter)',
     containerMaxWidth: 'var(--layout-grid-containerMaxWidth)'
   }
+});
+
+globalStyle('body', {
+  margin: 0,
+  minHeight: '100vh',
+  background: vars.color.theme.background,
+  color: vars.color.theme.text.primary,
+  fontFamily: vars.font.sans,
+  transition: `background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
+  colorScheme: 'light',
+});
+
+globalStyle('.dark body', {
+  background: darkVars.color.theme.background,
+  color: darkVars.color.theme.text.primary,
+  colorScheme: 'dark',
 });

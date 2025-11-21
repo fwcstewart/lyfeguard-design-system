@@ -1,23 +1,12 @@
+import { buildDarkTheme } from './types';
+
 /**
  * Dark theme definition for the Lyfeguard design system.
  *
- * This placeholder exports a simple object that mirrors the
- * `defaultTheme` structure.  In a real implementation you would
- * override token values such as colours, backgrounds and borders to
- * provide appropriate contrast for a dark UI.  See the design
- * documentation for guidance on creating accessible dark themes.
+ * The dark theme mirrors the light token structure while swapping the
+ * colour tokens for the `.dark` variants registered in
+ * `globals.css.ts`. Using the builder keeps the theme definition in sync
+ * with any updates to the token map and ensures component backgrounds
+ * remain distinct from the page surface.
  */
-
-export const darkTheme = {
-  /*
-   * Example overrides:
-   * colors: {
-   *   background: '#051a22',
-   *   foreground: '#ffffff',
-   *   primary: '#177b9a',
-   *   secondary: '#00ffb2',
-   * },
-   * radii: { ... },
-   * spacing: { ... },
-   */
-};
+export const darkTheme = buildDarkTheme();
