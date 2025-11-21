@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 // Vitest configuration for the design-system components package.
 // This config enables jsdom environment and integrates with the
@@ -15,5 +16,11 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./setupTests.ts'],
+    setupFiles: ['@testing-library/jest-dom/vitest'],
+    setupFiles: ['./src/setupTests.ts'],
+    setupFiles: ['@vanilla-extract/css/disableRuntimeStyles', '@testing-library/jest-dom/vitest'],
+    setupFiles: ['@vanilla-extract/css/disableRuntimeStyles', './vitest.setup.ts'],
+    setupFiles: ['src/testSetup.ts'],
+    setupFiles: ['@testing-library/jest-dom'],
   },
 });
