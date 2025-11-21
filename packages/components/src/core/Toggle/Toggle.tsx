@@ -31,6 +31,8 @@ export const Toggle: React.FC<ToggleProps> = ({ checked, onChange, label, ...pro
   const [internal, setInternal] = useState(false);
   const isControlled = checked !== undefined;
   const isOn = isControlled ? checked : internal;
+  const trackColor = isOn ? vars.color.accentMint : vars.color.theme.border;
+  const handleTranslation = isOn ? `translateX(${vars.spacing[5]})` : 'translateX(0)';
   const handleToggle = () => {
     const newState = !isOn;
     if (!isControlled) setInternal(newState);
@@ -42,15 +44,17 @@ export const Toggle: React.FC<ToggleProps> = ({ checked, onChange, label, ...pro
       onClick={handleToggle}
       className={s.container}
       data-lyfeguard="Toggle"
+      role="switch"
+      aria-checked={isOn}
       {...props}
     >
       <span
         className={s.track}
-        style={{ backgroundColor: isOn ? vars.color.brand500 : vars.color.neutral400 }}
+        style={{ backgroundColor: trackColor }}
       >
         <span
           className={s.handle}
-          style={{ transform: isOn ? 'translateX(20px)' : 'translateX(0)' }}
+          style={{ transform: handleTranslation }}
         />
       </span>
       {label && <span className={s.label}>{label}</span>}

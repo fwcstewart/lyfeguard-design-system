@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox } from './Checkbox';
+import { vars } from '../../globals.css';
 
 export default {
   title: 'Core/Checkbox',
@@ -18,3 +19,21 @@ export const Controlled = () => {
     />
   );
 };
+
+export const DarkMode = () => (
+  <div
+    className="dark"
+    style={{
+      background: vars.color.theme.background,
+      color: vars.color.theme.text.primary,
+      padding: vars.spacing[6] as unknown as string,
+      display: 'inline-flex',
+      flexDirection: 'column',
+      gap: vars.spacing[3],
+    }}
+  >
+    <Checkbox label="Dark surface primary" defaultChecked />
+    <Checkbox label="Dark surface unchecked" />
+    <Checkbox label="Disabled state" disabled />
+  </div>
+);
