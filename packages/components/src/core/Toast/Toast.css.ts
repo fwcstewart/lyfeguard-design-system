@@ -1,10 +1,10 @@
-import { style, styleVariants, keyframes } from '@vanilla-extract/css';
+import { style, styleVariants, keyframes, createVar } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
 export const container = style({
   position: 'fixed',
-  bottom: '16px',
-  right: '16px',
+  bottom: vars.spacing[4] as unknown as string,
+  right: vars.spacing[4] as unknown as string,
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing[3] as unknown as string,
@@ -34,6 +34,11 @@ const slideOut = keyframes({
   },
 });
 
+const backgroundVar = createVar();
+const textColorVar = createVar();
+const borderColorVar = createVar();
+const accentColorVar = createVar();
+
 export const toastBase = style({
   minWidth: '280px',
   maxWidth: '420px',
@@ -43,8 +48,11 @@ export const toastBase = style({
   fontSize: vars.font.size.body.sm,
   lineHeight: vars.font.lineHeight.body.sm,
   boxShadow: vars.shadow.md,
+  background: backgroundVar,
+  color: textColorVar,
+  border: `1px solid ${borderColorVar}`,
   display: 'flex',
-  alignItems: 'flex-start',
+  alignItems: 'center',
   justifyContent: 'space-between',
   gap: vars.spacing[3] as unknown as string,
   pointerEvents: 'auto',
@@ -63,56 +71,100 @@ export const toastBase = style({
 
 export const variants = styleVariants({
   info: {
-    background: vars.color.info100,
-    borderLeft: `4px solid ${vars.color.info500}`,
-    color: vars.color.info500,
+    vars: {
+      [backgroundVar]: vars.color.info100,
+      [textColorVar]: vars.color.info500,
+      [borderColorVar]: vars.color.info500,
+      [accentColorVar]: vars.color.info500,
+    },
     selectors: {
       '.dark &': {
-        background: vars.color.info500_15,
-        color: vars.color.info500,
+        vars: {
+          [backgroundVar]: vars.color.info500_15,
+          [textColorVar]: vars.color.info500,
+          [borderColorVar]: vars.color.info500,
+          [accentColorVar]: vars.color.info500,
+        },
       },
     },
   },
   success: {
-    background: vars.color.success500,
-    borderLeft: `4px solid ${vars.color.success600}`,
-    color: vars.color.neutral0,
+    vars: {
+      [backgroundVar]: vars.color.success500_15,
+      [textColorVar]: vars.color.success600,
+      [borderColorVar]: vars.color.success600,
+      [accentColorVar]: vars.color.success600,
+    },
     selectors: {
       '.dark &': {
-        background: vars.color.theme.surface,
-        borderLeft: `4px solid ${vars.color.success500}`,
-        color: vars.color.success500,
-        backdropFilter: 'blur(8px)',
+        vars: {
+          [backgroundVar]: vars.color.theme.surface,
+          [textColorVar]: vars.color.success500,
+          [borderColorVar]: vars.color.success500,
+          [accentColorVar]: vars.color.success500,
+        },
       },
     },
   },
   warning: {
-    background: vars.color.warning100,
-    borderLeft: `4px solid ${vars.color.warning500}`,
-    color: vars.color.warning500,
+    vars: {
+      [backgroundVar]: vars.color.warning100,
+      [textColorVar]: vars.color.warning500,
+      [borderColorVar]: vars.color.warning500,
+      [accentColorVar]: vars.color.warning500,
+    },
     selectors: {
       '.dark &': {
-        background: vars.color.warning500_15,
-        color: vars.color.warning500,
+        vars: {
+          [backgroundVar]: vars.color.warning500_15,
+          [textColorVar]: vars.color.warning500,
+          [borderColorVar]: vars.color.warning500,
+          [accentColorVar]: vars.color.warning500,
+        },
       },
     },
   },
   error: {
-    background: vars.color.error100,
-    borderLeft: `4px solid ${vars.color.error500}`,
-    color: vars.color.error500,
+    vars: {
+      [backgroundVar]: vars.color.error100,
+      [textColorVar]: vars.color.error500,
+      [borderColorVar]: vars.color.error500,
+      [accentColorVar]: vars.color.error500,
+    },
     selectors: {
       '.dark &': {
-        background: vars.color.error500_15,
-        color: vars.color.error500,
+        vars: {
+          [backgroundVar]: vars.color.error500_15,
+          [textColorVar]: vars.color.error500,
+          [borderColorVar]: vars.color.error500,
+          [accentColorVar]: vars.color.error500,
+        },
       },
     },
   },
 });
 
+export const statusBar = style({
+  width: vars.spacing[1] as unknown as string,
+  borderRadius: vars.radius.sm,
+  alignSelf: 'stretch',
+  backgroundColor: accentColorVar,
+  flexShrink: 0,
+});
+
+export const iconWrapper = style({
+  width: vars.spacing[5] as unknown as string,
+  height: vars.spacing[5] as unknown as string,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: accentColorVar,
+  flexShrink: 0,
+});
+
 export const message = style({
   flex: 1,
-  paddingTop: '2px',
+  paddingTop: vars.spacing[1] as unknown as string,
 });
 
 export const closeButton = style({
@@ -120,12 +172,12 @@ export const closeButton = style({
   border: 'none',
   cursor: 'pointer',
   color: 'inherit',
-  fontSize: '20px',
+  fontSize: vars.font.size.body.base,
   lineHeight: 1,
-  padding: `${vars.spacing[1]} ${vars.spacing[1]}` as unknown as string,
-  width: '24px',
-  height: '24px',
-  minWidth: '24px',
+  padding: vars.spacing[1] as unknown as string,
+  width: vars.spacing[6] as unknown as string,
+  height: vars.spacing[6] as unknown as string,
+  minWidth: vars.spacing[6] as unknown as string,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -143,8 +195,8 @@ export const closeButton = style({
       transform: 'scale(0.95)',
     },
     '&:focus-visible': {
-      outline: `2px solid currentColor`,
-      outlineOffset: '2px',
+      outline: 'none',
+      boxShadow: `0 0 0 3px ${vars.color.brand500_20}`,
       opacity: 1,
     },
   },

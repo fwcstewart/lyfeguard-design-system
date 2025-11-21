@@ -16,6 +16,7 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "@vanilla-extract/vite-plugin": "^3.9.5",
     "tsup": "^7.2.0",
     "@vanilla-extract/css": "^1.0.0",
     "@vanilla-extract/vite-plugin": "^5.1.1",
