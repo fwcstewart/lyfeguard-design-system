@@ -4,6 +4,7 @@ import { Spinner } from '../Spinner/Spinner';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonState = 'hover' | 'focus' | 'active' | 'disabled' | 'loading';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -26,11 +27,25 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * Shows a loading spinner and disables the button
    */
   isLoading?: boolean;
+  /**
+   * Optional state attribute to surface button pseudo states in stories or testing
+   */
+  'data-state'?: ButtonState;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { variant = 'primary', size = 'md', children, iconLeft, iconRight, isLoading = false, disabled, ...props },
+    {
+      variant = 'primary',
+      size = 'md',
+      children,
+      iconLeft,
+      iconRight,
+      isLoading = false,
+      disabled,
+      'data-state': dataState,
+      ...props
+    },
     ref
   ) => {
     const variantClass =
@@ -49,12 +64,16 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const className = `${variantClass} ${sizeClass}`;
     const isDisabled = disabled || isLoading;
+    const resolvedState = isDisabled ? (isLoading ? 'loading' : 'disabled') : dataState;
 
     return (
       <button
         ref={ref}
         className={className}
         data-lyfeguard="Button"
+        data-variant={variant}
+        data-size={size}
+        data-state={resolvedState}
         disabled={isDisabled}
         {...props}
       >
