@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
 export const wrapper = style({
@@ -42,4 +42,39 @@ export const select = style({
       color: vars.color.theme.text.disabled,
     },
   },
+});
+
+globalStyle(`${select} option`, {
+  padding: `${vars.spacing[2]} ${vars.spacing[3]}`,
+  backgroundColor: vars.color.theme.surface,
+  color: vars.color.theme.text.primary,
+  fontFamily: vars.font.sans,
+  fontSize: vars.font.size.body.base,
+  lineHeight: vars.font.lineHeight.body.base,
+});
+
+globalStyle(`${select} option:hover:not(:disabled)`, {
+  backgroundColor: vars.color.theme.surfaceHover,
+});
+
+globalStyle(`${select} option:checked`, {
+  backgroundColor: vars.color.theme.surfaceActive,
+  color: vars.color.theme.text.primary,
+});
+
+globalStyle(`${select} option:disabled`, {
+  color: vars.color.theme.text.disabled,
+});
+
+globalStyle(`.dark ${select} option`, {
+  backgroundColor: vars.color.theme.surface,
+  color: vars.color.theme.text.primary,
+});
+
+globalStyle(`.dark ${select} option:hover:not(:disabled)`, {
+  backgroundColor: vars.color.theme.surfaceHover,
+});
+
+globalStyle(`.dark ${select} option:checked`, {
+  backgroundColor: vars.color.theme.surfaceActive,
 });
