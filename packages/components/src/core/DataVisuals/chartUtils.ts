@@ -34,7 +34,7 @@ export const chartTypography = {
  */
 export const getTickProps = () => ({
   ...chartTypography,
-  fill: vars.color.theme.text.tertiary,
+  fill: vars.color.theme.text.secondary,
   fontSize: vars.font.size.body.xs,
   fontWeight: vars.font.weight.regular,
 });

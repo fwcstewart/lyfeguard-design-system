@@ -8,9 +8,9 @@ import { createGlobalTheme, globalStyle } from '@vanilla-extract/css';
 globalStyle(':root', {
   vars: {
     // Page background - the base background color for the entire page/viewport
-    '--color-theme-background': 'var(--color-neutral-0)',
+    '--color-theme-background': 'var(--color-neutral-100)',
     // Component background - used for cards, modals, and other elevated surfaces
-    '--color-theme-surface': 'var(--color-neutral-50)',
+    '--color-theme-surface': 'var(--color-neutral-0)',
     '--color-theme-surfaceHover': 'var(--color-neutral-100)',
     '--color-theme-surfaceActive': 'var(--color-neutral-200)',
     '--color-theme-border': 'var(--color-neutral-200)',
