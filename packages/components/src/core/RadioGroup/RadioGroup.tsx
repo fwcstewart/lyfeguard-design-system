@@ -4,6 +4,7 @@ import * as s from './RadioGroup.css';
 export interface RadioOption {
   value: string;
   label: string;
+  disabled?: boolean;
 }
 
 export interface RadioGroupProps {
@@ -54,7 +55,12 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     <fieldset className={s.group} style={{ flexDirection: inline ? 'row' : 'column' }} data-lyfeguard="RadioGroup">
       {label && <legend className={s.label}>{label}</legend>}
       {options.map((opt) => (
-        <label className={s.option} key={opt.value} style={{ flexDirection: inline ? 'row' : 'row' }}>
+        <label
+          className={s.option}
+          key={opt.value}
+          data-disabled={opt.disabled ? 'true' : 'false'}
+          style={inline ? { flexDirection: 'row' } : undefined}
+        >
           <input
             type="radio"
             name={name}
@@ -62,6 +68,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
             checked={value === undefined ? undefined : value === opt.value}
             onChange={handleChange}
             className={s.radio}
+            disabled={opt.disabled}
           />
           <span className={s.label}>{opt.label}</span>
         </label>

@@ -3,6 +3,7 @@ import React from 'react';
 import { Toast } from './Toast';
 import { ToastProvider, useToast } from './ToastProvider';
 import { Button } from '../Button/Button';
+import { vars } from '../../globals.css';
 
 const meta: Meta<typeof Toast> = {
   title: 'Core/Toast',
@@ -46,7 +47,7 @@ const ToastDemoInner: React.FC = () => {
           Clear All
         </Button>
       </div>
-      <p style={{ color: '#666', fontSize: '14px' }}>
+      <p style={{ color: vars.color.theme.text.secondary, fontSize: vars.font.size.body.sm }}>
         Click the buttons above to show toast notifications. They will appear in the bottom-right
         corner and auto-dismiss after 5 seconds (unless specified otherwise).
       </p>

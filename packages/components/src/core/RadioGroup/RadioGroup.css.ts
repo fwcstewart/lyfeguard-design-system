@@ -1,6 +1,11 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
+const controlSize = vars.spacing[4];
+const controlBorderWidth = `calc(${vars.spacing[1]} * 0.375)`; // 1.5px derived from spacing token
+const focusRingWidth = vars.spacing[1];
+const indicatorSize = vars.spacing[2];
+
 // Wrapper for the entire radio group. We stack radios by default but allow
 // horizontal layout via inline prop.
 export const group = style({
@@ -15,15 +20,23 @@ export const option = style({
   alignItems: 'center',
   gap: vars.spacing[2],
   cursor: 'pointer',
+  selectors: {
+    '&[data-disabled="true"]': {
+      cursor: 'not-allowed',
+    },
+    '&[data-disabled="true"] span': {
+      color: vars.color.theme.text.disabled,
+    },
+  },
 });
 
 // Native radio input styled to match DS. The circle is drawn with
 // CSS; when checked, we fill the dot.
 export const radio = style({
   appearance: 'none',
-  width: '16px',
-  height: '16px',
-  border: `1.5px solid ${vars.color.theme.border}`,
+  width: controlSize,
+  height: controlSize,
+  border: `${controlBorderWidth} solid ${vars.color.theme.border}`,
   borderRadius: '50%',
   backgroundColor: vars.color.theme.surface,
   display: 'grid',
@@ -33,13 +46,18 @@ export const radio = style({
     '&:hover:not(:disabled)': {
       borderColor: vars.color.theme.borderHover,
     },
+    '&:focus-visible': {
+      outline: 'none',
+      borderColor: vars.color.accentMint,
+      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.accentMint_20}`,
+    },
     '&:checked': {
       borderColor: vars.color.accentMint,
     },
     '&:checked::after': {
       content: '',
-      width: '8px',
-      height: '8px',
+      width: indicatorSize,
+      height: indicatorSize,
       borderRadius: '50%',
       backgroundColor: vars.color.accentMint,
     },

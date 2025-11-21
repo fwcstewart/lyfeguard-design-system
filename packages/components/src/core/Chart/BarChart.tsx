@@ -9,11 +9,7 @@ import {
   Legend,
 } from 'recharts';
 
-// Import token values for chart colours. At runtime these values should
-// correspond to the Lyfeguard brand colours defined in the tokens package.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import * as tokens from '@lyfeguard/tokens/dist/js/tokens.js';
+import { vars } from '../../globals.css';
 
 export interface BarDefinition {
   /**
@@ -61,18 +57,18 @@ export interface BarChartProps {
 export const BarChart: React.FC<BarChartProps> = ({ data, xKey, bars, width = 600, height = 300 }) => {
   // Build a list of colours; rotate through brand palette if none provided.
   const defaultColours: string[] = [
-    tokens.ColorBrand500,
-    tokens.ColorBrand800,
-    tokens.ColorAccentMint,
-    tokens.ColorNeutral600,
-  ].filter(Boolean) as string[];
+    vars.color.brand500,
+    vars.color.brand800,
+    vars.color.accentMint,
+    vars.color.neutral600,
+  ];
 
   return (
     <ReBarChart width={width} height={height} data={data} margin={{ top: 16, right: 32, bottom: 0, left: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke={tokens.ColorNeutral200 || '#CFD6D6'} />
-      <XAxis dataKey={xKey} stroke={tokens.ColorNeutral800 || '#455252'} />
-      <YAxis stroke={tokens.ColorNeutral800 || '#455252'} />
-      <Tooltip wrapperStyle={{ fontFamily: tokens.FontFamilySans || 'sans-serif' }} />
+      <CartesianGrid strokeDasharray="3 3" stroke={vars.color.theme.border} />
+      <XAxis dataKey={xKey} stroke={vars.color.theme.text.secondary} />
+      <YAxis stroke={vars.color.theme.text.secondary} />
+      <Tooltip wrapperStyle={{ fontFamily: vars.font.sans }} />
       <Legend />
       {bars.map((bar, idx) => (
         <Bar
