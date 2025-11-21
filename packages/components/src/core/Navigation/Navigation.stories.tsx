@@ -1,6 +1,7 @@
 import React from 'react';
 import { TopNav } from './TopNav';
 import { Sidebar } from './Sidebar';
+import { vars } from '../../globals.css';
 
 export default {
   title: 'Core/Navigation',
@@ -14,7 +15,14 @@ export const TopNavigation = () => (
       { label: 'Documents', href: '#' },
       { label: 'Contacts', href: '#' },
     ]}
-    actions={<button style={{ background: 'none', border: 'none', color: 'white' }}>User</button>}
+    actions={
+      <button
+        style={{ background: 'none', border: 'none', color: vars.color.theme.text.primary }}
+        type="button"
+      >
+        User
+      </button>
+    }
   />
 );
 

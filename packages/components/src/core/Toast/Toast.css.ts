@@ -136,15 +136,8 @@ export const closeButton = style({
   selectors: {
     '&:hover': {
       opacity: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+      backgroundColor: vars.color.theme.surfaceHover,
       transform: 'scale(1.1)',
-    },
-    '.dark &': {
-      selectors: {
-        '&:hover': {
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        },
-      },
     },
     '&:active': {
       transform: 'scale(0.95)',

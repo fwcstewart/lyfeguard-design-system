@@ -5,10 +5,10 @@ export const sidebar = style({
   display: 'flex',
   flexDirection: 'column',
   width: '280px',
-  background: vars.color.brand900,
-  color: vars.color.neutral0,
+  background: vars.color.theme.surface,
+  color: vars.color.theme.text.primary,
   padding: `${vars.spacing[5]} 0` as unknown as string,
-  borderRight: `1px solid rgba(255, 255, 255, 0.1)`,
+  borderRight: `1px solid ${vars.color.theme.border}`,
 });
 
 export const item = style({
@@ -21,7 +21,7 @@ export const item = style({
   fontSize: vars.font.size.ui.label,
   lineHeight: vars.font.lineHeight.ui.label,
   fontWeight: vars.font.weight.medium,
-  color: 'rgba(255, 255, 255, 0.8)',
+  color: vars.color.theme.text.secondary,
   cursor: 'pointer',
   borderLeft: `4px solid transparent`,
   transition: `background-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, border-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, transform ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
@@ -36,8 +36,8 @@ export const item = style({
       fontWeight: vars.font.weight.semiBold,
     },
     '&:hover:not([data-active="true"])': {
-      background: 'rgba(255, 255, 255, 0.08)',
-      color: vars.color.neutral0,
+      background: vars.color.theme.surfaceHover,
+      color: vars.color.theme.text.primary,
       transform: 'translateX(4px)',
     },
     '&[data-active="true"]:hover': {
