@@ -2,6 +2,7 @@ import '@lyfeguard/tokens/dist/css/tokens.css';
 import type { Preview } from '@storybook/react';
 import React from 'react';
 import { ThemeProvider } from '../packages/components/src/themes';
+import { lyfeguardTheme, storybookBackgrounds } from './theme';
 
 /**
  * Global decorator that wraps all stories with ThemeProvider and sets the iframe background.
@@ -9,19 +10,19 @@ import { ThemeProvider } from '../packages/components/src/themes';
  */
 const withThemeProvider = (Story: any, context: any) => {
   const theme = (context.globals?.theme as 'light' | 'dark') || 'light';
-  
+
   // Inject CSS to set the body background to match the theme
   // This runs in the preview iframe context
   if (typeof document !== 'undefined') {
     const styleId = 'storybook-theme-background';
     let styleElement = document.getElementById(styleId) as HTMLStyleElement;
-    
+
     if (!styleElement) {
       styleElement = document.createElement('style');
       styleElement.id = styleId;
       document.head.appendChild(styleElement);
     }
-    
+
     styleElement.textContent = `
       body {
         background-color: var(--color-theme-background) !important;
@@ -34,7 +35,7 @@ const withThemeProvider = (Story: any, context: any) => {
       }
     `;
   }
-  
+
   return React.createElement(
     ThemeProvider,
     { theme },
@@ -55,8 +56,21 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/
-      }
-    }
+      },
+      expanded: true,
+    },
+    backgrounds: {
+      default: 'Surface',
+      values: storybookBackgrounds,
+    },
+    docs: {
+      theme: lyfeguardTheme,
+    },
+    options: {
+      storySort: {
+        order: ['Welcome', 'Foundations', 'Components', 'Layout', 'Technical Patterns'],
+      },
+    },
   },
   globalTypes: {
     theme: {
