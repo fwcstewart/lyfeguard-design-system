@@ -15,7 +15,10 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "lint:tokens": "node scripts/check-style-tokens.js",
-    "story": "storybook dev -p 6006 --config-dir storybook"
+    "story": "storybook dev -p 6006 --config-dir storybook",
+    "storybook": "storybook dev -p 6006 --config-dir storybook",
+    "prestorybook:build": "npm run build -- --filter=@lyfeguard/tokens",
+    "storybook:build": "storybook build --config-dir storybook --output-dir storybook-static"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "8.6.14",

@@ -21,6 +21,15 @@ The Storybook UI will open in your browser at `http://localhost:6006`. Use the s
 - `theme.ts` – Shared theme tokens for both the manager and docs surfaces.
 - `docs/` – MDX content that introduces the design system foundations, layout patterns, and component guidance.
 
+## GitHub Pages deployment
+
+Storybook is published automatically to GitHub Pages from the `main` branch. The workflow builds static assets with a repository-scoped base path so the UI loads correctly under `https://<org>.github.io/lyfeguard-design-system/`.
+
+1. Enable GitHub Pages for the repository and choose **GitHub Actions** as the source.
+2. Push to `main` (or manually dispatch) to trigger the **Deploy Storybook to GitHub Pages** workflow.
+3. The workflow runs `npm run storybook:build -- --quiet`, uploads `storybook-static` as a Pages artifact, and deploys it to the Pages environment.
+4. If you host the site under a custom domain, update `STORYBOOK_BASE_PATH` in `.github/workflows/storybook-pages.yml` to match your desired base path.
+
 ## UI & Theming
 
 Storybook is themed with Lyfeguard tokens so the manager, docs, and preview iframe share the same colours, fonts, and spacings. Use the toolbar toggle to switch between **light** and **dark** themes; the preview backgrounds menu offers canvas, surface, and brand-aligned backdrops for quickly testing contrast.
