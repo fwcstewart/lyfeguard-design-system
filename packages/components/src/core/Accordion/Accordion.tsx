@@ -25,7 +25,7 @@ export interface AccordionItem {
   disabled?: boolean;
 }
 
-export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AccordionProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * List of accordion items to render.
    */

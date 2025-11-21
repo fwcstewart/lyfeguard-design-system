@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_lyfeguard_docs=self.webpackChunk_lyfeguard_docs||[]).push([[647],{3531:(e,s,r)=>{r.r(s),r.d(s,{default:()=>t});r(4041);var u=r(4357),a=r(7473),c=r(8582),d=r(8150),l=r(6270),n=r(1085);function t(e){return(0,n.jsx)(c.e3,{className:(0,u.A)(a.G.wrapper.docsPages),children:(0,n.jsx)(l.A,{children:(0,d.v)(e.route.routes)})})}}}]);
