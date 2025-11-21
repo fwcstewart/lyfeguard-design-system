@@ -46,17 +46,17 @@ export const primary = style([
   {
     background: vars.color.accentMint,
     color: vars.color.brand900,
-    boxShadow: `0 1px 2px rgba(0, 0, 0, 0.05)`,
+    boxShadow: vars.shadow.xs,
     selectors: {
       '&:hover:not(:disabled)': {
         background: vars.color.success600,
-        boxShadow: `0 4px 12px ${vars.color.accentMint_30}`,
+        boxShadow: vars.shadow.md,
         transform: 'translateY(-1px)',
       },
       '&:active:not(:disabled)': {
         background: vars.color.success600,
         transform: 'translateY(0)',
-        boxShadow: `0 1px 2px rgba(0, 0, 0, 0.05)`,
+        boxShadow: vars.shadow.xs,
       },
       '&:disabled': {
         opacity: 0.5,
@@ -68,10 +68,9 @@ export const primary = style([
       },
       '.dark &': {
         color: vars.color.brand900,
-        boxShadow: `0 1px 2px rgba(0, 0, 0, 0.2)`,
         selectors: {
           '&:hover:not(:disabled)': {
-            boxShadow: `0 4px 12px ${vars.color.accentMint_40}`,
+            boxShadow: vars.shadow.md,
           },
         },
       },
