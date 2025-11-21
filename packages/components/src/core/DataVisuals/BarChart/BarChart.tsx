@@ -10,9 +10,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { vars } from '../../../globals.css';
-import { 
-  DATA_COLOR_SLOTS, 
-  DataColorSlot, 
+import {
+  DATA_COLOR_SLOTS,
+  DataColorSlot,
   chartTypography, 
   getTickProps, 
   getTooltipStyle, 
@@ -20,6 +20,8 @@ import {
   getGridStyle,
   getChartMargin,
 } from '../chartUtils';
+
+export { DATA_COLOR_SLOTS } from '../chartUtils';
 
 export interface BarDefinition {
   /**
