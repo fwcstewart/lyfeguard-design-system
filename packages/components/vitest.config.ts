@@ -15,6 +15,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
+    setupFiles: ['./setupTests.ts'],
     setupFiles: ['@testing-library/jest-dom/vitest'],
     setupFiles: ['./src/setupTests.ts'],
     setupFiles: ['@vanilla-extract/css/disableRuntimeStyles', '@testing-library/jest-dom/vitest'],
