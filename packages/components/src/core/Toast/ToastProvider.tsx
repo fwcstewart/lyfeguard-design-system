@@ -1,34 +1,13 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import { ToastItem } from './ToastItem';
 import * as s from './Toast.css';
+import { vars } from '../../globals.css';
+import type { ToastOptions, ToastPosition, ToastVariant, ToastItemData } from './types';
 
-export type ToastVariant = 'info' | 'success' | 'warning' | 'error';
-export type ToastPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-
-export interface ToastOptions {
-  /**
-   * Visual variant for the toast
-   */
-  variant?: ToastVariant;
-  /**
-   * Auto-dismiss timeout in milliseconds. Set to 0 to disable auto-dismiss.
-   */
-  duration?: number;
-  /**
-   * Position of the toast container
-   */
-  position?: ToastPosition;
-}
-
-export interface Toast {
-  id: string;
-  message: ReactNode;
-  variant: ToastVariant;
-  duration: number;
-}
+export type { ToastOptions, ToastPosition, ToastVariant, ToastItemData as Toast } from './types';
 
 interface ToastContextValue {
-  toasts: Toast[];
+  toasts: ToastItemData[];
   showToast: (message: ReactNode, options?: ToastOptions) => string;
   removeToast: (id: string) => void;
   clearAll: () => void;
@@ -64,12 +43,12 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   defaultDuration = 5000,
   children,
 }) => {
-  const [toasts, setToasts] = useState<Toast[]>([]);
+  const [toasts, setToasts] = useState<ToastItemData[]>([]);
 
   const showToast = useCallback(
     (message: ReactNode, options?: ToastOptions): string => {
       const id = `toast-${Date.now()}-${Math.random()}`;
-      const toast: Toast = {
+      const toast: ToastItemData = {
         id,
         message,
         variant: options?.variant || 'info',
@@ -114,20 +93,21 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
       acc[position].push(toast);
       return acc;
     },
-    {} as Record<ToastPosition, Toast[]>
+    {} as Record<ToastPosition, ToastItemData[]>
   );
 
   const getPositionStyles = (position: ToastPosition): React.CSSProperties => {
+    const offset = vars.spacing[4] as unknown as string;
     switch (position) {
       case 'top-left':
-        return { top: '16px', left: '16px', bottom: 'auto', right: 'auto' };
+        return { top: offset, left: offset, bottom: 'auto', right: 'auto' };
       case 'top-right':
-        return { top: '16px', right: '16px', bottom: 'auto', left: 'auto' };
+        return { top: offset, right: offset, bottom: 'auto', left: 'auto' };
       case 'bottom-left':
-        return { bottom: '16px', left: '16px', top: 'auto', right: 'auto' };
+        return { bottom: offset, left: offset, top: 'auto', right: 'auto' };
       case 'bottom-right':
       default:
-        return { bottom: '16px', right: '16px', top: 'auto', left: 'auto' };
+        return { bottom: offset, right: offset, top: 'auto', left: 'auto' };
     }
   };
 
