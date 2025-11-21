@@ -39,6 +39,20 @@ export const States: Story = {
         error="Please enter a valid email address"
       />
       <Input label="Disabled" placeholder="Disabled input" disabled />
+      <Input
+        label="Amount"
+        prefix="£"
+        suffix="GBP"
+        placeholder="0.00"
+        helperText="Currency is locked to GBP"
+      />
+      <Input
+        label="Referral code"
+        placeholder="Add code"
+        maxLength={12}
+        showCharacterCount
+        helperText="Optional"
+      />
     </div>
   ),
 };

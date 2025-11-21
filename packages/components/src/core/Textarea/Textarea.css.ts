@@ -33,6 +33,7 @@ export const textarea = style({
   selectors: {
     '&:hover:not(:disabled):not(:focus-visible)': {
       borderColor: vars.color.theme.borderHover,
+      boxShadow: `0 12px 28px ${vars.color.brand500_15}`,
     },
     '&:focus-visible': {
       outline: 'none',
@@ -57,6 +58,7 @@ export const textarea = style({
     },
     '.dark &:hover:not(:disabled):not(:focus-visible)': {
       borderColor: vars.color.theme.borderHover,
+      boxShadow: `0 12px 28px ${vars.color.accentMint_20}`,
     },
     '.dark &:focus-visible': {
       borderColor: vars.color.accentMint,

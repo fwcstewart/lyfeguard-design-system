@@ -28,54 +28,100 @@ const shake = keyframes({
   '20%, 40%, 60%, 80%': { transform: `translateX(calc(${vars.spacing[1]} / 2))` }, // 2px
 });
 
-export const input = style({
-  appearance: 'none',
-  paddingBlock: inputPaddingY,
+export const field = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: vars.spacing[2],
   paddingInline: inputPaddingX,
-  fontFamily: vars.font.sans,
+  paddingBlock: inputPaddingY,
   borderRadius: vars.radius.md,
   border: `1.5px solid ${vars.color.theme.border}`,
-  background: vars.color.theme.surface,
-  fontSize: vars.font.size.body.base,
-  lineHeight: vars.font.lineHeight.body.base,
-  color: vars.color.theme.text.primary,
+  background: `linear-gradient(90deg, ${vars.color.theme.surface} 0%, ${vars.color.theme.surfaceHover} 100%)`,
   transition: `border-color ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, box-shadow ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}, background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
   selectors: {
-    '&:hover:not(:disabled):not(:focus)': {
-      borderColor: vars.color.theme.borderHover,
-    },
-    '&:focus': {
-      outline: 'none',
+    '&:focus-within': {
       borderColor: vars.color.accentMint,
       boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColor}`,
       background: vars.color.theme.surface,
     },
-    '&:disabled': {
-      opacity: 0.6,
+    '&:hover:not([data-disabled="true"])': {
+      borderColor: vars.color.theme.borderHover,
+      boxShadow: `0 10px 26px ${vars.color.brand500_15}`,
+    },
+    '&[data-disabled="true"]': {
+      opacity: 0.65,
       cursor: 'not-allowed',
       background: vars.color.theme.surfaceHover,
+    },
+    '.dark &': {
+      borderColor: vars.color.theme.border,
+      background: vars.color.theme.surface,
+      selectors: {
+        '&:focus-within': {
+          borderColor: vars.color.accentMint,
+          boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColorDark}`,
+        },
+        '&:hover:not([data-disabled="true"])': {
+          borderColor: vars.color.theme.borderHover,
+          boxShadow: `0 10px 26px ${vars.color.accentMint_20}`,
+        },
+      },
+    },
+  },
+});
+
+export const fieldError = style({
+  borderColor: vars.color.error500,
+  boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.error500_15}`,
+  selectors: {
+    '&:focus-within': {
+      borderColor: vars.color.error500,
+      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.error500_15}`,
+      background: vars.color.error100,
+    },
+    '.dark &': {
+      borderColor: vars.color.error500,
+      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.error500_15}`,
+      background: vars.color.theme.surface,
+    },
+  },
+});
+
+export const fieldDisabled = style({
+  background: vars.color.theme.surfaceHover,
+});
+
+export const input = style({
+  appearance: 'none',
+  paddingBlock: 0,
+  paddingInline: 0,
+  fontFamily: vars.font.sans,
+  borderRadius: vars.radius.md,
+  border: 'none',
+  background: 'transparent',
+  fontSize: vars.font.size.body.base,
+  lineHeight: vars.font.lineHeight.body.base,
+  color: vars.color.theme.text.primary,
+  width: '100%',
+  selectors: {
+    '&:focus': {
+      outline: 'none',
+    },
+    '&:disabled': {
+      opacity: 1,
       color: vars.color.theme.text.disabled,
+      WebkitTextFillColor: vars.color.theme.text.disabled,
     },
     '&::placeholder': {
       color: vars.color.theme.text.tertiary,
       opacity: 1,
     },
     '.dark &': {
-      borderColor: vars.color.theme.border,
-      background: vars.color.theme.surface,
       color: vars.color.theme.text.primary,
     },
-    '.dark &:hover:not(:disabled):not(:focus)': {
-      borderColor: vars.color.theme.borderHover,
-    },
-    '.dark &:focus': {
-      borderColor: vars.color.accentMint,
-      boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColorDark}`,
-      background: vars.color.theme.surface,
-    },
     '.dark &:disabled': {
-      background: vars.color.theme.surfaceHover,
       color: vars.color.theme.text.disabled,
+      WebkitTextFillColor: vars.color.theme.text.disabled,
     },
     '.dark &::placeholder': {
       color: vars.color.theme.text.tertiary,
@@ -83,24 +129,13 @@ export const input = style({
   },
 });
 
-export const inputError = style({
-  borderColor: vars.color.error500,
-  boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.error500_15}`,
-  animation: `${shake} ${vars.motion.duration.normal} ${vars.motion.easing.ease}`,
-  selectors: {
-    '&:focus': {
-      borderColor: vars.color.error500,
-      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.error500_15}`,
-    },
-    '.dark &': {
-      borderColor: vars.color.error500,
-      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.error500_15}`,
-    },
-    '.dark &:focus': {
-      borderColor: vars.color.error500,
-      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.error500_15}`,
-    },
-  },
+export const affix = style({
+  color: vars.color.theme.text.secondary,
+  fontSize: vars.font.size.body.base,
+  lineHeight: vars.font.lineHeight.body.base,
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: vars.spacing[1],
 });
 
 export const helperText = style({
@@ -118,4 +153,18 @@ export const errorText = style({
   marginTop: vars.spacing[1],
   fontWeight: vars.font.weight.medium,
   animation: `${shake} ${vars.motion.duration.normal} ${vars.motion.easing.ease}`,
+});
+
+export const footer = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: vars.spacing[2],
+});
+
+export const characterCount = style({
+  marginLeft: 'auto',
+  fontSize: vars.font.size.body.xs,
+  lineHeight: vars.font.lineHeight.body.xs,
+  color: vars.color.theme.text.secondary,
 });
