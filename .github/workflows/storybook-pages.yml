@@ -3,6 +3,8 @@ name: Deploy Storybook to GitHub Pages
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -35,7 +37,7 @@ jobs:
 
       - name: Build Storybook
         env:
-          STORYBOOK_BASE_PATH: /${{ github.repository }}/
+          STORYBOOK_BASE_PATH: /${{ github.event.repository.name }}/
         run: npm run storybook:build -- --quiet
 
       - name: Upload artifact
@@ -44,6 +46,7 @@ jobs:
           path: storybook-static
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
