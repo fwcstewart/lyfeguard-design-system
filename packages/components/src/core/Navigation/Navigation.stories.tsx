@@ -7,31 +7,36 @@ export default {
   title: 'Core/Navigation',
 };
 
-export const TopNavigation = () => (
-  <TopNav
-    brandName="Lyfeguard"
-    links={[
-      { label: 'Dashboard', href: '#' },
-      { label: 'Documents', href: '#' },
-      { label: 'Contacts', href: '#' },
-    ]}
-    actions={
-      <button
-        style={{ background: 'none', border: 'none', color: vars.color.theme.text.primary }}
-        type="button"
-      >
-        User
-      </button>
-    }
-  />
+const links = [
+  { label: 'Dashboard', href: '#', isActive: true },
+  { label: 'Documents', href: '#' },
+  { label: 'Contacts', href: '#' },
+];
+
+const sidebarItems = [
+  { label: 'Dashboard' },
+  { label: 'Documents' },
+  { label: 'Contacts' },
+];
+
+const Action = () => (
+  <button style={{ background: 'none', border: 'none', color: vars.color.theme.text.primary }} type="button">
+    User
+  </button>
 );
 
-export const SideNavigation = () => (
-  <Sidebar
-    items={[
-      { label: 'Dashboard' },
-      { label: 'Documents' },
-      { label: 'Contacts' },
-    ]}
-  />
+export const TopNavigationLight = () => <TopNav brandName="Lyfeguard" links={links} actions={<Action />} />;
+
+export const TopNavigationDark = () => (
+  <div className="dark" style={{ padding: vars.spacing[5], background: vars.color.theme.background }}>
+    <TopNav brandName="Lyfeguard" links={links} actions={<Action />} />
+  </div>
+);
+
+export const SideNavigationLight = () => <Sidebar items={sidebarItems} />;
+
+export const SideNavigationDark = () => (
+  <div className="dark" style={{ padding: vars.spacing[5], background: vars.color.theme.background }}>
+    <Sidebar items={sidebarItems} />
+  </div>
 );

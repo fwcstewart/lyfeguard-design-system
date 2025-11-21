@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import * as s from './TopNav.css';
 
 export interface NavLinkItem {
@@ -45,11 +45,47 @@ export interface TopNavProps {
  * within your application shell.
  */
 export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', links = [], actions }) => {
+  const linkRefs = useRef<HTMLAnchorElement[]>([]);
+
+  const handleArrowNavigation = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) {
+      return;
+    }
+
+    const items = linkRefs.current.filter((link) => Boolean(link?.isConnected));
+    if (!items.length) {
+      return;
+    }
+
+    const activeElement = document.activeElement as HTMLElement | null;
+    const currentIndex = items.findIndex((link) => link === activeElement);
+    let nextIndex = currentIndex >= 0 ? currentIndex : 0;
+
+    if (event.key === 'ArrowRight') {
+      nextIndex = (currentIndex + 1 + items.length) % items.length;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      nextIndex = (currentIndex - 1 + items.length) % items.length;
+    }
+
+    if (event.key === 'Home') {
+      nextIndex = 0;
+    }
+
+    if (event.key === 'End') {
+      nextIndex = items.length - 1;
+    }
+
+    items[nextIndex]?.focus();
+    event.preventDefault();
+  };
+
   return (
     <header className={s.topNav} data-lyfeguard="TopNav">
       <div className={s.left}>
         {brand ? <div className={s.logo}>{brand}</div> : <div className={s.logo}>{brandName}</div>}
-        <nav className={s.navLinks}>
+        <nav className={s.navLinks} aria-label="Primary navigation" onKeyDown={handleArrowNavigation}>
           {links.map((link, idx) => {
             const props: React.HTMLAttributes<HTMLAnchorElement> = {};
             if (link.onClick) {
@@ -64,6 +100,12 @@ export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', 
                 href={link.href || '#'}
                 className={s.navLink}
                 data-active={link.isActive}
+                aria-current={link.isActive ? 'page' : undefined}
+                ref={(node) => {
+                  if (node) {
+                    linkRefs.current[idx] = node;
+                  }
+                }}
                 {...props}
               >
                 {link.label}

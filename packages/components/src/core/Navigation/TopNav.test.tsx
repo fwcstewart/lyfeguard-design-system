@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { TopNav } from './TopNav';
@@ -44,5 +45,52 @@ describe('TopNav', () => {
   it('renders actions on the right side', () => {
     render(<TopNav actions={<button>Action</button>} links={[]} />);
     expect(screen.getByText('Action')).toBeInTheDocument();
+  });
+
+  it('sets aria-current on the active link', () => {
+    render(
+      <TopNav
+        links={[
+          { label: 'Home', href: '/' },
+          { label: 'Dashboard', href: '/dashboard', isActive: true },
+        ]}
+      />
+    );
+
+    expect(screen.getByText('Dashboard')).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByText('Home')).not.toHaveAttribute('aria-current');
+  });
+
+  it('supports arrow key navigation between links', async () => {
+    const user = userEvent.setup();
+    render(
+      <TopNav
+        links={[
+          { label: 'Home', href: '/' },
+          { label: 'Dashboard', href: '/dashboard' },
+          { label: 'Settings', href: '/settings' },
+        ]}
+      />
+    );
+
+    const home = screen.getByText('Home');
+    const dashboard = screen.getByText('Dashboard');
+    const settings = screen.getByText('Settings');
+
+    home.focus();
+    await user.keyboard('{ArrowRight}');
+    expect(dashboard).toHaveFocus();
+
+    await user.keyboard('{ArrowRight}');
+    expect(settings).toHaveFocus();
+
+    await user.keyboard('{ArrowLeft}');
+    expect(dashboard).toHaveFocus();
+
+    await user.keyboard('{End}');
+    expect(settings).toHaveFocus();
+
+    await user.keyboard('{Home}');
+    expect(home).toHaveFocus();
   });
 });
