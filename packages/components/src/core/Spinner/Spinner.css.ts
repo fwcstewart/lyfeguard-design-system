@@ -7,13 +7,29 @@ const spin = keyframes({
   to: { transform: 'rotate(360deg)' },
 });
 
-// Base style for the spinner element. The border colours use the
-// design-system tokens. The size will be provided via inline style.
+// Base style for the spinner element. Sizing, stroke and track colours are
+// driven by semantic tokens with light/dark overrides.
 export const spinner = style({
   borderStyle: 'solid',
-  borderWidth: '3px',
-  borderColor: `${vars.color.neutral200}`,
-  borderTopColor: vars.color.brand500,
   borderRadius: '50%',
-  animation: `${spin} 0.8s linear infinite`,
+  width: 'var(--spinner-size)',
+  height: 'var(--spinner-size)',
+  borderWidth: 'var(--spinner-stroke-width)',
+  borderColor: 'var(--spinner-track-color)',
+  borderTopColor: 'var(--spinner-stroke-color)',
+  animation: `${spin} ${vars.motion.duration.normal} linear infinite`,
+  vars: {
+    '--spinner-size': vars.spacing[6],
+    '--spinner-stroke-width': `calc(${vars.spacing[1]} * 0.75)`,
+    '--spinner-track-color': vars.color.theme.border,
+    '--spinner-stroke-color': vars.color.brand500,
+  },
+  selectors: {
+    '.dark &': {
+      vars: {
+        '--spinner-track-color': vars.color.neutral700,
+        '--spinner-stroke-color': vars.color.accentMint,
+      },
+    },
+  },
 });
