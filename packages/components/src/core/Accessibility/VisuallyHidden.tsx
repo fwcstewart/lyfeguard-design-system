@@ -10,7 +10,7 @@ export interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLSpanElemen
  */
 export const VisuallyHidden: React.FC<VisuallyHiddenProps> = ({ children, ...props }) => {
   return (
-    <span className={s.visuallyHidden} {...props}>
+    <span data-lyfeguard="VisuallyHidden" className={s.visuallyHidden} {...props}>
       {children}
     </span>
   );

@@ -18,10 +18,31 @@ export interface SkipLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElem
  * the main page content, bypassing navigation links. It is hidden off-screen
  * until focused.
  */
-export const SkipLink: React.FC<SkipLinkProps> = ({ targetId = "content", label = "Skip to content", ...props }) => {
+export const SkipLink: React.FC<SkipLinkProps> = ({ targetId = "content", label = "Skip to content", onFocus, onBlur, ...props }) => {
   const href = `#${targetId}`;
+  const [isFocusVisible, setIsFocusVisible] = React.useState(false);
+
+  const handleFocus = (event: React.FocusEvent<HTMLAnchorElement>) => {
+    setIsFocusVisible(true);
+    onFocus?.(event);
+  };
+
+  const handleBlur = (event: React.FocusEvent<HTMLAnchorElement>) => {
+    setIsFocusVisible(false);
+    onBlur?.(event);
+  };
+
   return (
-    <a href={href} className={s.skipLink} {...props}>
+    <a
+      data-lyfeguard="SkipLink"
+      href={href}
+      className={s.skipLink}
+      data-focus-visible={isFocusVisible ? "true" : "false"}
+      style={isFocusVisible ? { transform: "translateY(0)" } : undefined}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      {...props}
+    >
       {label}
     </a>
   );

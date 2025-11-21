@@ -1,4 +1,5 @@
 import React from 'react';
+import { generateId } from '../../helpers/aria';
 import * as s from './Input.css';
 
 export interface InputProps
@@ -18,17 +19,38 @@ export interface InputProps
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, helperText, error, className, ...props }, ref) => {
+  ({ label, helperText, error, className, id, ...props }, ref) => {
+    const inputId = id ?? generateId('input');
     const inputClass = error ? `${s.input} ${s.inputError}` : s.input;
+    const helperId = helperText ? `${inputId}-helper` : undefined;
+    const errorId = error ? `${inputId}-error` : undefined;
+    const describedBy = errorId ?? helperId;
 
     return (
       <div className={s.wrapper} data-lyfeguard="Input">
-        {label && <label className={s.label}>{label}</label>}
-        <input ref={ref} className={inputClass} {...props} />
+        {label && (
+          <label className={s.label} htmlFor={inputId}>
+            {label}
+          </label>
+        )}
+        <input
+          id={inputId}
+          ref={ref}
+          className={inputClass}
+          aria-invalid={Boolean(error)}
+          aria-describedby={describedBy}
+          {...props}
+        />
         {error ? (
-          <span className={s.errorText}>{error}</span>
+          <span id={errorId} className={s.errorText}>
+            {error}
+          </span>
         ) : (
-          helperText && <span className={s.helperText}>{helperText}</span>
+          helperText && (
+            <span id={helperId} className={s.helperText}>
+              {helperText}
+            </span>
+          )
         )}
       </div>
     );
