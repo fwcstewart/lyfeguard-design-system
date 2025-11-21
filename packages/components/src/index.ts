@@ -39,6 +39,7 @@ export * from './core/Accessibility/VisuallyHidden';
 export * from './core/Layout/Container';
 export * from './core/Layout/Grid';
 export * from './core/Layout/GridItem';
+export * from './core/Layout/Stack';
 
 // Low‑level primitives
 export * from './primitives';
