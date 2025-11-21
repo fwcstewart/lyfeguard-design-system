@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as s from './Toast.css';
-import type { ToastVariant } from './ToastProvider';
+import type { ToastVariant } from './types';
+import { ToastContent } from './ToastItem';
 
 export interface ToastProps {
   /**
@@ -33,32 +34,50 @@ export interface ToastProps {
  */
 export const Toast: React.FC<ToastProps> = ({ open, onClose, children, variant = 'info', duration = 5000 }) => {
   const [internalOpen, setInternalOpen] = useState(open);
+  const [isExiting, setIsExiting] = useState(false);
+
   useEffect(() => {
-    setInternalOpen(open);
-  }, [open]);
+    if (open) {
+      setInternalOpen(true);
+      setIsExiting(false);
+      return;
+    }
+
+    if (internalOpen) {
+      setIsExiting(true);
+      const timeout = setTimeout(() => setInternalOpen(false), 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [open, internalOpen]);
+
   useEffect(() => {
-    if (!internalOpen) return;
+    if (!internalOpen || duration === 0) return;
     const timeout = setTimeout(() => {
-      setInternalOpen(false);
-      onClose?.();
+      setIsExiting(true);
+      setTimeout(() => {
+        setInternalOpen(false);
+        onClose?.();
+      }, 300);
     }, duration);
     return () => clearTimeout(timeout);
   }, [internalOpen, duration, onClose]);
+
   if (!internalOpen) return null;
   return (
     <div className={s.container} data-lyfeguard="Toast">
-      <div className={[s.toastBase, s.variants[variant]].join(' ')} role="status">
-        <div className={s.message}>{children}</div>
-        <button
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit' }}
-          onClick={() => {
+      <ToastContent
+        variant={variant}
+        onClose={() => {
+          setIsExiting(true);
+          setTimeout(() => {
             setInternalOpen(false);
             onClose?.();
-          }}
-        >
-          ×
-        </button>
-      </div>
+          }, 300);
+        }}
+        isExiting={isExiting}
+      >
+        {children}
+      </ToastContent>
     </div>
   );
 };
