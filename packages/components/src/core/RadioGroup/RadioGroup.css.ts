@@ -12,6 +12,9 @@ export const group = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing[2],
+  border: 'none',
+  margin: 0,
+  padding: 0,
 });
 
 // Each radio option wrapper; ensures label and input are aligned
@@ -25,6 +28,9 @@ export const option = style({
       cursor: 'not-allowed',
     },
     '&[data-disabled="true"] span': {
+      color: vars.color.theme.text.disabled,
+    },
+    '.dark &[data-disabled="true"] span': {
       color: vars.color.theme.text.disabled,
     },
   },
@@ -41,9 +47,14 @@ export const radio = style({
   backgroundColor: vars.color.theme.surface,
   display: 'grid',
   placeContent: 'center',
-  transition: `background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}, border-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
+  transition: `background-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}, border-color ${vars.motion.duration.fast} ${vars.motion.easing.ease}, box-shadow ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
   selectors: {
     '&:hover:not(:disabled)': {
+      borderColor: vars.color.theme.borderHover,
+      backgroundColor: vars.color.theme.surfaceHover,
+    },
+    '&:active:not(:disabled)': {
+      backgroundColor: vars.color.theme.surfaceActive,
       borderColor: vars.color.theme.borderHover,
     },
     '&:focus-visible': {
@@ -51,8 +62,12 @@ export const radio = style({
       borderColor: vars.color.accentMint,
       boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.accentMint_20}`,
     },
+    '.dark &:focus-visible': {
+      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.accentMint_30}`,
+    },
     '&:checked': {
       borderColor: vars.color.accentMint,
+      backgroundColor: vars.color.accentMint_10,
     },
     '&:checked::after': {
       content: '',
@@ -61,16 +76,50 @@ export const radio = style({
       borderRadius: '50%',
       backgroundColor: vars.color.accentMint,
     },
+    '.dark &:checked': {
+      backgroundColor: vars.color.accentMint_15,
+    },
+    '.dark &:checked::after': {
+      backgroundColor: vars.color.accentMint,
+    },
     '&:disabled': {
-      opacity: 0.6,
       cursor: 'not-allowed',
+      backgroundColor: vars.color.theme.surfaceHover,
+      borderColor: vars.color.theme.border,
+    },
+    '&:disabled::after': {
+      backgroundColor: vars.color.theme.text.disabled,
+    },
+    '.dark &:disabled': {
+      backgroundColor: vars.color.theme.surface,
+      borderColor: vars.color.theme.borderHover,
+    },
+    '.dark &:disabled::after': {
+      backgroundColor: vars.color.theme.text.disabled,
     },
   },
 });
 
-export const label = style({
+export const legend = style({
   fontFamily: vars.font.sans,
   fontSize: vars.font.size.ui.label,
+  fontWeight: vars.font.weight.medium,
   lineHeight: vars.font.lineHeight.ui.label,
   color: vars.color.theme.text.primary,
+  marginBottom: vars.spacing[1] as unknown as string,
+});
+
+export const optionLabel = style({
+  fontFamily: vars.font.sans,
+  fontSize: vars.font.size.body.sm,
+  lineHeight: vars.font.lineHeight.body.sm,
+  color: vars.color.theme.text.primary,
+});
+
+export const helperText = style({
+  marginTop: vars.spacing[1] as unknown as string,
+  fontFamily: vars.font.sans,
+  fontSize: vars.font.size.body.xs,
+  lineHeight: vars.font.lineHeight.body.xs,
+  color: vars.color.theme.text.tertiary,
 });

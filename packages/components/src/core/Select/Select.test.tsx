@@ -1,5 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import '@vanilla-extract/css/disableRuntimeStyles';
+import '@testing-library/jest-dom/vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import { Select } from './Select';
 
 describe('Select', () => {
@@ -10,9 +12,8 @@ describe('Select', () => {
         <option value="banana">Banana</option>
       </Select>
     );
-    // The label should be present
+
     expect(screen.getByText('Fruits')).toBeInTheDocument();
-    // The options should render within the select element
     expect(screen.getByRole('option', { name: 'Apple' })).toBeInTheDocument();
     expect(screen.getByRole('option', { name: 'Banana' })).toBeInTheDocument();
   });
@@ -27,9 +28,46 @@ describe('Select', () => {
       </Select>
     );
     const selectElement = screen.getByTestId('select') as HTMLSelectElement;
-    // Change the value of the select element
+
     fireEvent.change(selectElement, { target: { value: 'banana' } });
-    // The onChange handler should have been called exactly once
+
     expect(handleChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('exposes the combobox role with an associated label', () => {
+    render(
+      <Select label="Fruits" aria-describedby="select-help">
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+      </Select>
+    );
+
+    const selectElement = screen.getByRole('combobox', { name: 'Fruits' });
+
+    expect(selectElement).toBeInTheDocument();
+    expect(selectElement).toHaveAccessibleName('Fruits');
+    expect(selectElement).toHaveAttribute('aria-describedby', 'select-help');
+  });
+
+  it('supports keyboard interaction to change selection', () => {
+    const handleChange = vi.fn();
+    render(
+      <Select label="Fruits" onChange={handleChange} defaultValue="apple">
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cherry">Cherry</option>
+      </Select>
+    );
+
+    const selectElement = screen.getByRole('combobox', { name: 'Fruits' }) as HTMLSelectElement;
+
+    selectElement.focus();
+    expect(selectElement).toHaveFocus();
+
+    fireEvent.keyDown(selectElement, { key: 'ArrowDown' });
+    fireEvent.change(selectElement, { target: { value: 'banana' } });
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(selectElement.value).toBe('banana');
   });
 });

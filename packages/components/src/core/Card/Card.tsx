@@ -28,14 +28,34 @@ export const Card: React.FC<CardProps> = ({
   clickable = false,
   children,
   className,
+  onKeyDown,
+  onClick,
   ...props
 }) => {
+  const isInteractive = clickable || Boolean(onClick);
   const cardClassName = clickable
     ? `${s.card} ${s.clickable} ${className || ''}`
     : `${s.card} ${className || ''}`;
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (isInteractive && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      onClick?.(event as unknown as React.MouseEvent<HTMLDivElement>);
+    }
+
+    onKeyDown?.(event);
+  };
+
   return (
-    <div className={cardClassName.trim()} data-lyfeguard="Card" {...props}>
+    <div
+      className={cardClassName.trim()}
+      data-lyfeguard="Card"
+      {...props}
+      role={isInteractive ? 'button' : props.role}
+      tabIndex={isInteractive ? props.tabIndex ?? 0 : props.tabIndex}
+      onKeyDown={handleKeyDown}
+      onClick={onClick}
+    >
       {header && <div className={s.header}>{header}</div>}
       <div className={s.body}>{children}</div>
       {footer && <div className={s.footer}>{footer}</div>}

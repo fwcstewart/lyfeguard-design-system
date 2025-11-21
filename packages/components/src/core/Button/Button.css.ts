@@ -1,6 +1,11 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
+const focusRingLight = `0 0 0 3px color-mix(in srgb, ${vars.color.accentMint} 32%, ${vars.color.theme.surface})`;
+const focusRingDark = `0 0 0 3px color-mix(in srgb, ${vars.color.accentMint} 40%, ${vars.color.theme.background})`;
+const hoverOverlay = `color-mix(in srgb, ${vars.color.accentMint} 18%, ${vars.color.theme.surface})`;
+const activeOverlay = `color-mix(in srgb, ${vars.color.accentMint} 22%, ${vars.color.theme.surfaceActive})`;
+
 // Base styles shared across button variants
 export const base = style({
   fontFamily: vars.font.sans,
@@ -15,9 +20,16 @@ export const base = style({
   border: 'none',
   position: 'relative',
   selectors: {
-    '&:focus-visible': {
+    '&:focus-visible, &[data-state="focus"]': {
       outline: 'none',
-      boxShadow: `0 0 0 3px ${vars.color.brand500_20}`,
+      boxShadow: focusRingLight,
+    },
+    '.dark &': {
+      selectors: {
+        '&:focus-visible, &[data-state="focus"]': {
+          boxShadow: focusRingDark,
+        },
+      },
     },
   },
 });
@@ -48,29 +60,29 @@ export const primary = style([
     color: vars.color.brand900,
     boxShadow: vars.shadow.xs,
     selectors: {
-      '&:hover:not(:disabled)': {
+      '&:hover:not(:disabled), &[data-state="hover"]': {
         background: vars.color.success600,
         boxShadow: vars.shadow.md,
         transform: 'translateY(-1px)',
       },
-      '&:active:not(:disabled)': {
+      '&:active:not(:disabled), &[data-state="active"]': {
         background: vars.color.success600,
         transform: 'translateY(0)',
         boxShadow: vars.shadow.xs,
       },
-      '&:disabled': {
-        opacity: 0.5,
+      '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+        opacity: 0.6,
         cursor: 'not-allowed',
         transform: 'none',
-      },
-      '&:focus-visible': {
-        boxShadow: `0 0 0 3px ${vars.color.accentMint_30}`,
       },
       '.dark &': {
         color: vars.color.brand900,
         selectors: {
-          '&:hover:not(:disabled)': {
+          '&:hover:not(:disabled), &[data-state="hover"]': {
             boxShadow: vars.shadow.md,
+          },
+          '&:focus-visible, &[data-state="focus"]': {
+            boxShadow: focusRingDark,
           },
         },
       },
@@ -85,23 +97,45 @@ export const secondary = style([
     border: `1.5px solid ${vars.color.accentMint}`,
     color: vars.color.accentMint,
     selectors: {
-      '&:hover:not(:disabled)': {
-        background: vars.color.accentMint_10,
-        borderColor: vars.color.success600,
+      '&:hover:not(:disabled), &[data-state="hover"]': {
+        background: hoverOverlay,
+        borderColor: vars.color.accentMint,
         transform: 'translateY(-1px)',
       },
-      '&:active:not(:disabled)': {
-        background: vars.color.accentMint_15,
+      '&:active:not(:disabled), &[data-state="active"]': {
+        background: activeOverlay,
         transform: 'translateY(0)',
       },
-      '&:disabled': {
-        opacity: 0.5,
+      '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+        opacity: 0.6,
         cursor: 'not-allowed',
         borderColor: vars.color.theme.border,
         color: vars.color.theme.text.disabled,
       },
-      '&:focus-visible': {
-        boxShadow: `0 0 0 3px ${vars.color.accentMint_30}`,
+      '&:focus-visible, &[data-state="focus"]': {
+        boxShadow: focusRingLight,
+      },
+      '.dark &': {
+        color: vars.color.theme.text.primary,
+        borderColor: vars.color.theme.border,
+        selectors: {
+          '&:hover:not(:disabled), &[data-state="hover"]': {
+            background: `color-mix(in srgb, ${vars.color.theme.overlay} 26%, ${vars.color.theme.surface})`,
+            borderColor: vars.color.theme.borderHover,
+            color: vars.color.theme.text.primary,
+          },
+          '&:active:not(:disabled), &[data-state="active"]': {
+            background: `color-mix(in srgb, ${vars.color.theme.overlay} 32%, ${vars.color.theme.surfaceActive})`,
+            borderColor: vars.color.theme.borderHover,
+          },
+          '&:focus-visible, &[data-state="focus"]': {
+            boxShadow: focusRingDark,
+          },
+          '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+            color: vars.color.theme.text.disabled,
+            borderColor: vars.color.theme.border,
+          },
+        },
       },
     },
   },
@@ -115,22 +149,36 @@ export const tertiary = style([
     paddingLeft: 0,
     paddingRight: 0,
     selectors: {
-      '&:hover:not(:disabled)': {
+      '&:hover:not(:disabled), &[data-state="hover"]': {
         textDecoration: 'underline',
         color: vars.color.success600,
       },
-      '&:active:not(:disabled)': {
-        opacity: 0.8,
+      '&:active:not(:disabled), &[data-state="active"]': {
+        opacity: 0.85,
         transform: 'scale(0.98)',
       },
-      '&:disabled': {
-        opacity: 0.5,
+      '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+        opacity: 0.6,
         cursor: 'not-allowed',
         color: vars.color.theme.text.disabled,
       },
-      '&:focus-visible': {
-        boxShadow: `0 0 0 3px ${vars.color.accentMint_30}`,
+      '&:focus-visible, &[data-state="focus"]': {
+        boxShadow: focusRingLight,
         borderRadius: vars.radius.sm,
+      },
+      '.dark &': {
+        color: vars.color.theme.text.primary,
+        selectors: {
+          '&:hover:not(:disabled), &[data-state="hover"]': {
+            color: vars.color.accentMint,
+          },
+          '&:focus-visible, &[data-state="focus"]': {
+            boxShadow: focusRingDark,
+          },
+          '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+            color: vars.color.theme.text.disabled,
+          },
+        },
       },
     },
   },

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
+import { vars } from '../../globals.css';
 import { Table } from './Table';
 
 const meta: Meta<typeof Table> = {
@@ -37,17 +38,27 @@ const data: Person[] = [
   { name: 'Eve', age: 29, role: 'Designer', salary: 80000 },
 ];
 
+const DarkSurface: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div
+    className="dark"
+    style={{
+      background: vars.color.theme.background,
+      color: vars.color.theme.text.primary,
+      padding: vars.spacing[6] as unknown as string,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: vars.spacing[4] as unknown as string,
+    }}
+  >
+    {children}
+  </div>
+);
+
 export const Basic: Story = {
-  render: () => (
-    <Table
-      columns={columns}
-      data={data}
-      onRowClick={(row) => alert(`Clicked ${row.name}`)}
-    />
-  ),
+  render: () => <Table columns={columns} data={data} />,
 };
 
-export const Sortable: Story = {
+export const SortableLight: Story = {
   render: () => (
     <Table
       columns={columns}
@@ -57,12 +68,24 @@ export const Sortable: Story = {
   ),
 };
 
-export const SingleSelection: Story = {
+export const SortableDark: Story = {
+  render: () => (
+    <DarkSurface>
+      <Table
+        columns={columns}
+        data={data}
+        defaultSort={{ columnIndex: 2, direction: 'asc' }}
+      />
+    </DarkSurface>
+  ),
+};
+
+export const SelectableLight: Story = {
   render: () => {
     const [selected, setSelected] = useState<number[]>([]);
     return (
-      <div>
-        <p style={{ marginBottom: '16px' }}>
+      <div style={{ display: 'grid', gap: vars.spacing[3] as unknown as string }}>
+        <p style={{ margin: 0 }}>
           Selected: {selected.length > 0 ? data[selected[0]]?.name : 'None'}
         </p>
         <Table
@@ -77,33 +100,13 @@ export const SingleSelection: Story = {
   },
 };
 
-export const MultipleSelection: Story = {
+export const SelectableDark: Story = {
   render: () => {
     const [selected, setSelected] = useState<number[]>([]);
     return (
-      <div>
-        <p style={{ marginBottom: '16px' }}>
+      <DarkSurface>
+        <p style={{ margin: 0 }}>
           Selected {selected.length} of {data.length} rows
-        </p>
-        <Table
-          columns={columns}
-          data={data}
-          selectable="multiple"
-          selectedRows={selected}
-          onSelectionChange={setSelected}
-        />
-      </div>
-    );
-  },
-};
-
-export const WithSortingAndSelection: Story = {
-  render: () => {
-    const [selected, setSelected] = useState<number[]>([]);
-    return (
-      <div>
-        <p style={{ marginBottom: '16px' }}>
-          Selected {selected.length} row(s). Click column headers to sort.
         </p>
         <Table
           columns={columns}
@@ -113,7 +116,19 @@ export const WithSortingAndSelection: Story = {
           onSelectionChange={setSelected}
           defaultSort={{ columnIndex: 1, direction: 'asc' }}
         />
-      </div>
+      </DarkSurface>
     );
   },
+};
+
+export const CompactDensity: Story = {
+  render: () => (
+    <Table
+      columns={columns}
+      data={data}
+      selectable="multiple"
+      density="compact"
+      defaultSort={{ columnIndex: 0, direction: 'asc' }}
+    />
+  ),
 };
