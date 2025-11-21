@@ -4,11 +4,12 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --dts --format esm,cjs",
-    "dev": "tsup src/index.ts --watch --dts --format esm,cjs"
-    ,
+    "dev": "tsup src/index.ts --watch --dts --format esm,cjs",
     "test": "vitest"
   },
   "peerDependencies": {
@@ -24,10 +25,12 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/jest-dom": "^6.0.0",
     "jsdom": "^22.0.0",
-    "@vitejs/plugin-react": "^4.0.0"
+    "@vitejs/plugin-react": "^4.0.0",
+    "@vanilla-extract/vite-plugin": "^5.1.1"
   },
   "dependencies": {
     "recharts": "^2.7.0",
-    "@lyfeguard/utils": "*"
+    "@lyfeguard/utils": "*",
+    "@lyfeguard/tokens": "*"
   }
 }
