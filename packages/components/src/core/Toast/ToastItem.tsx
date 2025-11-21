@@ -1,6 +1,51 @@
 import React, { useEffect, useState } from 'react';
+import { CheckIcon, CloseIcon, InfoIcon, WarningIcon } from '@lyfeguard/icons';
 import * as s from './Toast.css';
-import { ToastVariant } from './ToastProvider';
+import { ToastVariant } from './types';
+
+export interface ToastContentProps {
+  variant: ToastVariant;
+  onClose: () => void;
+  children: React.ReactNode;
+  isExiting?: boolean;
+}
+
+const variantIcons: Record<ToastVariant, React.ReactNode> = {
+  info: <InfoIcon size={18} aria-hidden="true" />,
+  success: <CheckIcon size={18} aria-hidden="true" />,
+  warning: <WarningIcon size={18} aria-hidden="true" />,
+  error: <WarningIcon size={18} aria-hidden="true" />,
+};
+
+export const ToastContent: React.FC<ToastContentProps> = ({
+  variant,
+  onClose,
+  children,
+  isExiting = false,
+}) => (
+  <div
+    className={[s.toastBase, s.variants[variant]].join(' ')}
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    data-lyfeguard="Toast"
+    data-exiting={isExiting}
+  >
+    <span className={s.statusBar} aria-hidden="true" />
+    <div className={s.iconWrapper} aria-hidden="true">
+      {variantIcons[variant]}
+    </div>
+    <div className={s.message}>{children}</div>
+    <button
+      className={s.closeButton}
+      onClick={onClose}
+      aria-label="Close notification"
+      type="button"
+    >
+      <CloseIcon size={16} aria-hidden="true" />
+    </button>
+  </div>
+);
 
 export interface ToastItemProps {
   id: string;
@@ -45,39 +90,9 @@ export const ToastItem: React.FC<ToastItemProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div
-      className={[s.toastBase, s.variants[variant]].join(' ')}
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      data-lyfeguard="Toast"
-      data-exiting={isExiting}
-    >
-      <div className={s.message}>{children}</div>
-      <button
-        className={s.closeButton}
-        onClick={handleClose}
-        aria-label="Close notification"
-        type="button"
-      >
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-    </div>
+    <ToastContent variant={variant} onClose={handleClose} isExiting={isExiting}>
+      {children}
+    </ToastContent>
   );
 };
 
