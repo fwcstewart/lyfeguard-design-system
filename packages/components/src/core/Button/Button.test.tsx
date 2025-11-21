@@ -6,7 +6,7 @@ import { Button } from './Button';
 describe('Button component', () => {
   it('renders the provided children', () => {
     render(<Button>Click me</Button>);
-    expect(screen.getByText('Click me')).toBeInTheDocument();
+    expect(screen.queryByText('Click me')).not.toBeNull();
   });
 
   it('calls onClick when clicked', () => {
@@ -14,5 +14,44 @@ describe('Button component', () => {
     render(<Button onClick={handleClick}>Press</Button>);
     fireEvent.click(screen.getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('provides data attributes for variant and size', () => {
+    render(
+      <Button variant="secondary" size="lg">
+        Secondary Large
+      </Button>
+    );
+
+    const button = screen.getByRole('button');
+    expect(button.getAttribute('data-variant')).toBe('secondary');
+    expect(button.getAttribute('data-size')).toBe('lg');
+    expect(button.hasAttribute('data-state')).toBe(false);
+  });
+
+  it('sets loading as a disabled state', () => {
+    render(<Button isLoading>Loading</Button>);
+    const button = screen.getByRole('button');
+    expect(button.disabled).toBe(true);
+    expect(button.getAttribute('data-state')).toBe('loading');
+  });
+
+  it('supports explicit data-state overrides', () => {
+    render(
+      <Button data-state="active" variant="tertiary">
+        Active
+      </Button>
+    );
+
+    const button = screen.getByRole('button');
+    expect(button.getAttribute('data-state')).toBe('active');
+    expect(button.disabled).toBe(false);
+  });
+
+  it('marks disabled buttons with a disabled state attribute', () => {
+    render(<Button disabled>Disabled</Button>);
+    const button = screen.getByRole('button');
+    expect(button.disabled).toBe(true);
+    expect(button.getAttribute('data-state')).toBe('disabled');
   });
 });
