@@ -7,8 +7,8 @@ const meta: Meta<typeof Textarea> = {
   title: 'Components/Textarea',
   component: Textarea,
   argTypes: {
-    onChange: { action: 'changed' }
-  }
+    onChange: { action: 'changed' },
+  },
 };
 
 export default meta;
@@ -20,8 +20,8 @@ export const Default: Story = {
     placeholder: 'Enter your message here',
     helperText: 'Share additional context if needed.',
     maxLength: 120,
-    showCharacterCount: true
-  }
+    showCharacterCount: true,
+  },
 };
 
 export const WithContainer: Story = {
@@ -45,5 +45,40 @@ export const WithContainer: Story = {
         {...args}
       />
     </div>
-  )
+  ),
+};
+
+export const White: Story = {
+  args: {
+    label: 'Message',
+    placeholder: 'Enter your message here',
+    helperText: 'White surface textarea',
+    variant: 'white',
+  },
+};
+
+export const ReadonlyAndDisabled: Story = {
+  render: (args) => (
+    <div
+      style={{
+        display: 'grid',
+        gap: vars.spacing[5] as unknown as string,
+        maxWidth: '600px',
+      }}
+    >
+      <Textarea
+        label="Read only"
+        defaultValue="This value cannot be edited"
+        readOnly
+        {...args}
+      />
+      <Textarea
+        label="Disabled"
+        placeholder="Disabled textarea"
+        disabled
+        helperText="Disabled state mirrors legacy surface"
+        {...args}
+      />
+    </div>
+  ),
 };

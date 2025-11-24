@@ -49,4 +49,24 @@ describe('Textarea component', () => {
     expect(handleChange).toHaveBeenCalled();
     expect(screen.getByText('5/10')).toBeInTheDocument();
   });
+
+  test('applies variant and readonly/disabled data attributes', () => {
+    render(
+      <div>
+        <Textarea label="White" variant="white" />
+        <Textarea label="Readonly" readOnly defaultValue="Locked" />
+        <Textarea label="Disabled" disabled />
+      </div>,
+    );
+
+    const white = screen.getByLabelText('White');
+    const readonly = screen.getByLabelText('Readonly');
+    const disabled = screen.getByLabelText('Disabled');
+
+    expect(white).toHaveAttribute('data-variant', 'white');
+    expect(readonly).toHaveAttribute('data-readonly', 'true');
+    expect(readonly).toHaveAttribute('readonly');
+    expect(disabled).toBeDisabled();
+    expect(disabled).toHaveAttribute('data-disabled', 'true');
+  });
 });

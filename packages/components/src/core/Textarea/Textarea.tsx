@@ -19,6 +19,11 @@ export interface TextareaProps
    * When true and maxLength is provided, displays a live character count
    */
   showCharacterCount?: boolean;
+  /**
+   * Visual variant of the textarea
+   * @default 'default'
+   */
+  variant?: 'default' | 'white';
 }
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -34,6 +39,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       value,
       onChange,
       showCharacterCount = false,
+      variant = 'default',
+      readOnly = false,
       ...props
     },
     ref,
@@ -44,6 +51,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const errorId = error ? `${textareaId}-error` : undefined;
     const counterId =
       showCharacterCount && maxLength ? `${textareaId}-counter` : undefined;
+    const wrapperClassName = className ? `${s.wrapper} ${className}` : s.wrapper;
 
     const [internalValue, setInternalValue] = React.useState<string>(
       (defaultValue ?? '')?.toString() ?? '',
@@ -55,9 +63,10 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       }
     }, [value]);
 
-    const describedBy = [errorId, helperId, counterId]
+    const describedBy = [props['aria-describedby'], error ? errorId : helperId, counterId]
       .filter(Boolean)
-      .join(' ');
+      .join(' ')
+      .trim();
 
     const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
       event,
@@ -69,15 +78,21 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     };
 
     const currentLength = (value ?? internalValue)?.toString().length ?? 0;
-    const textareaClass = error
-      ? `${s.textarea} ${s.textareaError}${className ? ` ${className}` : ''}`
-      : `${s.textarea}${className ? ` ${className}` : ''}`;
+    const textareaClass = [
+      s.textarea,
+      variant === 'white' ? s.textareaWhite : '',
+      error ? s.textareaError : '',
+      props.disabled ? s.textareaDisabled : '',
+      readOnly ? s.textareaReadOnly : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const controlProps =
       value !== undefined ? { value } : { defaultValue };
 
     return (
-      <div className={s.wrapper} data-lyfeguard="Textarea">
+      <div className={wrapperClassName} data-lyfeguard="Textarea">
         {label && (
           <label className={s.label} htmlFor={textareaId}>
             {label}
@@ -87,9 +102,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={textareaId}
           ref={ref}
           className={textareaClass}
-          aria-invalid={!!error}
+          data-variant={variant}
+          data-readonly={readOnly ? 'true' : undefined}
+          data-has-error={error ? 'true' : undefined}
+          data-disabled={props.disabled ? 'true' : undefined}
+          aria-invalid={error ? true : props['aria-invalid']}
           aria-describedby={describedBy || undefined}
           maxLength={maxLength}
+          readOnly={readOnly}
           onChange={handleChange}
           {...controlProps}
           {...props}

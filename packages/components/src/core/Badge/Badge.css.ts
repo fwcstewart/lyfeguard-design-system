@@ -12,6 +12,15 @@ export const badgeVars = {
 };
 
 export const badgeStatusTokens = {
+  active: {
+    surface: vars.color.accentMint_15,
+    text: vars.color.accentMint,
+    outline: vars.color.accentMint_30,
+    solid: vars.color.accentMint,
+    onSolid: vars.color.brand900,
+    darkText: vars.color.accentMint,
+    darkOutline: vars.color.accentMint_20,
+  },
   primary: {
     surface: vars.color.brand500_20,
     text: vars.color.brand800,
@@ -56,6 +65,24 @@ export const badgeStatusTokens = {
     onSolid: vars.color.brand900,
     darkText: vars.color.info500,
     darkOutline: vars.color.info500_15,
+  },
+  pending: {
+    surface: vars.color.warning100,
+    text: vars.color.warning500,
+    outline: vars.color.warning500,
+    solid: vars.color.warning500,
+    onSolid: vars.color.brand900,
+    darkText: vars.color.warning500,
+    darkOutline: vars.color.warning500_15,
+  },
+  secondary: {
+    surface: vars.color.brand500_20,
+    text: vars.color.brand900,
+    outline: vars.color.brand500_30,
+    solid: vars.color.brand900,
+    onSolid: vars.color.neutral0,
+    darkText: vars.color.brand500,
+    darkOutline: vars.color.brand500_40,
   },
 } as const;
 

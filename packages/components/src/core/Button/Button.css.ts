@@ -40,7 +40,7 @@ export const base = style([
     color: 'var(--button-color)',
     border: 'var(--button-border)',
     boxShadow: 'var(--button-shadow)',
-    cursor: 'pointer',
+    cursor: 'var(--button-cursor)',
     position: 'relative',
     transition,
     selectors: {
@@ -99,6 +99,7 @@ export const base = style([
       '--button-disabled-border': BUTTON_VARIANTS.primary.disabled.border,
       '--button-disabled-color': BUTTON_VARIANTS.primary.disabled.color,
       '--button-focus-shadow': BUTTON_VARIANTS.primary.focusShadow,
+      '--button-cursor': 'pointer',
     },
   },
   prefersReducedMotion,

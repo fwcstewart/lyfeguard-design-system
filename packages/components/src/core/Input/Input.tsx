@@ -107,7 +107,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
-        <div className={fieldStateClasses} data-disabled={props.disabled ? 'true' : undefined}>
+        <div
+          className={fieldStateClasses}
+          data-disabled={props.disabled ? 'true' : undefined}
+          data-variant={variant}
+          data-readonly={readOnly ? 'true' : undefined}
+          data-has-error={error ? 'true' : undefined}
+        >
           {prefix && <span className={s.affix}>{prefix}</span>}
           <input
             id={inputId}

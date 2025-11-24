@@ -80,4 +80,10 @@ describe('Button component', () => {
 
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  it('exposes legacy inactive cursor tokens', () => {
+    render(<Button variant="inactive">Inactive</Button>);
+    const button = screen.getByRole('button');
+    expect(button.style.getPropertyValue('--button-cursor')).toBe('default');
+  });
 });
