@@ -47,6 +47,9 @@ export * from './core/Layout/Section';
 export * from './core/Layout/AspectRatio';
 export * from './core/Layout/Center';
 export * from './core/Layout/Cluster';
+export * from './core/Layout/Flex';
+export * from './core/Layout/Split';
+export * from './core/Layout/SidebarLayout';
 
 // Low‑level primitives
 export * from './primitives';

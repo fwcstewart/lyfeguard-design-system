@@ -354,3 +354,221 @@ export const cluster = style({
     },
   },
 });
+
+/**
+ * Flex provides an explicit flexbox container with comprehensive control.
+ */
+export const flex = style({
+  display: 'flex',
+  width: '100%',
+  gap: `var(--flex-gap, ${spacingTokens.none})`,
+  padding: `var(--flex-padding, ${spacingTokens.none})`,
+  margin: `var(--flex-margin, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      gap: `var(--flex-gap-sm, var(--flex-gap, ${spacingTokens.none}))`,
+      padding: `var(--flex-padding-sm, var(--flex-padding, ${spacingTokens.none}))`,
+      margin: `var(--flex-margin-sm, var(--flex-margin, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      gap: `var(--flex-gap-md, var(--flex-gap-sm, var(--flex-gap, ${spacingTokens.none})))`,
+      padding: `var(--flex-padding-md, var(--flex-padding-sm, var(--flex-padding, ${spacingTokens.none})))`,
+      margin: `var(--flex-margin-md, var(--flex-margin-sm, var(--flex-margin, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      gap: `var(--flex-gap-lg, var(--flex-gap-md, var(--flex-gap, ${spacingTokens.none})))`,
+      padding: `var(--flex-padding-lg, var(--flex-padding-md, var(--flex-padding, ${spacingTokens.none})))`,
+      margin: `var(--flex-margin-lg, var(--flex-margin-md, var(--flex-margin, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      gap: `var(--flex-gap-xl, var(--flex-gap-lg, var(--flex-gap, ${spacingTokens.none})))`,
+      padding: `var(--flex-padding-xl, var(--flex-padding-lg, var(--flex-padding, ${spacingTokens.none})))`,
+      margin: `var(--flex-margin-xl, var(--flex-margin-lg, var(--flex-margin, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      gap: `var(--flex-gap-xxl, var(--flex-gap-xl, var(--flex-gap, ${spacingTokens.none})))`,
+      padding: `var(--flex-padding-xxl, var(--flex-padding-xl, var(--flex-padding, ${spacingTokens.none})))`,
+      margin: `var(--flex-margin-xxl, var(--flex-margin-xl, var(--flex-margin, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      gap: `var(--flex-gap-widescreen, var(--flex-gap-xxl, var(--flex-gap, ${spacingTokens.none})))`,
+      padding: `var(--flex-padding-widescreen, var(--flex-padding-xxl, var(--flex-padding, ${spacingTokens.none})))`,
+      margin: `var(--flex-margin-widescreen, var(--flex-margin-xxl, var(--flex-margin, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+/**
+ * Split divides space between two content areas.
+ */
+export const split = style({
+  display: 'flex',
+  width: '100%',
+  gap: `var(--split-gap, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      gap: `var(--split-gap-sm, var(--split-gap, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      gap: `var(--split-gap-md, var(--split-gap-sm, var(--split-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      gap: `var(--split-gap-lg, var(--split-gap-md, var(--split-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      gap: `var(--split-gap-xl, var(--split-gap-lg, var(--split-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      gap: `var(--split-gap-xxl, var(--split-gap-xl, var(--split-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      gap: `var(--split-gap-widescreen, var(--split-gap-xxl, var(--split-gap, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+export const splitColumn = style({
+  flexDirection: 'column',
+});
+
+export const splitStart = style({
+  minWidth: 0,
+  overflow: 'hidden',
+});
+
+export const splitEnd = style({
+  minWidth: 0,
+  overflow: 'hidden',
+});
+
+export const splitCollapseSm = style({});
+
+export const splitCollapseMd = style({});
+
+export const splitCollapseLg = style({});
+
+export const splitCollapseXl = style({});
+
+globalStyle(`${splitCollapseSm}`, {
+  '@media': {
+    [breakpointQueries.sm]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${splitCollapseMd}`, {
+  '@media': {
+    [breakpointQueries.md]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${splitCollapseLg}`, {
+  '@media': {
+    [breakpointQueries.lg]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${splitCollapseXl}`, {
+  '@media': {
+    [breakpointQueries.xl]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+/**
+ * SidebarLayout provides a two-column layout with sidebar and main content.
+ */
+export const sidebarLayout = style({
+  display: 'flex',
+  width: '100%',
+  gap: `var(--sidebar-layout-gap, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      gap: `var(--sidebar-layout-gap-sm, var(--sidebar-layout-gap, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      gap: `var(--sidebar-layout-gap-md, var(--sidebar-layout-gap-sm, var(--sidebar-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      gap: `var(--sidebar-layout-gap-lg, var(--sidebar-layout-gap-md, var(--sidebar-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      gap: `var(--sidebar-layout-gap-xl, var(--sidebar-layout-gap-lg, var(--sidebar-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      gap: `var(--sidebar-layout-gap-xxl, var(--sidebar-layout-gap-xl, var(--sidebar-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      gap: `var(--sidebar-layout-gap-widescreen, var(--sidebar-layout-gap-xxl, var(--sidebar-layout-gap, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+export const sidebarLayoutSidebar = style({
+  flexShrink: 0,
+  overflowY: 'auto',
+});
+
+export const sidebarLayoutContent = style({
+  flex: '1 1 0%',
+  minWidth: 0,
+  padding: `var(--sidebar-layout-content-padding, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      padding: `var(--sidebar-layout-content-padding-sm, var(--sidebar-layout-content-padding, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      padding: `var(--sidebar-layout-content-padding-md, var(--sidebar-layout-content-padding-sm, var(--sidebar-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      padding: `var(--sidebar-layout-content-padding-lg, var(--sidebar-layout-content-padding-md, var(--sidebar-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      padding: `var(--sidebar-layout-content-padding-xl, var(--sidebar-layout-content-padding-lg, var(--sidebar-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      padding: `var(--sidebar-layout-content-padding-xxl, var(--sidebar-layout-content-padding-xl, var(--sidebar-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      padding: `var(--sidebar-layout-content-padding-widescreen, var(--sidebar-layout-content-padding-xxl, var(--sidebar-layout-content-padding, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+export const sidebarLayoutCollapsed = style({});
+
+export const sidebarLayoutCollapseSm = style({});
+
+export const sidebarLayoutCollapseMd = style({});
+
+export const sidebarLayoutCollapseLg = style({});
+
+globalStyle(`${sidebarLayoutCollapseSm}`, {
+  '@media': {
+    [breakpointQueries.sm]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${sidebarLayoutCollapseMd}`, {
+  '@media': {
+    [breakpointQueries.md]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${sidebarLayoutCollapseLg}`, {
+  '@media': {
+    [breakpointQueries.lg]: {
+      flexDirection: 'column',
+    },
+  },
+});
