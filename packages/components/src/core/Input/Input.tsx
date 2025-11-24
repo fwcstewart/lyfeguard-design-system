@@ -2,7 +2,7 @@ import React, { useId } from 'react';
 import * as s from './Input.css';
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   /**
    * Optional label for the input field
    */

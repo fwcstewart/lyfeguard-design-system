@@ -20,7 +20,7 @@ export interface DateRangePreset extends DateRangeValue {
   label: string;
 }
 
-export interface DateRangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface DateRangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'value'> {
   /**
    * Controlled value for the date range.
    */
