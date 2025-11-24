@@ -1,4 +1,4 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { globalStyle, style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 
 const headerTypography = {
@@ -24,37 +24,40 @@ export const tableVariant = styleVariants({
   bordered: {
     border: `1px solid ${vars.color.theme.border}`,
     selectors: {
-      '& thead': {
-        borderBottom: `2px solid ${vars.color.theme.border}`,
-      },
-      '& tfoot': {
-        borderTop: `2px solid ${vars.color.theme.border}`,
-      },
       '.dark &': {
         borderColor: vars.color.theme.border,
       },
     },
   },
-  divided: {
-    selectors: {
-      '& tbody tr': {
-        borderBottom: `1px solid ${vars.color.theme.border}`,
-      },
-      '& tbody tr:last-child': {
-        borderBottom: 'none',
-      },
-      '.dark & tbody tr': {
-        borderBottomColor: vars.color.theme.border,
-      },
-    },
-  },
-  centered: {
-    selectors: {
-      '& th, & td': {
-        textAlign: 'center',
-      },
-    },
-  },
+  divided: {},
+  centered: {},
+});
+
+// Global styles for bordered variant
+globalStyle(`${tableVariant.bordered} thead`, {
+  borderBottom: `2px solid ${vars.color.theme.border}`,
+});
+
+globalStyle(`${tableVariant.bordered} tfoot`, {
+  borderTop: `2px solid ${vars.color.theme.border}`,
+});
+
+// Global styles for divided variant
+globalStyle(`${tableVariant.divided} tbody tr`, {
+  borderBottom: `1px solid ${vars.color.theme.border}`,
+});
+
+globalStyle(`${tableVariant.divided} tbody tr:last-child`, {
+  borderBottom: 'none',
+});
+
+globalStyle(`.dark ${tableVariant.divided} tbody tr`, {
+  borderBottomColor: vars.color.theme.border,
+});
+
+// Global styles for centered variant
+globalStyle(`${tableVariant.centered} th, ${tableVariant.centered} td`, {
+  textAlign: 'center',
 });
 
 export const headerCell = style({
