@@ -11,13 +11,61 @@ export const badgeVars = {
   darkOutline: createVar(),
 };
 
+export const badgeStatusTokens = {
+  primary: {
+    surface: vars.color.brand500_20,
+    text: vars.color.brand800,
+    outline: vars.color.brand500_30,
+    solid: vars.color.brand500,
+    onSolid: vars.color.neutral0,
+    darkText: vars.color.brand500,
+    darkOutline: vars.color.brand500_40,
+  },
+  success: {
+    surface: vars.color.success500_15,
+    text: vars.color.success600,
+    outline: vars.color.success500,
+    solid: vars.color.success500,
+    onSolid: vars.color.brand900,
+    darkText: vars.color.success500,
+    darkOutline: vars.color.success500_15,
+  },
+  warning: {
+    surface: vars.color.warning100,
+    text: vars.color.warning500,
+    outline: vars.color.warning500,
+    solid: vars.color.warning500,
+    onSolid: vars.color.brand900,
+    darkText: vars.color.warning500,
+    darkOutline: vars.color.warning500_15,
+  },
+  error: {
+    surface: vars.color.error100,
+    text: vars.color.error500,
+    outline: vars.color.error500,
+    solid: vars.color.error500,
+    onSolid: vars.color.neutral0,
+    darkText: vars.color.error500,
+    darkOutline: vars.color.error500_15,
+  },
+  info: {
+    surface: vars.color.info100,
+    text: vars.color.info500,
+    outline: vars.color.info500,
+    solid: vars.color.info500,
+    onSolid: vars.color.brand900,
+    darkText: vars.color.info500,
+    darkOutline: vars.color.info500_15,
+  },
+} as const;
+
 const base = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: vars.spacing[1] as unknown as string,
-  padding: `${vars.spacing[1]} ${vars.spacing[2]}` as unknown as string,
-  borderRadius: '6px',
+  gap: vars.spacing[1],
+  padding: `${vars.spacing[1]} ${vars.spacing[2]}`,
+  borderRadius: vars.radius.md,
   border: `1px solid ${badgeVars.outline}`,
   fontSize: vars.font.size.ui.overline,
   fontWeight: vars.font.weight.semiBold,
@@ -39,66 +87,27 @@ const base = style({
   },
 });
 
-export const status = styleVariants({
-  primary: {
-    vars: {
-      [badgeVars.surface]: vars.color.brand500_20,
-      [badgeVars.text]: vars.color.brand800,
-      [badgeVars.outline]: vars.color.brand500_30,
-      [badgeVars.solid]: vars.color.brand500,
-      [badgeVars.onSolid]: vars.color.neutral0,
-      [badgeVars.darkText]: vars.color.brand500,
-      [badgeVars.darkOutline]: vars.color.brand500_40,
-    },
-  },
-  success: {
-    vars: {
-      [badgeVars.surface]: vars.color.success500_15,
-      [badgeVars.text]: vars.color.success600,
-      [badgeVars.outline]: vars.color.success500,
-      [badgeVars.solid]: vars.color.success500,
-      [badgeVars.onSolid]: vars.color.brand900,
-      [badgeVars.darkText]: vars.color.success500,
-      [badgeVars.darkOutline]: vars.color.success500_15,
-    },
-  },
-  warning: {
-    vars: {
-      [badgeVars.surface]: vars.color.warning100,
-      [badgeVars.text]: vars.color.warning500,
-      [badgeVars.outline]: vars.color.warning500,
-      [badgeVars.solid]: vars.color.warning500,
-      [badgeVars.onSolid]: vars.color.brand900,
-      [badgeVars.darkText]: vars.color.warning500,
-      [badgeVars.darkOutline]: vars.color.warning500_15,
-    },
-  },
-  error: {
-    vars: {
-      [badgeVars.surface]: vars.color.error100,
-      [badgeVars.text]: vars.color.error500,
-      [badgeVars.outline]: vars.color.error500,
-      [badgeVars.solid]: vars.color.error500,
-      [badgeVars.onSolid]: vars.color.neutral0,
-      [badgeVars.darkText]: vars.color.error500,
-      [badgeVars.darkOutline]: vars.color.error500_15,
-    },
-  },
-  info: {
-    vars: {
-      [badgeVars.surface]: vars.color.info100,
-      [badgeVars.text]: vars.color.info500,
-      [badgeVars.outline]: vars.color.info500,
-      [badgeVars.solid]: vars.color.info500,
-      [badgeVars.onSolid]: vars.color.brand900,
-      [badgeVars.darkText]: vars.color.info500,
-      [badgeVars.darkOutline]: vars.color.info500_15,
-    },
+const mapStatusTokensToVars = (tokenSet: (typeof badgeStatusTokens)[keyof typeof badgeStatusTokens]) => ({
+  vars: {
+    [badgeVars.surface]: tokenSet.surface,
+    [badgeVars.text]: tokenSet.text,
+    [badgeVars.outline]: tokenSet.outline,
+    [badgeVars.solid]: tokenSet.solid,
+    [badgeVars.onSolid]: tokenSet.onSolid,
+    [badgeVars.darkText]: tokenSet.darkText,
+    [badgeVars.darkOutline]: tokenSet.darkOutline,
   },
 });
 
+export const status = styleVariants(badgeStatusTokens, mapStatusTokensToVars);
+
 export const appearance = styleVariants({
-  pill: base,
+  pill: [
+    base,
+    {
+      borderRadius: vars.radius.round,
+    },
+  ],
   solid: [
     base,
     {

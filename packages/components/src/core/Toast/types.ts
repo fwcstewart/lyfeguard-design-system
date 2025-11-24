@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
+import type { StatusVariant } from '../statusTokens';
 
-export type ToastVariant = 'info' | 'success' | 'warning' | 'error';
+export type ToastVariant = StatusVariant;
 export type ToastPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
 export interface ToastOptions {

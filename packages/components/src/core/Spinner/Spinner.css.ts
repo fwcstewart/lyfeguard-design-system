@@ -17,8 +17,6 @@ const pulse = keyframes({
   '100%': { opacity: 0.6, transform: 'scale(0.94)' },
 });
 
-// Base style for the spinner element. Sizing, stroke and track colours are
-// driven by semantic tokens with light/dark overrides.
 export const spinner = style({
   position: 'relative',
   display: 'inline-flex',
@@ -36,6 +34,7 @@ export const spinner = style({
   boxShadow: `0 0 ${vars.spacing[3]} ${vars.color.brand500_20}`,
   background: 'radial-gradient(circle at 50% 50%, transparent 55%, var(--spinner-sheen-color) 56%)',
   animation: `${spin} ${vars.motion.duration.normal} linear infinite`,
+  animationPlayState: 'var(--spinner-animation-state)',
   vars: {
     '--spinner-size': vars.spacing[6],
     '--spinner-stroke-width': `calc(${vars.spacing[1]} * 0.75)`,
@@ -43,6 +42,7 @@ export const spinner = style({
     '--spinner-stroke-color': vars.color.brand500,
     '--spinner-sheen-color': vars.color.brand500_15,
     '--spinner-glow-color': vars.color.brand500_30,
+    '--spinner-animation-state': 'running',
   },
   selectors: {
     '&::before': {
@@ -53,6 +53,7 @@ export const spinner = style({
       background: `conic-gradient(${vars.color.brand500} 0deg, ${vars.color.brand500_40} 110deg, ${vars.color.brand500_20} 220deg, ${vars.color.brand500_40} 310deg, ${vars.color.brand500} 360deg)`,
       mask: 'radial-gradient(farthest-side, transparent calc(100% - (var(--spinner-stroke-width) * 2)), black calc(100% - var(--spinner-stroke-width)))',
       animation: `${shimmer} calc(${vars.motion.duration.normal} * 1.4) linear infinite`,
+      animationPlayState: 'var(--spinner-animation-state)',
     },
     '&::after': {
       content: '""',
@@ -62,6 +63,7 @@ export const spinner = style({
       boxShadow: `0 0 ${vars.spacing[4]} var(--spinner-glow-color)`,
       opacity: 0.9,
       animation: `${pulse} ${vars.motion.duration.slow} ${vars.motion.easing.easeInOut} infinite`,
+      animationPlayState: 'var(--spinner-animation-state)',
       pointerEvents: 'none',
       mixBlendMode: 'screen',
     },
@@ -77,6 +79,18 @@ export const spinner = style({
         '&::before': {
           background: `conic-gradient(${vars.color.accentMint} 0deg, ${vars.color.accentMint_30} 110deg, ${vars.color.accentMint_20} 220deg, ${vars.color.accentMint_30} 310deg, ${vars.color.accentMint} 360deg)`,
         },
+      },
+    },
+  },
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      animation: 'none',
+      selectors: {
+        '&::before': { animation: 'none' },
+        '&::after': { animation: 'none', boxShadow: 'none' },
+      },
+      vars: {
+        '--spinner-animation-state': 'paused',
       },
     },
   },

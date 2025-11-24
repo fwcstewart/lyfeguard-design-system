@@ -1,23 +1,6 @@
 import React from 'react';
-import { vars } from '../../globals.css';
 import * as s from './Spinner.css';
-
-const SIZE_MAP = {
-  sm: {
-    size: vars.spacing[6],
-    strokeWidth: `calc(${vars.spacing[1]} * 0.5)`,
-  },
-  md: {
-    size: vars.spacing[7],
-    strokeWidth: `calc(${vars.spacing[1]} * 0.75)`,
-  },
-  lg: {
-    size: vars.spacing[9],
-    strokeWidth: `calc(${vars.spacing[2]} * 0.5)`,
-  },
-};
-
-export type SpinnerSize = keyof typeof SIZE_MAP;
+import { SPINNER_SIZES, SpinnerSize } from './constants';
 
 export interface SpinnerProps {
   /** Token-based size of the spinner */
@@ -34,7 +17,11 @@ export interface SpinnerProps {
  * via design tokens to maintain consistency.
  */
 export const Spinner: React.FC<SpinnerProps> = ({ size = 'md', ariaLabel = 'Loading' }) => {
-  const { size: diameter, strokeWidth } = SIZE_MAP[size];
+  const { size: diameter, strokeWidth } = SPINNER_SIZES[size];
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   return (
     <span
@@ -42,6 +29,7 @@ export const Spinner: React.FC<SpinnerProps> = ({ size = 'md', ariaLabel = 'Load
       style={{
         ['--spinner-size' as string]: diameter,
         ['--spinner-stroke-width' as string]: strokeWidth,
+        ['--spinner-animation-state' as string]: prefersReducedMotion ? 'paused' : undefined,
       }}
       role="status"
       aria-label={ariaLabel}

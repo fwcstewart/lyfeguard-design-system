@@ -1,7 +1,8 @@
 import React from 'react';
 import * as s from './Alert.css';
+import type { StatusVariant } from '../statusTokens';
 
-export type AlertVariant = 'info' | 'success' | 'warning' | 'error';
+export type AlertVariant = StatusVariant;
 
 export interface AlertProps {
   /**

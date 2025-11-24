@@ -1,5 +1,6 @@
-import { style, styleVariants, keyframes, globalStyle } from '@vanilla-extract/css';
+import { style, styleVariants, keyframes, globalStyle, createVar, type StyleRule } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
+import { STATUS_COLOR_TOKENS, type StatusVariant } from '../statusTokens';
 
 const fadeIn = keyframes({
   '0%': {
@@ -12,18 +13,28 @@ const fadeIn = keyframes({
   },
 });
 
+const backgroundVar = createVar();
+const borderVar = createVar();
+const textVar = createVar();
+const iconVar = createVar();
+
 export const base = style({
   display: 'flex',
   alignItems: 'flex-start',
-  gap: vars.spacing[3] as unknown as string,
+  gap: vars.spacing[3],
   borderRadius: vars.radius.lg,
-  padding: `${vars.spacing[5]} ${vars.spacing[6]}` as unknown as string,
+  padding: `${vars.spacing[5]} ${vars.spacing[6]}`,
   fontFamily: vars.font.sans,
   fontSize: vars.font.size.body.sm,
   lineHeight: vars.font.lineHeight.body.sm,
   animation: `${fadeIn} ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
   boxShadow: vars.shadow.xs,
   transition: `box-shadow ${vars.motion.duration.fast} ${vars.motion.easing.ease}`,
+  background: backgroundVar,
+  color: textVar,
+  borderLeftColor: borderVar,
+  borderLeftStyle: 'solid',
+  borderLeftWidth: vars.spacing[1],
   selectors: {
     '&:hover': {
       boxShadow: vars.shadow.sm,
@@ -31,32 +42,25 @@ export const base = style({
   },
 });
 
-export const variants = styleVariants({
-  info: {
-    background: vars.color.status.info.surface,
-    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.info.border}`, // 4px
-    color: vars.color.status.info.text,
-  },
-  success: {
-    background: vars.color.status.success.surface,
-    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.success.border}`, // 4px
-    color: vars.color.status.success.text,
-  },
-  warning: {
-    background: vars.color.status.warning.surface,
-    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.warning.border}`, // 4px
-    color: vars.color.status.warning.text,
-  },
-  error: {
-    background: vars.color.status.error.surface,
-    borderLeft: `${vars.spacing[1]} solid ${vars.color.status.error.border}`, // 4px
-    color: vars.color.status.error.text,
-  },
-});
+const variantStyles = Object.fromEntries(
+  Object.entries(STATUS_COLOR_TOKENS).map(([variant, tokens]) => [
+    variant,
+    {
+      vars: {
+        [backgroundVar]: tokens.background,
+        [borderVar]: tokens.border,
+        [textVar]: tokens.text,
+        [iconVar]: tokens.icon,
+      },
+    } satisfies StyleRule,
+  ]),
+) as Record<StatusVariant, StyleRule>;
+
+export const variants = styleVariants(variantStyles);
 
 export const title = style({
   fontWeight: vars.font.weight.semiBold,
-  marginBottom: vars.spacing[1] as unknown as string,
+  marginBottom: vars.spacing[1],
   fontSize: vars.font.size.body.base,
   lineHeight: vars.font.lineHeight.body.base,
 });
@@ -68,15 +72,15 @@ export const message = style({
 });
 
 export const icon = style({
-  color: 'inherit',
+  color: iconVar,
   flexShrink: 0,
-  marginTop: vars.spacing[1] as unknown as string,
+  marginTop: vars.spacing[1],
 });
 
 export const content = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: vars.spacing[1] as unknown as string,
+  gap: vars.spacing[1],
 });
 
 globalStyle(`${icon} svg`, {

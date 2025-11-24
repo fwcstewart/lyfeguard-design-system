@@ -7,8 +7,14 @@ export default {
   component: Spinner,
 };
 
+const rowStyle = {
+  display: 'flex',
+  gap: vars.spacing[3] as unknown as string,
+  alignItems: 'center',
+};
+
 export const Sizes = () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+  <div style={rowStyle}>
     <Spinner size="sm" />
     <Spinner size="md" />
     <Spinner size="lg" />
@@ -19,7 +25,7 @@ export const Themed = () => (
   <div
     style={{
       display: 'flex',
-      gap: '12px',
+      gap: vars.spacing[3] as unknown as string,
       alignItems: 'center',
       padding: vars.spacing[3] as unknown as string,
       borderRadius: vars.radius.md,
@@ -29,5 +35,12 @@ export const Themed = () => (
   >
     <span>Loading</span>
     <Spinner ariaLabel="Loading" />
+  </div>
+);
+
+export const ReducedMotion = () => (
+  <div style={rowStyle}>
+    <Spinner ariaLabel="Reduced motion" />
+    <span style={{ color: vars.color.theme.text.secondary }}>Respects prefers-reduced-motion</span>
   </div>
 );

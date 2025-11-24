@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { Button } from './Button';
+import { BUTTON_VARIANTS } from './constants';
 
 describe('Button component', () => {
   it('renders the provided children', () => {
@@ -34,6 +35,20 @@ describe('Button component', () => {
     const button = screen.getByRole('button');
     expect(button.disabled).toBe(true);
     expect(button.getAttribute('data-state')).toBe('loading');
+    expect(button).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('exposes focus ring token through CSS variable', () => {
+    render(
+      <Button data-state="focus" variant="primary">
+        Focusable
+      </Button>
+    );
+
+    const button = screen.getByRole('button');
+    expect(button.style.getPropertyValue('--button-focus-shadow')).toBe(
+      BUTTON_VARIANTS.primary.focusShadow
+    );
   });
 
   it('supports explicit data-state overrides', () => {
@@ -53,5 +68,16 @@ describe('Button component', () => {
     const button = screen.getByRole('button');
     expect(button.disabled).toBe(true);
     expect(button.getAttribute('data-state')).toBe('disabled');
+    expect(button).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('keeps icon and label alignment when loading', () => {
+    const { container } = render(
+      <Button isLoading iconLeft={<span aria-hidden>✓</span>}>
+        Submit
+      </Button>
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
