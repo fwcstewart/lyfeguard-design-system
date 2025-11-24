@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { Card } from './Card';
+import { Card, CardContent, CardFooter, CardHeader } from './Card';
 
 describe('Card', () => {
   it('renders its children', () => {
@@ -46,5 +46,33 @@ describe('Card', () => {
     await user.keyboard(' ');
 
     expect(handleClick).toHaveBeenCalledTimes(2);
+  });
+
+  it('exposes composable sections while keeping header/footer props', () => {
+    render(
+      <Card header="Header" footer="Footer">
+        <CardHeader>Custom heading</CardHeader>
+        <CardContent>Card content</CardContent>
+        <CardFooter>Action</CardFooter>
+      </Card>,
+    );
+
+    expect(screen.getByText('Header')).toBeInTheDocument();
+    expect(screen.getByText('Custom heading')).toBeInTheDocument();
+    expect(screen.getAllByText('Card content')).toHaveLength(1);
+    expect(screen.getByText('Action')).toBeInTheDocument();
+    expect(screen.getByText('Footer')).toBeInTheDocument();
+  });
+
+  it('marks tone choice for accessibility tooling', () => {
+    render(
+      <Card tone="info" header="Tone header">
+        Info tone
+      </Card>,
+    );
+
+    const card = screen.getByText('Tone header').closest('[data-lyfeguard="Card"]');
+    expect(card).not.toBeNull();
+    expect(card).toHaveAttribute('data-tone', 'info');
   });
 });

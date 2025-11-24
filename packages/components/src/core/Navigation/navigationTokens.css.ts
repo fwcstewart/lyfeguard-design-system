@@ -9,6 +9,7 @@ export const navigationActiveBackground = createVar();
 export const navigationActiveText = createVar();
 export const navigationIndicator = createVar();
 export const navigationSeparator = createVar();
+export const navigationFocusRing = createVar();
 
 globalStyle(':root', {
   vars: {
@@ -20,6 +21,7 @@ globalStyle(':root', {
     [navigationActiveText]: vars.color.brand500,
     [navigationIndicator]: vars.color.brand500,
     [navigationSeparator]: vars.color.theme.border,
+    [navigationFocusRing]: `0 0 0 3px color-mix(in srgb, ${vars.color.accentMint} 32%, ${vars.color.theme.surface})`,
   },
 });
 
@@ -33,5 +35,6 @@ globalStyle('.dark', {
     [navigationActiveText]: vars.color.brand500,
     [navigationIndicator]: vars.color.brand500_40,
     [navigationSeparator]: vars.color.theme.border,
+    [navigationFocusRing]: `0 0 0 3px color-mix(in srgb, ${vars.color.accentMint} 40%, ${vars.color.theme.background})`,
   },
 });

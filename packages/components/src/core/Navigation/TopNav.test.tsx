@@ -77,7 +77,7 @@ describe('TopNav', () => {
     const dashboard = screen.getByText('Dashboard');
     const settings = screen.getByText('Settings');
 
-    home.focus();
+    await user.tab();
     await user.keyboard('{ArrowRight}');
     expect(dashboard).toHaveFocus();
 
@@ -92,5 +92,33 @@ describe('TopNav', () => {
 
     await user.keyboard('{Home}');
     expect(home).toHaveFocus();
+  });
+
+  it('uses roving tabIndex so only one nav item is tabbable', async () => {
+    const user = userEvent.setup();
+    render(
+      <TopNav
+        links={[
+          { label: 'Home', href: '/' },
+          { label: 'Dashboard', href: '/dashboard' },
+          { label: 'Settings', href: '/settings' },
+        ]}
+        actions={<button type="button">Profile</button>}
+      />,
+    );
+
+    await user.tab();
+
+    const home = screen.getByText('Home');
+    const dashboard = screen.getByText('Dashboard');
+    expect(home).toHaveFocus();
+    expect(dashboard).toHaveAttribute('tabIndex', '-1');
+
+    await user.keyboard('{ArrowRight}');
+    expect(dashboard).toHaveFocus();
+    expect(dashboard).toHaveAttribute('tabIndex', '0');
+
+    await user.tab();
+    expect(screen.getByText('Profile')).toHaveFocus();
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Spinner } from './Spinner';
 import { SPINNER_SIZES } from './constants';
@@ -24,6 +24,7 @@ describe('Spinner', () => {
   it('applies a default aria-label for accessibility', () => {
     render(<Spinner />);
     expect(screen.getByRole('status')).toHaveAttribute('aria-label', 'Loading');
+    expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
   });
 
   it('allows a custom aria-label to be provided', () => {
@@ -38,7 +39,7 @@ describe('Spinner', () => {
     expect(spinner.style.getPropertyValue('--spinner-stroke-width')).toBe(SPINNER_SIZES.lg.strokeWidth);
   });
 
-  it('pauses animation when reduced motion is requested', () => {
+  it('pauses animation when reduced motion is requested', async () => {
     vi.stubGlobal('matchMedia', (query: string) => ({
       matches: query === '(prefers-reduced-motion: reduce)',
       media: query,
@@ -51,6 +52,11 @@ describe('Spinner', () => {
 
     render(<Spinner ariaLabel="Reduced" />);
     const spinner = screen.getByRole('status');
+
+    await waitFor(() => {
+      expect(spinner.dataset.reducedMotion).toBe('true');
+    });
+
     expect(spinner.style.getPropertyValue('--spinner-animation-state')).toBe('paused');
   });
 });

@@ -27,7 +27,7 @@ describe('Sidebar', () => {
     const documents = screen.getByRole('button', { name: 'Documents' });
     const contacts = screen.getByRole('button', { name: 'Contacts' });
 
-    home.focus();
+    await user.tab();
     await user.keyboard('{ArrowDown}');
     expect(documents).toHaveFocus();
 
@@ -42,6 +42,31 @@ describe('Sidebar', () => {
 
     await user.keyboard('{Home}');
     expect(home).toHaveFocus();
+  });
+
+  it('keeps a single tabbable item using roving tabindex', async () => {
+    const user = userEvent.setup();
+    render(
+      <Sidebar
+        items={[
+          { label: 'Home' },
+          { label: 'Documents' },
+          { label: 'Contacts' },
+        ]}
+      />,
+    );
+
+    await user.tab();
+
+    const home = screen.getByRole('button', { name: 'Home' });
+    const documents = screen.getByRole('button', { name: 'Documents' });
+
+    expect(home).toHaveFocus();
+    expect(documents).toHaveAttribute('tabIndex', '-1');
+
+    await user.keyboard('{ArrowDown}');
+    expect(documents).toHaveFocus();
+    expect(documents).toHaveAttribute('tabIndex', '0');
   });
 
   it('invokes onSelect when activating items', async () => {

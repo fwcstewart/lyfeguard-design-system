@@ -18,10 +18,34 @@ export interface SpinnerProps {
  */
 export const Spinner: React.FC<SpinnerProps> = ({ size = 'md', ariaLabel = 'Loading' }) => {
   const { size: diameter, strokeWidth } = SPINNER_SIZES[size];
-  const prefersReducedMotion =
-    typeof window !== 'undefined' &&
-    typeof window.matchMedia === 'function' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updatePreference = (event: MediaQueryListEvent | MediaQueryList) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    updatePreference(mediaQuery);
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', updatePreference);
+    } else if (typeof mediaQuery.addListener === 'function') {
+      mediaQuery.addListener(updatePreference);
+    }
+
+    return () => {
+      if (typeof mediaQuery.removeEventListener === 'function') {
+        mediaQuery.removeEventListener('change', updatePreference);
+      } else if (typeof mediaQuery.removeListener === 'function') {
+        mediaQuery.removeListener(updatePreference);
+      }
+    };
+  }, []);
 
   return (
     <span
@@ -32,7 +56,9 @@ export const Spinner: React.FC<SpinnerProps> = ({ size = 'md', ariaLabel = 'Load
         ['--spinner-animation-state' as string]: prefersReducedMotion ? 'paused' : undefined,
       }}
       role="status"
+      aria-live="polite"
       aria-label={ariaLabel}
+      data-reduced-motion={prefersReducedMotion ? 'true' : undefined}
       data-lyfeguard="Spinner"
     />
   );

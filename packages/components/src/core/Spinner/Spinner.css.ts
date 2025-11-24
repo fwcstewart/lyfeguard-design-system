@@ -81,6 +81,18 @@ export const spinner = style({
         },
       },
     },
+    '&[data-reduced-motion="true"]': {
+      animation: 'none',
+      boxShadow: 'none',
+      background: 'none',
+      vars: {
+        '--spinner-animation-state': 'paused',
+      },
+      selectors: {
+        '&::before': { animation: 'none', background: 'none' },
+        '&::after': { animation: 'none', boxShadow: 'none' },
+      },
+    },
   },
   '@media': {
     '(prefers-reduced-motion: reduce)': {

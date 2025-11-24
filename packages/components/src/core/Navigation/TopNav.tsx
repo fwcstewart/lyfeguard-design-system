@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import * as s from './TopNav.css';
 
 export interface NavLinkItem {
@@ -46,6 +46,22 @@ export interface TopNavProps {
  */
 export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', links = [], actions }) => {
   const linkRefs = useRef<HTMLAnchorElement[]>([]);
+  const initialFocusIndex = useMemo(() => {
+    if (!links.length) return -1;
+    const activeIndex = links.findIndex((link) => link.isActive);
+    return activeIndex >= 0 ? activeIndex : 0;
+  }, [links]);
+
+  const [focusIndex, setFocusIndex] = useState<number>(initialFocusIndex);
+
+  useEffect(() => {
+    setFocusIndex((current) => {
+      if (!links.length) return -1;
+      const activeIndex = links.findIndex((link) => link.isActive);
+      const nextIndex = activeIndex >= 0 ? activeIndex : Math.max(0, Math.min(current, links.length - 1));
+      return nextIndex;
+    });
+  }, [links]);
 
   const handleArrowNavigation = (event: React.KeyboardEvent<HTMLElement>) => {
     if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) {
@@ -59,7 +75,7 @@ export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', 
 
     const activeElement = document.activeElement as HTMLElement | null;
     const currentIndex = items.findIndex((link) => link === activeElement);
-    let nextIndex = currentIndex >= 0 ? currentIndex : 0;
+    let nextIndex = currentIndex >= 0 ? currentIndex : focusIndex >= 0 ? focusIndex : 0;
 
     if (event.key === 'ArrowRight') {
       nextIndex = (currentIndex + 1 + items.length) % items.length;
@@ -77,6 +93,7 @@ export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', 
       nextIndex = items.length - 1;
     }
 
+    setFocusIndex(nextIndex);
     items[nextIndex]?.focus();
     event.preventDefault();
   };
@@ -106,6 +123,8 @@ export const TopNav: React.FC<TopNavProps> = ({ brand, brandName = 'Lyfeguard', 
                     linkRefs.current[idx] = node;
                   }
                 }}
+                tabIndex={focusIndex === idx ? 0 : -1}
+                onFocus={() => setFocusIndex(idx)}
                 {...props}
               >
                 {link.label}

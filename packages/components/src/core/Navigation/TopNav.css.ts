@@ -9,6 +9,7 @@ import {
   navigationSeparator,
   navigationSurface,
   navigationText,
+  navigationFocusRing,
 } from './navigationTokens.css';
 
 export const topNav = style({
@@ -77,8 +78,8 @@ export const navLink = style({
       borderRadius: vars.radius.round,
     },
     '&:focus-visible': {
-      outline: `2px solid ${navigationIndicator}`,
-      outlineOffset: '2px',
+      outline: 'none',
+      boxShadow: navigationFocusRing,
     },
   },
 });
