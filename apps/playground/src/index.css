@@ -1,0 +1,20 @@
+/* CSS Reset for Playground */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure Stack gaps work correctly */
+[data-lyfeguard="Stack"] {
+  display: flex !important;
+  flex-direction: column;
+}
+
+[data-lyfeguard="Stack"][data-direction="row"] {
+  flex-direction: row;
+}
+
