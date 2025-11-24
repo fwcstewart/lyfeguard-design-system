@@ -4,19 +4,34 @@ import { Meta } from '@storybook/blocks';
 
 # Layout
 
-Layout primitives provide the foundation for building consistent, responsive interfaces.
+Layout primitives provide the foundation for building consistent, responsive interfaces. The layout system is organized into three phases, from basic primitives to complete page structures.
 
-## Layout Components
+## Core Layout Components
 
+### Foundation Primitives
 - **Container** - Constrains content width and centers it on the page
 - **Stack** - Vertical or horizontal stacking with consistent spacing
 - **Grid** - Flexible grid system with configurable columns
 - **GridItem** - Controls how many columns an item spans
 
+### Phase 1: Composition Helpers
+- **Section** - Semantic sectioning with spacing and optional dividers
+- **AspectRatio** - Maintains consistent aspect ratios for media
+- **Center** - Quick centering utility for content blocks
+- **Cluster** - Inline grouping with automatic wrapping
+
+### Phase 2: Advanced Layouts
+- **Flex** - Explicit flexbox utility with comprehensive control
+- **Split** - Divides space between two content areas
+- **SidebarLayout** - Two-column layout with sidebar and main content
+
+### Phase 3: Page Structure
+- **PageLayout** - Complete page structure with header, sidebar, main, and footer regions
+
 ## Spacing System
 
 All layout components use the design system's spacing tokens for consistent rhythm:
-- Use semantic spacing tokens (xs, sm, md, lg, xl)
+- Use semantic spacing tokens (xs, sm, md, lg, xl, 2xl, 3xl, 4xl)
 - Spacing adapts responsively across breakpoints
 - Dividers use theme-aware border colours
 
@@ -26,12 +41,48 @@ Layout components support responsive values:
 - Base values apply to all screen sizes
 - Override at specific breakpoints (sm, md, lg, xl, xxl, widescreen)
 - Breakpoints align with the design system's token system
+- Components like Split, SidebarLayout, and PageLayout support automatic collapse at breakpoints
 
 ## Best Practices
 
-- Use Stack for simple vertical or horizontal layouts
-- Use Grid for complex multi-column layouts
+### Choosing the Right Component
+- Use **Stack** for simple vertical or horizontal layouts
+- Use **Grid** for complex multi-column layouts
+- Use **Section** for semantic grouping with consistent spacing
+- Use **Cluster** for inline items like tags, badges, or buttons
+- Use **Split** for two-column layouts (forms, sidebar/content)
+- Use **SidebarLayout** for navigation sidebars
+- Use **PageLayout** for complete application shells
+
+### Composition
 - Combine Stack and Grid for nested layouts
+- Use Section to group related content
+- Nest layout components to build complex interfaces
 - Always use spacing tokens, never hard-code values
+
+### Responsive Design
 - Test layouts at different screen sizes
+- Use responsive spacing values for adaptive layouts
+- Leverage collapseAt props for mobile-friendly layouts
+- Consider sticky headers/footers for long content
+
+## Component Hierarchy
+
+```
+PageLayout (Phase 3)
+├── Header (TopNav)
+├── Body
+│   ├── Sidebar (Sidebar component)
+│   └── Main Content
+│       ├── Container
+│       ├── Section
+│       │   ├── Stack
+│       │   ├── Grid
+│       │   │   └── GridItem
+│       │   ├── Flex
+│       │   ├── Split
+│       │   └── Cluster
+│       └── AspectRatio
+└── Footer
+```
 

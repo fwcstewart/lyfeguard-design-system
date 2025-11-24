@@ -572,3 +572,134 @@ globalStyle(`${sidebarLayoutCollapseLg}`, {
     },
   },
 });
+
+/**
+ * PageLayout provides a complete page structure with header, sidebar, main, and footer.
+ */
+export const pageLayout = style({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  gap: `var(--page-layout-gap, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      gap: `var(--page-layout-gap-sm, var(--page-layout-gap, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      gap: `var(--page-layout-gap-md, var(--page-layout-gap-sm, var(--page-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      gap: `var(--page-layout-gap-lg, var(--page-layout-gap-md, var(--page-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      gap: `var(--page-layout-gap-xl, var(--page-layout-gap-lg, var(--page-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      gap: `var(--page-layout-gap-xxl, var(--page-layout-gap-xl, var(--page-layout-gap, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      gap: `var(--page-layout-gap-widescreen, var(--page-layout-gap-xxl, var(--page-layout-gap, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+export const pageLayoutFullHeight = style({
+  height: '100vh',
+  overflow: 'hidden',
+});
+
+export const pageLayoutHeader = style({
+  flexShrink: 0,
+  width: '100%',
+});
+
+export const pageLayoutHeaderSticky = style({
+  position: 'sticky',
+  top: 0,
+  zIndex: 100,
+});
+
+export const pageLayoutBody = style({
+  display: 'flex',
+  flex: '1 1 0%',
+  minHeight: 0,
+  width: '100%',
+  overflow: 'hidden',
+});
+
+export const pageLayoutSidebar = style({
+  flexShrink: 0,
+  overflowY: 'auto',
+  overflowX: 'hidden',
+});
+
+export const pageLayoutContent = style({
+  flex: '1 1 0%',
+  minWidth: 0,
+  overflowY: 'auto',
+  overflowX: 'hidden',
+  padding: `var(--page-layout-content-padding, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      padding: `var(--page-layout-content-padding-sm, var(--page-layout-content-padding, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      padding: `var(--page-layout-content-padding-md, var(--page-layout-content-padding-sm, var(--page-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      padding: `var(--page-layout-content-padding-lg, var(--page-layout-content-padding-md, var(--page-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      padding: `var(--page-layout-content-padding-xl, var(--page-layout-content-padding-lg, var(--page-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      padding: `var(--page-layout-content-padding-xxl, var(--page-layout-content-padding-xl, var(--page-layout-content-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      padding: `var(--page-layout-content-padding-widescreen, var(--page-layout-content-padding-xxl, var(--page-layout-content-padding, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+export const pageLayoutFooter = style({
+  flexShrink: 0,
+  width: '100%',
+});
+
+export const pageLayoutFooterSticky = style({
+  position: 'sticky',
+  bottom: 0,
+  zIndex: 100,
+});
+
+export const pageLayoutCollapsed = style({});
+
+export const pageLayoutCollapseSm = style({});
+
+export const pageLayoutCollapseMd = style({});
+
+export const pageLayoutCollapseLg = style({});
+
+globalStyle(`${pageLayoutCollapseSm} ${pageLayoutBody}`, {
+  '@media': {
+    [breakpointQueries.sm]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${pageLayoutCollapseMd} ${pageLayoutBody}`, {
+  '@media': {
+    [breakpointQueries.md]: {
+      flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${pageLayoutCollapseLg} ${pageLayoutBody}`, {
+  '@media': {
+    [breakpointQueries.lg]: {
+      flexDirection: 'column',
+    },
+  },
+});

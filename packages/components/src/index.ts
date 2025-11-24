@@ -50,6 +50,7 @@ export * from './core/Layout/Cluster';
 export * from './core/Layout/Flex';
 export * from './core/Layout/Split';
 export * from './core/Layout/SidebarLayout';
+export * from './core/Layout/PageLayout';
 
 // Low‑level primitives
 export * from './primitives';
