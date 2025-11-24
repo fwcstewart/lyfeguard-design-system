@@ -1,5 +1,6 @@
-import { style, styleVariants, keyframes, createVar } from '@vanilla-extract/css';
+import { style, styleVariants, keyframes, createVar, type StyleRule } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
+import { STATUS_COLOR_TOKENS, type StatusVariant } from '../statusTokens';
 
 export const container = style({
   position: 'fixed',
@@ -69,80 +70,21 @@ export const toastBase = style({
   },
 });
 
-export const variants = styleVariants({
-  info: {
-    vars: {
-      [backgroundVar]: vars.color.info100,
-      [textColorVar]: vars.color.info500,
-      [borderColorVar]: vars.color.info500,
-      [accentColorVar]: vars.color.info500,
-    },
-    selectors: {
-      '.dark &': {
-        vars: {
-          [backgroundVar]: vars.color.info500_15,
-          [textColorVar]: vars.color.info500,
-          [borderColorVar]: vars.color.info500,
-          [accentColorVar]: vars.color.info500,
-        },
+const variantStyles = Object.fromEntries(
+  Object.entries(STATUS_COLOR_TOKENS).map(([variant, tokens]) => [
+    variant,
+    {
+      vars: {
+        [backgroundVar]: tokens.background,
+        [textColorVar]: tokens.text,
+        [borderColorVar]: tokens.border,
+        [accentColorVar]: tokens.icon,
       },
-    },
-  },
-  success: {
-    vars: {
-      [backgroundVar]: vars.color.success500_15,
-      [textColorVar]: vars.color.success600,
-      [borderColorVar]: vars.color.success600,
-      [accentColorVar]: vars.color.success600,
-    },
-    selectors: {
-      '.dark &': {
-        vars: {
-          [backgroundVar]: vars.color.theme.surface,
-          [textColorVar]: vars.color.success500,
-          [borderColorVar]: vars.color.success500,
-          [accentColorVar]: vars.color.success500,
-        },
-      },
-    },
-  },
-  warning: {
-    vars: {
-      [backgroundVar]: vars.color.warning100,
-      [textColorVar]: vars.color.warning500,
-      [borderColorVar]: vars.color.warning500,
-      [accentColorVar]: vars.color.warning500,
-    },
-    selectors: {
-      '.dark &': {
-        vars: {
-          [backgroundVar]: vars.color.warning500_15,
-          [textColorVar]: vars.color.warning500,
-          [borderColorVar]: vars.color.warning500,
-          [accentColorVar]: vars.color.warning500,
-        },
-      },
-    },
-  },
-  error: {
-    vars: {
-      [backgroundVar]: vars.color.error100,
-      [textColorVar]: vars.color.error500,
-      [borderColorVar]: vars.color.error500,
-      [accentColorVar]: vars.color.error500,
-    },
-    selectors: {
-      '.dark &': {
-        vars: {
-          [backgroundVar]: vars.color.error500_15,
-          [textColorVar]: vars.color.error500,
-          [borderColorVar]: vars.color.error500,
-          [accentColorVar]: vars.color.error500,
-        },
-      },
-    },
-  },
-});
+    } satisfies StyleRule,
+  ]),
+) as Record<StatusVariant, StyleRule>;
+
+export const variants = styleVariants(variantStyles);
 
 export const statusBar = style({
   width: vars.spacing[1] as unknown as string,

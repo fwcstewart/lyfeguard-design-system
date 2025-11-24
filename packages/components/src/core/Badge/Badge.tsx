@@ -1,66 +1,20 @@
 import React from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { vars } from '../../globals.css';
 import { VisuallyHidden } from '../Accessibility/VisuallyHidden';
 import * as s from './Badge.css';
 
-const STATUS_TOKENS = {
-  primary: {
-    surface: vars.color.brand500_20,
-    text: vars.color.brand800,
-    outline: vars.color.brand500_30,
-    solid: vars.color.brand500,
-    onSolid: vars.color.neutral0,
-    darkText: vars.color.brand500,
-    darkOutline: vars.color.brand500_40,
-  },
-  success: {
-    surface: vars.color.success500_15,
-    text: vars.color.success600,
-    outline: vars.color.success500,
-    solid: vars.color.success500,
-    onSolid: vars.color.brand900,
-    darkText: vars.color.success500,
-    darkOutline: vars.color.success500_15,
-  },
-  warning: {
-    surface: vars.color.warning100,
-    text: vars.color.warning500,
-    outline: vars.color.warning500,
-    solid: vars.color.warning500,
-    onSolid: vars.color.brand900,
-    darkText: vars.color.warning500,
-    darkOutline: vars.color.warning500_15,
-  },
-  error: {
-    surface: vars.color.error100,
-    text: vars.color.error500,
-    outline: vars.color.error500,
-    solid: vars.color.error500,
-    onSolid: vars.color.neutral0,
-    darkText: vars.color.error500,
-    darkOutline: vars.color.error500_15,
-  },
-  info: {
-    surface: vars.color.info100,
-    text: vars.color.info500,
-    outline: vars.color.info500,
-    solid: vars.color.info500,
-    onSolid: vars.color.brand900,
-    darkText: vars.color.info500,
-    darkOutline: vars.color.info500_15,
-  },
-};
+type BadgeVariant = keyof typeof s.status;
+type BadgeAppearance = keyof typeof s.appearance;
 
 export interface BadgeProps {
   /**
    * The badge variant which controls the colour scheme
    */
-  variant?: keyof typeof STATUS_TOKENS;
+  variant?: BadgeVariant;
   /**
    * Visual style of the badge surface
    */
-  appearance?: 'pill' | 'solid' | 'outline';
+  appearance?: BadgeAppearance;
   /**
    * Additional screen reader text to give more context than the visible label
    */
@@ -83,7 +37,7 @@ export const Badge: React.FC<BadgeProps> = ({
   srText,
   children,
 }) => {
-  const tokenSet = STATUS_TOKENS[variant];
+  const tokenSet = s.badgeStatusTokens[variant];
 
   const customProperties = assignInlineVars({
     [s.badgeVars.surface]: tokenSet.surface,

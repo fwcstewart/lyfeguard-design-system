@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { describe, expect, it } from 'vitest';
-import { vars } from '../../globals.css';
-import { badgeVars, appearance, status } from './Badge.css';
+import { badgeVars, appearance, badgeStatusTokens, status } from './Badge.css';
 import { Badge } from './Badge';
 
 const getVarName = (variable: string) => variable.replace('var(', '').replace(')', '');
@@ -16,11 +15,12 @@ describe('Badge', () => {
   it('applies tokenised colours for contrast in light and dark themes', () => {
     render(<Badge variant="success">Success</Badge>);
     const badge = screen.getByText('Success');
+    const tokenSet = badgeStatusTokens.success;
 
-    expect(badge.style.getPropertyValue(getVarName(badgeVars.surface))).toBe(vars.color.success500_15);
-    expect(badge.style.getPropertyValue(getVarName(badgeVars.text))).toBe(vars.color.success600);
-    expect(badge.style.getPropertyValue(getVarName(badgeVars.darkText))).toBe(vars.color.success500);
-    expect(badge.style.getPropertyValue(getVarName(badgeVars.darkOutline))).toBe(vars.color.success500_15);
+    expect(badge.style.getPropertyValue(getVarName(badgeVars.surface))).toBe(tokenSet.surface);
+    expect(badge.style.getPropertyValue(getVarName(badgeVars.text))).toBe(tokenSet.text);
+    expect(badge.style.getPropertyValue(getVarName(badgeVars.darkText))).toBe(tokenSet.darkText);
+    expect(badge.style.getPropertyValue(getVarName(badgeVars.darkOutline))).toBe(tokenSet.darkOutline);
   });
 
   it('supports appearance variants', () => {

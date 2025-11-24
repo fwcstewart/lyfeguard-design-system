@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
+import { vars } from '../../globals.css';
 import { Badge } from './Badge';
 
 const meta: Meta<typeof Badge> = {
@@ -13,7 +14,13 @@ type Story = StoryObj<typeof Badge>;
 
 const Wrapper: React.FC<React.PropsWithChildren> = ({ children }) => (
   <div
-    style={{ display: 'flex', gap: '12px', padding: '12px', background: 'var(--color-theme-surface)' }}
+    style={{
+      display: 'flex',
+      gap: vars.spacing[3],
+      padding: vars.spacing[3],
+      background: vars.color.theme.surface,
+      borderRadius: vars.radius.lg,
+    }}
   >
     {children}
   </div>
@@ -21,9 +28,18 @@ const Wrapper: React.FC<React.PropsWithChildren> = ({ children }) => (
 
 export const Default: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: vars.spacing[4] }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-theme-text-secondary)' }}>Variants</p>
+        <p
+          style={{
+            margin: `0 0 ${vars.spacing[2]}`,
+            fontSize: vars.font.size.body.sm,
+            lineHeight: vars.font.lineHeight.body.sm,
+            color: vars.color.theme.text.secondary,
+          }}
+        >
+          Variants
+        </p>
         <Wrapper>
           <Badge variant="primary">Primary</Badge>
           <Badge variant="success">Success</Badge>
@@ -33,7 +49,16 @@ export const Default: Story = {
         </Wrapper>
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-theme-text-secondary)' }}>Appearances</p>
+        <p
+          style={{
+            margin: `0 0 ${vars.spacing[2]}`,
+            fontSize: vars.font.size.body.sm,
+            lineHeight: vars.font.lineHeight.body.sm,
+            color: vars.color.theme.text.secondary,
+          }}
+        >
+          Appearances
+        </p>
         <Wrapper>
           <Badge appearance="pill" variant="success">Pill</Badge>
           <Badge appearance="solid" variant="success">Solid</Badge>
