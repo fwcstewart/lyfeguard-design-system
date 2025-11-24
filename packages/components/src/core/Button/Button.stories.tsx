@@ -9,7 +9,23 @@ const meta: Meta<typeof Button> = {
     onClick: { action: 'clicked' },
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'dark', 'danger', 'ghost'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'dark',
+        'dark-secondary',
+        'danger',
+        'ghost',
+        'inverted',
+        'white',
+        'black',
+        'outline-white',
+        'outline-modal',
+        'alert',
+        'edit',
+        'inactive',
+      ],
     },
     size: {
       control: 'select',
@@ -38,13 +54,26 @@ export const Default: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div style={rowStyle}>
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="tertiary">Tertiary</Button>
-      <Button variant="dark">Dark</Button>
-      <Button variant="danger">Danger</Button>
-      <Button variant="ghost">Ghost</Button>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: vars.spacing[4] as unknown as string }}>
+      <div style={rowStyle}>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="tertiary">Tertiary</Button>
+        <Button variant="dark">Dark</Button>
+        <Button variant="dark-secondary">Dark Secondary</Button>
+        <Button variant="danger">Danger</Button>
+        <Button variant="ghost">Ghost</Button>
+      </div>
+      <div style={rowStyle}>
+        <Button variant="inverted">Inverted</Button>
+        <Button variant="white">White</Button>
+        <Button variant="black">Black</Button>
+        <Button variant="outline-white">Outline White</Button>
+        <Button variant="outline-modal">Outline Modal</Button>
+        <Button variant="alert">Alert</Button>
+        <Button variant="edit">Edit</Button>
+        <Button variant="inactive">Inactive</Button>
+      </div>
     </div>
   ),
 };

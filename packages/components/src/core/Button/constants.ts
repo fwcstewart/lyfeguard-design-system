@@ -1,6 +1,21 @@
 import { vars } from '../../globals.css';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'dark' | 'danger' | 'ghost';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'dark'
+  | 'dark-secondary'
+  | 'danger'
+  | 'ghost'
+  | 'inverted'
+  | 'white'
+  | 'black'
+  | 'outline-white'
+  | 'outline-modal'
+  | 'alert'
+  | 'edit'
+  | 'inactive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonSizeTokens {
@@ -48,11 +63,13 @@ export interface ButtonVariantTokens {
     background: string;
     border: string;
     shadow: string;
+    color?: string;
   };
   active: {
     background: string;
     border: string;
     shadow: string;
+    color?: string;
   };
   disabled: {
     background: string;
@@ -197,6 +214,206 @@ export const BUTTON_VARIANTS: Record<ButtonVariant, ButtonVariantTokens> = {
       color: vars.color.theme.text.disabled,
     },
     focusShadow: focusRingLight,
+  },
+  inverted: {
+    background: vars.color.brand900,
+    color: vars.color.neutral0,
+    border: `1px solid ${vars.color.brand900}`,
+    shadow: vars.shadow.xs,
+    hover: {
+      background: vars.color.accentMint,
+      border: `1px solid ${vars.color.accentMint}`,
+      shadow: vars.shadow.md,
+    },
+    active: {
+      background: vars.color.accentMint,
+      border: `1px solid ${vars.color.accentMint}`,
+      shadow: vars.shadow.xs,
+    },
+    disabled: {
+      background: vars.color.brand900,
+      border: `1px solid ${vars.color.brand900}`,
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingDark,
+  },
+  'dark-secondary': {
+    background: vars.color.brand900,
+    color: vars.color.accentMint,
+    border: `1px solid ${vars.color.brand900}`,
+    shadow: vars.shadow.xs,
+    hover: {
+      background: vars.color.accentMint,
+      border: `1px solid ${vars.color.accentMint}`,
+      shadow: vars.shadow.md,
+    },
+    active: {
+      background: vars.color.accentMint,
+      border: `1px solid ${vars.color.accentMint}`,
+      shadow: vars.shadow.xs,
+    },
+    disabled: {
+      background: vars.color.brand900,
+      border: `1px solid ${vars.color.brand900}`,
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingDark,
+  },
+  white: {
+    background: vars.color.neutral0,
+    color: vars.color.brand900,
+    border: `1px solid ${vars.color.neutral0}`,
+    shadow: vars.shadow.xs,
+    hover: {
+      background: 'rgba(255, 255, 255, 0.8)',
+      border: `1px solid rgba(255, 255, 255, 0.8)`,
+      shadow: vars.shadow.sm,
+    },
+    active: {
+      background: 'rgba(255, 255, 255, 0.7)',
+      border: `1px solid rgba(255, 255, 255, 0.7)`,
+      shadow: vars.shadow.xs,
+    },
+    disabled: {
+      background: vars.color.neutral0,
+      border: `1px solid ${vars.color.neutral0}`,
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingLight,
+  },
+  black: {
+    background: '#000000',
+    color: vars.color.neutral0,
+    border: '1px solid #000000',
+    shadow: vars.shadow.xs,
+    hover: {
+      background: 'rgba(0, 0, 0, 0.8)',
+      border: '1px solid rgba(0, 0, 0, 0.8)',
+      shadow: vars.shadow.sm,
+    },
+    active: {
+      background: 'rgba(0, 0, 0, 0.7)',
+      border: '1px solid rgba(0, 0, 0, 0.7)',
+      shadow: vars.shadow.xs,
+    },
+    disabled: {
+      background: '#000000',
+      border: '1px solid #000000',
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingDark,
+  },
+  'outline-white': {
+    background: 'transparent',
+    color: vars.color.neutral0,
+    border: `1px solid ${vars.color.neutral0}`,
+    shadow: 'none',
+    hover: {
+      background: 'transparent',
+      border: `1px solid ${vars.color.accentMint}`,
+      shadow: 'none',
+    },
+    active: {
+      background: 'transparent',
+      border: `1px solid ${vars.color.accentMint}`,
+      shadow: 'none',
+    },
+    disabled: {
+      background: 'transparent',
+      border: `1px solid ${vars.color.theme.border}`,
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingDark,
+  },
+  'outline-modal': {
+    background: 'transparent',
+    color: vars.color.brand900,
+    border: `1px solid ${vars.color.brand900}`,
+    shadow: 'none',
+    hover: {
+      background: 'transparent',
+      border: `1px solid rgba(8, 37, 46, 0.6)`,
+      shadow: 'none',
+    },
+    active: {
+      background: 'transparent',
+      border: `1px solid rgba(8, 37, 46, 0.4)`,
+      shadow: 'none',
+    },
+    disabled: {
+      background: 'transparent',
+      border: `1px solid ${vars.color.theme.border}`,
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingLight,
+  },
+  alert: {
+    background: 'transparent',
+    color: vars.color.brand900,
+    border: 'transparent',
+    shadow: 'none',
+    hover: {
+      background: `color-mix(in srgb, ${vars.color.error500} 10%, transparent)`,
+      border: 'transparent',
+      shadow: 'none',
+      color: vars.color.error500,
+    },
+    active: {
+      background: `color-mix(in srgb, ${vars.color.error500} 20%, transparent)`,
+      border: 'transparent',
+      shadow: 'none',
+      color: vars.color.error500,
+    },
+    disabled: {
+      background: 'transparent',
+      border: 'transparent',
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingLight,
+  },
+  edit: {
+    background: 'transparent',
+    color: vars.color.brand900,
+    border: 'transparent',
+    shadow: 'none',
+    hover: {
+      background: vars.color.theme.surfaceHover,
+      border: 'transparent',
+      shadow: 'none',
+    },
+    active: {
+      background: vars.color.theme.surfaceActive,
+      border: 'transparent',
+      shadow: 'none',
+    },
+    disabled: {
+      background: 'transparent',
+      border: 'transparent',
+      color: vars.color.theme.text.disabled,
+    },
+    focusShadow: focusRingLight,
+  },
+  inactive: {
+    background: 'transparent',
+    color: vars.color.neutral500,
+    border: `1px solid ${vars.color.neutral500}`,
+    shadow: 'none',
+    hover: {
+      background: 'transparent',
+      border: `1px solid ${vars.color.neutral500}`,
+      shadow: 'none',
+    },
+    active: {
+      background: 'transparent',
+      border: `1px solid ${vars.color.neutral500}`,
+      shadow: 'none',
+    },
+    disabled: {
+      background: 'transparent',
+      border: `1px solid ${vars.color.neutral500}`,
+      color: vars.color.neutral500,
+    },
+    focusShadow: 'none',
   },
 };
 

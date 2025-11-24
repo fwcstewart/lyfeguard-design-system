@@ -48,12 +48,14 @@ export const base = style([
         background: 'var(--button-hover-background)',
         border: 'var(--button-hover-border)',
         boxShadow: 'var(--button-hover-shadow)',
+        color: 'var(--button-hover-color, var(--button-color))',
         transform: 'translateY(-1px)',
       },
       '&:active:not(:disabled), &[data-state="active"]': {
         background: 'var(--button-active-background)',
         border: 'var(--button-active-border)',
         boxShadow: 'var(--button-active-shadow)',
+        color: 'var(--button-active-color, var(--button-color))',
         transform: 'translateY(0)',
       },
       '&:focus-visible, &[data-state="focus"]': {
@@ -115,7 +117,7 @@ export const sizes = styleVariants(BUTTON_SIZES, ({ paddingX, paddingY, minHeigh
 
 export const variants = styleVariants(BUTTON_VARIANTS, ({
   background,
-  color,
+  color: baseColor,
   border,
   shadow,
   hover,
@@ -125,15 +127,17 @@ export const variants = styleVariants(BUTTON_VARIANTS, ({
 }) => ({
   vars: {
     '--button-background': background,
-    '--button-color': color,
+    '--button-color': baseColor,
     '--button-border': border,
     '--button-shadow': shadow,
     '--button-hover-background': hover.background,
     '--button-hover-border': hover.border,
     '--button-hover-shadow': hover.shadow,
+    '--button-hover-color': hover.color || baseColor,
     '--button-active-background': active.background,
     '--button-active-border': active.border,
     '--button-active-shadow': active.shadow,
+    '--button-active-color': active.color || baseColor,
     '--button-disabled-background': disabled.background,
     '--button-disabled-border': disabled.border,
     '--button-disabled-color': disabled.color,

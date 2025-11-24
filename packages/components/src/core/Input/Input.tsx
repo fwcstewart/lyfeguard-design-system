@@ -27,6 +27,15 @@ export interface InputProps
    * When true and `maxLength` is provided, renders a live character counter.
    */
   showCharacterCount?: boolean;
+  /**
+   * Visual variant of the input field
+   * @default 'default'
+   */
+  variant?: 'default' | 'white';
+  /**
+   * When true, applies readonly styling (grayed out, non-interactive appearance)
+   */
+  readOnly?: boolean;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -40,6 +49,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       prefix,
       suffix,
       showCharacterCount = false,
+      variant = 'default',
+      readOnly = false,
       value,
       defaultValue,
       onChange,
@@ -71,8 +82,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const ariaInvalid = error ? true : props['aria-invalid'];
     const fieldStateClasses = [
       s.field,
+      variant === 'white' ? s.fieldWhite : '',
       error ? s.fieldError : '',
       props.disabled ? s.fieldDisabled : '',
+      readOnly ? s.fieldReadOnly : '',
     ]
       .filter(Boolean)
       .join(' ');
@@ -103,6 +116,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...controlProps}
             {...props}
             maxLength={maxLength}
+            readOnly={readOnly}
             aria-invalid={ariaInvalid}
             aria-describedby={describedBy || undefined}
             onChange={handleChange}

@@ -30,6 +30,16 @@ export interface ModalProps {
    * If true, clicking the overlay will not close the modal
    */
   disableOverlayClick?: boolean;
+  /**
+   * Visual variant of the modal
+   * @default 'default'
+   */
+  variant?: 'default' | 'white' | 'dark';
+  /**
+   * If true, modal uses wide layout (95vw max-width)
+   * @default false
+   */
+  wide?: boolean;
 }
 
 /**
@@ -47,6 +57,8 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   footer,
   disableOverlayClick = false,
+  variant = 'default',
+  wide = false,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
@@ -199,7 +211,7 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div
         ref={modalRef}
-        className={s.modal}
+        className={`${s.modal} ${variant === 'white' ? s.modalWhite : ''} ${variant === 'dark' ? s.modalDark : ''} ${wide ? s.modalWide : ''}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -207,24 +219,25 @@ export const Modal: React.FC<ModalProps> = ({
         aria-describedby={descriptionId}
         tabIndex={-1}
         data-exiting={isExiting}
+        data-variant={variant}
       >
-        <div className={s.header}>
+        <div className={`${s.header} ${variant === 'dark' ? s.modalDarkHeader : ''}`}>
           {(title || description) && (
             <div style={{ flex: 1 }}>
               {title && (
-                <h2 id={titleId} className={s.title}>
+                <h2 id={titleId} className={`${s.title} ${variant === 'dark' ? s.modalDarkTitle : ''}`}>
                   {title}
                 </h2>
               )}
               {description && (
-                <p id={descriptionId} className={s.description}>
+                <p id={descriptionId} className={`${s.description} ${variant === 'dark' ? s.modalDarkDescription : ''}`}>
                   {description}
                 </p>
               )}
             </div>
           )}
           <button
-            className={s.closeButton}
+            className={`${s.closeButton} ${variant === 'dark' ? s.modalDarkCloseButton : ''}`}
             onClick={handleClose}
             aria-label="Close modal"
             type="button"
@@ -247,8 +260,8 @@ export const Modal: React.FC<ModalProps> = ({
             </svg>
           </button>
         </div>
-        <div className={s.content}>{children}</div>
-        {footer && <div className={s.footer}>{footer}</div>}
+        <div className={`${s.content} ${variant === 'dark' ? s.modalDarkContent : ''} ${wide ? s.modalWideContent : ''}`}>{children}</div>
+        {footer && <div className={`${s.footer} ${variant === 'dark' ? s.modalDarkFooter : ''}`}>{footer}</div>}
       </div>
     </div>
   );

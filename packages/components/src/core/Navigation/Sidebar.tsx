@@ -127,7 +127,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlled
             {...actionProps}
           >
             {item.icon && <span className={s.iconWrapper}>{item.icon}</span>}
-            <span>{item.label}</span>
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0 }}>{item.label}</span>
           </Element>
         );
       })}

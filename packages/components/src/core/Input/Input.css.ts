@@ -91,6 +91,60 @@ export const fieldDisabled = style({
   background: vars.color.theme.surfaceHover,
 });
 
+export const fieldWhite = style({
+  background: vars.color.neutral0,
+  borderColor: 'transparent',
+  selectors: {
+    '&:focus-within': {
+      borderColor: vars.color.accentMint,
+      boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColor}`,
+      background: vars.color.neutral0,
+    },
+    '&:hover:not([data-disabled="true"])': {
+      borderColor: 'transparent',
+      boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColor}`,
+    },
+    '.dark &': {
+      background: vars.color.neutral0,
+      selectors: {
+        '&:focus-within': {
+          borderColor: vars.color.accentMint,
+          boxShadow: `0 0 0 ${focusRingWidth} ${focusRingColorDark}`,
+        },
+      },
+    },
+  },
+});
+
+export const fieldReadOnly = style({
+  background: vars.color.neutral100,
+  borderColor: vars.color.neutral300,
+  color: vars.color.neutral500,
+  cursor: 'default',
+  selectors: {
+    '&:focus-within': {
+      borderColor: vars.color.neutral300,
+      boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.neutral300}`,
+      background: vars.color.neutral100,
+    },
+    '&:hover': {
+      borderColor: vars.color.neutral300,
+      boxShadow: 'none',
+    },
+    '.dark &': {
+      background: vars.color.theme.surfaceHover,
+      borderColor: vars.color.theme.border,
+      color: vars.color.theme.text.tertiary,
+      selectors: {
+        '&:focus-within': {
+          borderColor: vars.color.theme.border,
+          boxShadow: `0 0 0 ${focusRingWidth} ${vars.color.theme.border}`,
+        },
+      },
+    },
+  },
+});
+
 export const input = style({
   appearance: 'none',
   paddingBlock: 0,
@@ -112,6 +166,11 @@ export const input = style({
       color: vars.color.theme.text.disabled,
       WebkitTextFillColor: vars.color.theme.text.disabled,
     },
+    '&[readonly]': {
+      color: vars.color.neutral500,
+      WebkitTextFillColor: vars.color.neutral500,
+      cursor: 'default',
+    },
     '&::placeholder': {
       color: vars.color.theme.text.tertiary,
       opacity: 1,
@@ -122,6 +181,10 @@ export const input = style({
     '.dark &:disabled': {
       color: vars.color.theme.text.disabled,
       WebkitTextFillColor: vars.color.theme.text.disabled,
+    },
+    '.dark &[readonly]': {
+      color: vars.color.theme.text.tertiary,
+      WebkitTextFillColor: vars.color.theme.text.tertiary,
     },
     '.dark &::placeholder': {
       color: vars.color.theme.text.tertiary,

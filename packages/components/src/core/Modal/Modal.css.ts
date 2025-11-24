@@ -205,3 +205,95 @@ export const footer = style({
     },
   },
 });
+
+export const modalWhite = style({
+  background: vars.color.neutral0,
+  selectors: {
+    '.dark &': {
+      background: vars.color.neutral0,
+    },
+  },
+});
+
+export const modalDark = style({
+  background: vars.color.brand900,
+  color: vars.color.neutral0,
+  border: `1px solid ${vars.color.brand900}`,
+  selectors: {
+    '.dark &': {
+      background: vars.color.brand900,
+      border: `1px solid ${vars.color.brand500_40}`,
+    },
+  },
+});
+
+export const modalDarkHeader = style({
+  selectors: {
+    [`${modalDark} &`]: {
+      background: vars.color.brand900,
+      borderBottom: `1px solid ${vars.color.brand500_40}`,
+      color: vars.color.neutral0,
+    },
+  },
+});
+
+export const modalDarkContent = style({
+  selectors: {
+    [`${modalDark} &`]: {
+      background: vars.color.brand900,
+      color: vars.color.neutral0,
+    },
+  },
+});
+
+export const modalDarkFooter = style({
+  selectors: {
+    [`${modalDark} &`]: {
+      background: vars.color.brand800,
+      borderTop: `1px solid ${vars.color.brand500_40}`,
+    },
+  },
+});
+
+export const modalDarkTitle = style({
+  selectors: {
+    [`${modalDark} &`]: {
+      color: vars.color.neutral0,
+    },
+  },
+});
+
+export const modalDarkDescription = style({
+  selectors: {
+    [`${modalDark} &`]: {
+      color: vars.color.neutral300,
+    },
+  },
+});
+
+export const modalDarkCloseButton = style({
+  selectors: {
+    [`${modalDark} &`]: {
+      color: vars.color.neutral0,
+      selectors: {
+        '&:hover': {
+          color: vars.color.accentMint,
+          background: vars.color.brand800,
+        },
+      },
+    },
+  },
+});
+
+export const modalWide = style({
+  maxWidth: '95vw',
+});
+
+export const modalWideContent = style({
+  selectors: {
+    [`${modalWide} &`]: {
+      maxHeight: '95vh',
+      overflow: 'auto',
+    },
+  },
+});
