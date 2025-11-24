@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
 import {
   navigationActiveBackground,
@@ -12,22 +12,44 @@ import {
   navigationFocusRing,
 } from './navigationTokens.css';
 
+// Breakpoint queries for responsive behavior - matching Layout spacing.ts
+const breakpointQueries = {
+  sm: 'screen and (min-width: 544px)',
+  md: 'screen and (min-width: 768px)',
+  lg: 'screen and (min-width: 1012px)',
+} as const;
+
 export const topNav = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   height: `calc(${vars.spacing[10]} + ${vars.spacing[2]})`,
-  padding: `0 ${vars.spacing[7]}` as unknown as string,
+  padding: `0 ${vars.spacing[4]}` as unknown as string,
   background: navigationSurface,
   color: navigationText,
   borderBottom: `1px solid ${navigationSeparator}`,
   boxShadow: vars.shadow.sm,
+  '@media': {
+    [breakpointQueries.sm]: {
+      padding: `0 ${vars.spacing[6]}` as unknown as string,
+    },
+    [breakpointQueries.md]: {
+      padding: `0 ${vars.spacing[7]}` as unknown as string,
+    },
+  },
 });
 
 export const left = style({
   display: 'flex',
   alignItems: 'center',
-  gap: vars.spacing[6] as unknown as string,
+  gap: vars.spacing[2] as unknown as string,
+  flex: '1 1 0%',
+  minWidth: 0,
+  '@media': {
+    [breakpointQueries.md]: {
+      gap: vars.spacing[6] as unknown as string,
+    },
+  },
 });
 
 export const logo = style({
@@ -40,9 +62,14 @@ export const logo = style({
 });
 
 export const navLinks = style({
-  display: 'flex',
+  display: 'none',
   alignItems: 'center',
   gap: vars.spacing[1] as unknown as string,
+  '@media': {
+    [breakpointQueries.md]: {
+      display: 'flex',
+    },
+  },
 });
 
 export const navLink = style({
@@ -87,5 +114,11 @@ export const navLink = style({
 export const right = style({
   display: 'flex',
   alignItems: 'center',
-  gap: vars.spacing[4] as unknown as string,
+  gap: vars.spacing[2] as unknown as string,
+  flexShrink: 0,
+  '@media': {
+    [breakpointQueries.sm]: {
+      gap: vars.spacing[4] as unknown as string,
+    },
+  },
 });

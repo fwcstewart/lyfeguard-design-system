@@ -682,24 +682,54 @@ export const pageLayoutCollapseLg = style({});
 
 globalStyle(`${pageLayoutCollapseSm} ${pageLayoutBody}`, {
   '@media': {
-    [breakpointQueries.sm]: {
+    [`screen and (max-width: 543px)`]: {
       flexDirection: 'column',
     },
   },
 });
 
+globalStyle(`${pageLayoutCollapseSm} ${pageLayoutSidebar}`, {
+  '@media': {
+    [`screen and (max-width: 543px)`]: {
+      width: '100%',
+      maxWidth: '100%',
+    },
+  },
+});
+
+// Collapse at md means: stack vertically on screens smaller than md (768px)
 globalStyle(`${pageLayoutCollapseMd} ${pageLayoutBody}`, {
   '@media': {
-    [breakpointQueries.md]: {
+    [`screen and (max-width: 767px)`]: {
       flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${pageLayoutCollapseMd} ${pageLayoutSidebar}`, {
+  '@media': {
+    [`screen and (max-width: 767px)`]: {
+      width: '100%',
+      maxWidth: '100%',
+      borderRight: 'none',
+      borderBottom: `1px solid var(--color-theme-border)`,
     },
   },
 });
 
 globalStyle(`${pageLayoutCollapseLg} ${pageLayoutBody}`, {
   '@media': {
-    [breakpointQueries.lg]: {
+    [`screen and (max-width: 1011px)`]: {
       flexDirection: 'column',
+    },
+  },
+});
+
+globalStyle(`${pageLayoutCollapseLg} ${pageLayoutSidebar}`, {
+  '@media': {
+    [`screen and (max-width: 1011px)`]: {
+      width: '100%',
+      maxWidth: '100%',
     },
   },
 });

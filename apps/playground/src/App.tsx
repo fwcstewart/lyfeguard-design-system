@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Input,
@@ -23,35 +23,40 @@ import {
   Grid,
   GridItem,
   Section,
-  AspectRatio,
-  Center,
   Cluster,
-  Flex,
-  Split,
   PageLayout,
   TopNav,
   Sidebar,
 } from '@lyfeguard/design-system';
 
 export default function App() {
-  const [modalOpen, setModalOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(0);
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [toggleChecked, setToggleChecked] = useState(false);
-  const [radioValue, setRadioValue] = useState('option1');
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Auto-collapse sidebar on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      if (window.innerWidth < 768) {
+        setSidebarCollapsed(true);
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const sidebarItems = [
-    { label: 'Components', icon: '🧩', href: '#components' },
+    { label: 'Overview', icon: '🏠', href: '#overview' },
+    { label: 'Buttons', icon: '🔘', href: '#buttons' },
     { label: 'Forms', icon: '📝', href: '#forms' },
+    { label: 'Cards', icon: '🃏', href: '#cards' },
+    { label: 'Feedback', icon: '💬', href: '#feedback' },
     { label: 'Layout', icon: '📐', href: '#layout' },
-    { label: 'Data', icon: '📊', href: '#data' },
   ];
 
   const navLinks = [
     { label: 'Home', href: '#', isActive: true },
     { label: 'Components', href: '#components' },
-    { label: 'Documentation', href: '#' },
   ];
 
   const tableData = [
@@ -67,14 +72,9 @@ export default function App() {
           brandName="Lyfeguard"
           links={navLinks}
           actions={
-            <Cluster gap="sm" wrap>
-              <Button variant="secondary" size="sm" onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
-                {sidebarCollapsed ? '☰' : '✕'}
-              </Button>
-              <Button variant="primary" size="sm">
-                Sign In
-              </Button>
-            </Cluster>
+            <Button variant="secondary" size="sm" onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
+              {sidebarCollapsed ? '☰' : '✕'}
+            </Button>
           }
         />
       }
@@ -87,23 +87,36 @@ export default function App() {
       fullHeight
       stickyHeader
     >
-      <div style={{ height: '100%', overflowY: 'auto' }}>
+      <div style={{ height: '100%', overflowY: 'auto', width: '100%', minWidth: 0 }}>
         <Container>
-          <Stack gap="2xl" padding={{ base: 'lg', md: 'xl' }}>
-            {/* Hero Section */}
-            <Section spacing="xl">
+          <Stack gap={{ base: 'lg', md: 'xl' }} padding={{ base: 'md', sm: 'lg', md: 'xl' }}>
+            {/* Overview */}
+            <Section id="overview" spacing={{ base: 'lg', md: 'xl' }}>
               <Stack gap="md">
-                <h1 style={{ margin: 0, fontSize: '2.5rem', color: 'var(--color-theme-text-primary)' }}>
+                <h1
+                  style={{
+                    margin: 0,
+                    fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                    color: 'var(--color-theme-text-primary)',
+                    fontWeight: 700,
+                  }}
+                >
                   Design System Playground
                 </h1>
-                <p style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-secondary)' }}>
-                  Explore all components from the Lyfeguard design system. See how they work together to build
-                  beautiful, accessible interfaces.
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 'clamp(1rem, 2vw, 1.125rem)',
+                    color: 'var(--color-theme-text-secondary)',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Explore and test all components from the Lyfeguard design system. This playground demonstrates how
+                  components work together to build responsive, accessible interfaces.
                 </p>
                 <Cluster gap="sm" wrap>
                   <Badge>React</Badge>
                   <Badge>TypeScript</Badge>
-                  <Badge>Vanilla Extract</Badge>
                   <Badge>Accessible</Badge>
                   <Badge>Responsive</Badge>
                 </Cluster>
@@ -111,19 +124,21 @@ export default function App() {
             </Section>
 
             {/* Buttons */}
-            <Section spacing="lg" divider>
+            <Section id="buttons" spacing={{ base: 'lg', md: 'xl' }} divider>
               <Stack gap="lg">
                 <Stack gap="sm">
                   <h2 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Buttons</h2>
                   <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
-                    All button variants and sizes
+                    All button variants, sizes, and states
                   </p>
                 </Stack>
                 <Grid columns={12} gap="lg">
                   <GridItem span={{ base: 12, md: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Variants</h3>
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Variants
+                        </h3>
                         <Stack gap="sm">
                           <Button variant="primary">Primary</Button>
                           <Button variant="secondary">Secondary</Button>
@@ -137,19 +152,21 @@ export default function App() {
                   <GridItem span={{ base: 12, md: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Sizes</h3>
-                        <Cluster gap="sm" align="center">
-                          <Button variant="primary" size="sm">
-                            Small
-                          </Button>
-                          <Button variant="primary" size="md">
-                            Medium
-                          </Button>
-                          <Button variant="primary" size="lg">
-                            Large
-                          </Button>
-                        </Cluster>
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Sizes & States
+                        </h3>
                         <Stack gap="sm">
+                          <Cluster gap="sm" wrap>
+                            <Button variant="primary" size="sm">
+                              Small
+                            </Button>
+                            <Button variant="primary" size="md">
+                              Medium
+                            </Button>
+                            <Button variant="primary" size="lg">
+                              Large
+                            </Button>
+                          </Cluster>
                           <Button variant="primary" loading>
                             Loading
                           </Button>
@@ -164,8 +181,8 @@ export default function App() {
               </Stack>
             </Section>
 
-            {/* Form Controls */}
-            <Section spacing="lg" divider>
+            {/* Forms */}
+            <Section id="forms" spacing={{ base: 'lg', md: 'xl' }} divider>
               <Stack gap="lg">
                 <Stack gap="sm">
                   <h2 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Form Controls</h2>
@@ -174,29 +191,37 @@ export default function App() {
                   </p>
                 </Stack>
                 <Grid columns={12} gap="lg">
-                  <GridItem span={{ base: 12, md: 6 }}>
+                  <GridItem span={{ base: 12, lg: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Text Inputs</h3>
-                        <Input label="Name" placeholder="Enter your name" />
-                        <Input label="Email" type="email" placeholder="you@example.com" />
-                        <Input label="Password" type="password" placeholder="••••••••" />
-                        <Textarea label="Message" placeholder="Enter your message" rows={4} />
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Text Inputs
+                        </h3>
+                        <Stack gap="md">
+                          <Input label="Name" placeholder="Enter your name" />
+                          <Input label="Email" type="email" placeholder="you@example.com" />
+                          <Input label="Password" type="password" placeholder="••••••••" />
+                          <Textarea label="Message" placeholder="Enter your message" rows={4} />
+                        </Stack>
                       </Stack>
                     </Card>
                   </GridItem>
-                  <GridItem span={{ base: 12, md: 6 }}>
+                  <GridItem span={{ base: 12, lg: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Select & Date</h3>
-                        <Select label="Country">
-                          <option value="">Select a country</option>
-                          <option value="us">United States</option>
-                          <option value="uk">United Kingdom</option>
-                          <option value="ca">Canada</option>
-                        </Select>
-                        <DateInput label="Birth Date" />
-                        <FileUpload label="Upload File" accept=".pdf,.doc,.docx" />
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Other Controls
+                        </h3>
+                        <Stack gap="md">
+                          <Select label="Country">
+                            <option value="">Select a country</option>
+                            <option value="us">United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="ca">Canada</option>
+                          </Select>
+                          <DateInput label="Birth Date" />
+                          <FileUpload label="Upload File" accept=".pdf,.doc,.docx" />
+                        </Stack>
                       </Stack>
                     </Card>
                   </GridItem>
@@ -205,30 +230,27 @@ export default function App() {
                   <GridItem span={{ base: 12, md: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Checkboxes & Toggle</h3>
-                        <Checkbox
-                          label="I agree to the terms and conditions"
-                          checked={checkboxChecked}
-                          onChange={(e) => setCheckboxChecked(e.target.checked)}
-                        />
-                        <Checkbox label="Subscribe to newsletter" />
-                        <Checkbox label="Disabled checkbox" disabled />
-                        <Toggle
-                          label="Enable notifications"
-                          checked={toggleChecked}
-                          onChange={(e) => setToggleChecked(e.target.checked)}
-                        />
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Checkboxes & Toggle
+                        </h3>
+                        <Stack gap="md">
+                          <Checkbox label="I agree to the terms and conditions" />
+                          <Checkbox label="Subscribe to newsletter" defaultChecked />
+                          <Checkbox label="Disabled checkbox" disabled />
+                          <Toggle label="Enable notifications" />
+                        </Stack>
                       </Stack>
                     </Card>
                   </GridItem>
                   <GridItem span={{ base: 12, md: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Radio Group</h3>
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Radio Group
+                        </h3>
                         <RadioGroup
                           label="Select an option"
-                          value={radioValue}
-                          onChange={setRadioValue}
+                          defaultValue="option1"
                           options={[
                             { value: 'option1', label: 'Option 1' },
                             { value: 'option2', label: 'Option 2' },
@@ -242,8 +264,8 @@ export default function App() {
               </Stack>
             </Section>
 
-            {/* Cards & Badges */}
-            <Section spacing="lg" divider>
+            {/* Cards */}
+            <Section id="cards" spacing={{ base: 'lg', md: 'xl' }} divider>
               <Stack gap="lg">
                 <Stack gap="sm">
                   <h2 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Cards & Badges</h2>
@@ -256,8 +278,8 @@ export default function App() {
                     <Card>
                       <Stack gap="sm">
                         <h4 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Default Card</h4>
-                        <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
-                          Standard card with default padding and styling.
+                        <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)', fontSize: '0.875rem' }}>
+                          Standard card with default padding.
                         </p>
                         <Cluster gap="xs" wrap>
                           <Badge>New</Badge>
@@ -268,8 +290,8 @@ export default function App() {
                   </GridItem>
                   <GridItem span={{ base: 12, md: 4 }}>
                     <Card header="Card with Header" footer="Card Footer">
-                      <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
-                        Cards can have optional headers and footers for structured content.
+                      <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)', fontSize: '0.875rem' }}>
+                        Cards can have optional headers and footers.
                       </p>
                     </Card>
                   </GridItem>
@@ -277,8 +299,8 @@ export default function App() {
                     <Card clickable onClick={() => setModalOpen(true)}>
                       <Stack gap="sm">
                         <h4 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Clickable Card</h4>
-                        <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
-                          Click me to open a modal!
+                        <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)', fontSize: '0.875rem' }}>
+                          Click to open a modal.
                         </p>
                       </Stack>
                     </Card>
@@ -286,7 +308,9 @@ export default function App() {
                 </Grid>
                 <Card>
                   <Stack gap="md">
-                    <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Badge Variants</h3>
+                    <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                      Badge Variants
+                    </h3>
                     <Cluster gap="sm" wrap>
                       <Badge>Default</Badge>
                       <Badge variant="success">Success</Badge>
@@ -299,8 +323,8 @@ export default function App() {
               </Stack>
             </Section>
 
-            {/* Alerts & Feedback */}
-            <Section spacing="lg" divider>
+            {/* Feedback */}
+            <Section id="feedback" spacing={{ base: 'lg', md: 'xl' }} divider>
               <Stack gap="lg">
                 <Stack gap="sm">
                   <h2 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Alerts & Feedback</h2>
@@ -326,37 +350,43 @@ export default function App() {
                   <GridItem span={{ base: 12, md: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Progress Bar</h3>
-                        <ProgressBar value={65} label="Progress: 65%" />
-                        <ProgressBar value={30} label="Progress: 30%" />
-                        <ProgressBar value={90} label="Progress: 90%" />
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Progress Bar
+                        </h3>
+                        <Stack gap="md">
+                          <ProgressBar value={65} label="Progress: 65%" />
+                          <ProgressBar value={30} label="Progress: 30%" />
+                          <ProgressBar value={90} label="Progress: 90%" />
+                        </Stack>
                       </Stack>
                     </Card>
                   </GridItem>
                   <GridItem span={{ base: 12, md: 6 }}>
                     <Card>
                       <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Spinner</h3>
-                        <Flex gap="md" align="center" wrap="wrap">
-                          <Flex direction="column" gap="sm" align="center">
+                        <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                          Spinner
+                        </h3>
+                        <Cluster gap="lg" align="center" wrap>
+                          <Stack gap="xs" align="center">
                             <Spinner size="sm" />
                             <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>
                               Small
                             </span>
-                          </Flex>
-                          <Flex direction="column" gap="sm" align="center">
+                          </Stack>
+                          <Stack gap="xs" align="center">
                             <Spinner size="md" />
                             <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>
                               Medium
                             </span>
-                          </Flex>
-                          <Flex direction="column" gap="sm" align="center">
+                          </Stack>
+                          <Stack gap="xs" align="center">
                             <Spinner size="lg" />
                             <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>
                               Large
                             </span>
-                          </Flex>
-                        </Flex>
+                          </Stack>
+                        </Cluster>
                       </Stack>
                     </Card>
                   </GridItem>
@@ -365,7 +395,7 @@ export default function App() {
             </Section>
 
             {/* Data Display */}
-            <Section spacing="lg" divider>
+            <Section id="data" spacing={{ base: 'lg', md: 'xl' }} divider>
               <Stack gap="lg">
                 <Stack gap="sm">
                   <h2 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Data Display</h2>
@@ -375,7 +405,7 @@ export default function App() {
                 </Stack>
                 <Card>
                   <Stack gap="md">
-                    <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Tabs</h3>
+                    <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>Tabs</h3>
                     <Tabs
                       tabs={[
                         {
@@ -415,7 +445,7 @@ export default function App() {
                 </Card>
                 <Card>
                   <Stack gap="md">
-                    <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Table</h3>
+                    <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>Table</h3>
                     <Table
                       columns={[
                         { header: 'Name', accessor: 'name' },
@@ -428,98 +458,67 @@ export default function App() {
                 </Card>
                 <Card>
                   <Stack gap="md">
-                    <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Avatars</h3>
-                    <Cluster gap="md" align="center">
-                      <Flex direction="column" gap="xs" align="center">
+                    <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                      Avatars
+                    </h3>
+                    <Cluster gap="lg" align="center" wrap>
+                      <Stack gap="xs" align="center">
                         <Avatar size="sm" name="John Doe" />
-                        <span style={{ fontSize: '0.875rem' }}>Small</span>
-                      </Flex>
-                      <Flex direction="column" gap="xs" align="center">
+                        <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>Small</span>
+                      </Stack>
+                      <Stack gap="xs" align="center">
                         <Avatar size="md" name="Jane Smith" />
-                        <span style={{ fontSize: '0.875rem' }}>Medium</span>
-                      </Flex>
-                      <Flex direction="column" gap="xs" align="center">
+                        <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>
+                          Medium
+                        </span>
+                      </Stack>
+                      <Stack gap="xs" align="center">
                         <Avatar size="lg" name="Bob Johnson" />
-                        <span style={{ fontSize: '0.875rem' }}>Large</span>
-                      </Flex>
+                        <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>Large</span>
+                      </Stack>
                     </Cluster>
                   </Stack>
                 </Card>
               </Stack>
             </Section>
 
-            {/* Layout Components */}
-            <Section spacing="lg" divider>
+            {/* Layout */}
+            <Section id="layout" spacing={{ base: 'lg', md: 'xl' }}>
               <Stack gap="lg">
                 <Stack gap="sm">
                   <h2 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Layout Components</h2>
                   <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
-                    Building blocks for creating responsive layouts
+                    Building blocks for creating responsive layouts. This entire page uses PageLayout, Container, Stack,
+                    Grid, and Section components.
                   </p>
                 </Stack>
-                <Grid columns={12} gap="lg">
-                  <GridItem span={{ base: 12, md: 6 }}>
-                    <Card>
-                      <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>AspectRatio</h3>
-                        <AspectRatio ratio={16 / 9} fit="cover">
-                          <div
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              background: 'linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700))',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: 'white',
-                              fontWeight: 'bold',
-                            }}
-                          >
-                            16:9
-                          </div>
-                        </AspectRatio>
-                      </Stack>
-                    </Card>
-                  </GridItem>
-                  <GridItem span={{ base: 12, md: 6 }}>
-                    <Card>
-                      <Stack gap="md">
-                        <h3 style={{ margin: 0, color: 'var(--color-theme-text-primary)' }}>Split Layout</h3>
-                        <Split
-                          start={
-                            <div
-                              style={{
-                                padding: 'var(--spacing-4)',
-                                background: 'var(--color-brand-100)',
-                                borderRadius: 'var(--radius-md)',
-                                color: 'var(--color-brand-700)',
-                                textAlign: 'center',
-                              }}
-                            >
-                              30%
-                            </div>
-                          }
-                          end={
-                            <div
-                              style={{
-                                padding: 'var(--spacing-4)',
-                                background: 'var(--color-accent-100)',
-                                borderRadius: 'var(--radius-md)',
-                                color: 'var(--color-accent-700)',
-                                textAlign: 'center',
-                              }}
-                            >
-                              70%
-                            </div>
-                          }
-                          fraction={0.3}
-                          gap="md"
-                          collapseAt="md"
-                        />
-                      </Stack>
-                    </Card>
-                  </GridItem>
-                </Grid>
+                <Card>
+                  <Stack gap="md">
+                    <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-theme-text-primary)' }}>
+                      Layout System
+                    </h3>
+                    <p style={{ margin: 0, color: 'var(--color-theme-text-secondary)' }}>
+                      The layout system provides components for structuring pages:
+                    </p>
+                    <Stack gap="sm" as="ul" style={{ margin: 0, paddingLeft: '1.5rem' }}>
+                      <li style={{ color: 'var(--color-theme-text-secondary)' }}>
+                        <strong>Container</strong> - Centers and constrains content width
+                      </li>
+                      <li style={{ color: 'var(--color-theme-text-secondary)' }}>
+                        <strong>Stack</strong> - Vertical or horizontal spacing
+                      </li>
+                      <li style={{ color: 'var(--color-theme-text-secondary)' }}>
+                        <strong>Grid & GridItem</strong> - Responsive column layouts
+                      </li>
+                      <li style={{ color: 'var(--color-theme-text-secondary)' }}>
+                        <strong>Section</strong> - Semantic grouping with spacing
+                      </li>
+                      <li style={{ color: 'var(--color-theme-text-secondary)' }}>
+                        <strong>PageLayout</strong> - Complete page structure with header, sidebar, and content
+                      </li>
+                    </Stack>
+                  </Stack>
+                </Card>
               </Stack>
             </Section>
           </Stack>
