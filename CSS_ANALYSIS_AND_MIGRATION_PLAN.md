@@ -333,3 +333,32 @@ The CSS file also contains many utility classes (spacing, typography, colors, et
 4. Begin component enhancements in priority order
 5. Create a tracking issue/board for migration progress
 
+## Mirroring `currentcss.css` – Execution Plan
+
+To mirror the legacy styles before making improvements, execute the migration in **small, shippable increments**. Each step should land with stories and tests so we can validate parity against `currentcss.css`.
+
+### Wave 1: High-visibility surfaces
+- **Buttons:** Finalize all legacy variants (primary, secondary, tertiary, dark, dark-secondary, alert/edit/inactive, outline white/modal, white/black) with token-based colours and hover/active rings that match the CSS focus/hover states.
+- **Badges:** Recreate `.btn-badge-*` states (`active`, `pending`, `secondary`, `error`) with matching sizing, radii, and typography. Ensure dark-mode tokens mirror legacy contrast rules.
+- **Form Inputs:** Align input, select, radio/checkbox, and textarea containers with white/readonly/error states plus prefix/suffix affordances. Add error helper text spacing consistent with `currentcss.css`.
+- **Modal Shell:** Implement header/body/footer slots and size variants (default, wide, dark/white backgrounds) while keeping overlay colour and close-button placement consistent.
+
+### Wave 2: Layout and data display
+- **Cards:** Add sectioned card layouts, subscription plan cards, and hub card styling that mirror `.card`, `.hub-box`, and `.subscription-plan-box` patterns.
+- **Navigation:** Match tab/active states and spacing from `.nav-item`, `.tabs-nav`, and `.tab-item` while preserving keyboard navigation.
+- **Alerts/Toasts:** Ensure success/error/warning/info banners reuse the flash-message spacing, icon sizing, and transition timings from the legacy file.
+
+### Wave 3: Specialized experiences
+- **Specialised Inputs:** Build `PincodeInput` and `CurrencyInput` variants that mirror `.pincode-input` and `.currency` behaviour (fixed spacing, monospace digits, locale-aware separators).
+- **Filters & Tables:** Bring the `.transactions-*` filters and `.modal-table` spacing/striping into the existing Filter and Table components.
+- **Datepicker:** Align grid spacing, selected/hover states, and control buttons with `.datepicker` rules.
+
+### Delivery checkpoints
+- After each wave, run a **visual spot check in Storybook** against `currentcss.css` screenshots and record deltas in the docs.
+- Track remaining gaps in a migration checklist so teams know which components are parity-complete before enhancements begin.
+
+## Progress log
+
+- **2024-06-03** – Mirrored legacy `.input-field`/`.input-field-white` affordances in `Input` by using neutral backgrounds, larger radii, and mint focus rings. Added stories and tests for white/read-only/disabled states. **Next:** extend the same treatment to `Textarea` and `Select`, then tackle input error/helper spacing across grouped form fields.
+- **2024-06-04** – Aligned `Textarea` with legacy `.input-field` styles, including neutral/white surfaces, mint focus rings, readonly and disabled styling, and data markers. Expanded stories to cover white/read-only/disabled usage and added tests. **Next:** carry the neutral/white surface and focus updates into `Select`, then revisit shared helper/error spacing for grouped form fields.
+

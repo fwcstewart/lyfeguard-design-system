@@ -64,6 +64,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ['--button-disabled-border' as string]: variantTokens.disabled.border,
       ['--button-disabled-color' as string]: variantTokens.disabled.color,
       ['--button-focus-shadow' as string]: variantTokens.focusShadow,
+      ['--button-cursor' as string]: variant === 'inactive' ? 'default' : 'pointer',
     };
 
     return (

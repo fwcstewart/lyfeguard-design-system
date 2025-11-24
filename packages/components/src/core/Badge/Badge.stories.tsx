@@ -46,6 +46,9 @@ export const Default: Story = {
           <Badge variant="warning">Warning</Badge>
           <Badge variant="error">Error</Badge>
           <Badge variant="info">Info</Badge>
+          <Badge variant="active">Active</Badge>
+          <Badge variant="pending">Pending</Badge>
+          <Badge variant="secondary">Secondary</Badge>
         </Wrapper>
       </div>
       <div>

@@ -62,6 +62,26 @@ describe('Input component', () => {
     expect(screen.getByLabelText('Amount')).toBeInTheDocument();
   });
 
+  test('applies the white variant styling', () => {
+    render(<Input label="Account" variant="white" defaultValue="123" />);
+
+    const input = screen.getByLabelText('Account');
+    const field = input.parentElement as HTMLElement;
+
+    expect(field.dataset.variant).toBe('white');
+    expect(field.dataset.disabled).toBeUndefined();
+  });
+
+  test('applies readonly styling and attributes', () => {
+    render(<Input label="Reference" readOnly defaultValue="Fixed" />);
+
+    const input = screen.getByLabelText('Reference');
+    const field = input.parentElement as HTMLElement;
+
+    expect(input).toHaveAttribute('readonly');
+    expect(field.dataset.readonly).toBe('true');
+  });
+
   test('displays a live character counter when enabled', () => {
     render(
       <Input

@@ -23,7 +23,7 @@ export const States: Story = {
         width: 'min(100%, 360px)',
         padding: vars.spacing[5],
         borderRadius: vars.radius.md,
-        background: vars.color.theme.surface,
+        background: vars.color.neutral100,
         color: vars.color.theme.text.primary,
       }}
     >
@@ -38,7 +38,9 @@ export const States: Story = {
         placeholder="you@example.com"
         error="Please enter a valid email address"
       />
-      <Input label="Disabled" placeholder="Disabled input" disabled />
+      <Input label="Read only" placeholder="Fixed value" readOnly defaultValue="Static" />
+      <Input label="White" placeholder="Lighter surface" variant="white" />
+      <Input label="Disabled" placeholder="Disabled input" disabled variant="white" />
       <Input
         label="Amount"
         prefix="£"

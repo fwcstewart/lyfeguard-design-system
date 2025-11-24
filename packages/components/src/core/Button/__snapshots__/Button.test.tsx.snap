@@ -9,20 +9,21 @@ exports[`Button component > keeps icon and label alignment when loading 1`] = `
   data-state="loading"
   data-variant="primary"
   disabled=""
-  style="--button-padding-x: var(--spacing-5__302ff41y); --button-padding-y: var(--spacing-3__302ff41w); --button-min-height: var(--spacing-8__302ff421); --button-gap: var(--spacing-2__302ff41v); --button-font-size: var(--font-size-ui-button__302ff42l); --button-line-height: var(--font-lineHeight-ui-button__302ff431); --button-background: var(--color-accentMint__302ff49); --button-color: var(--color-brand900__302ff40); --button-border: transparent; --button-shadow: var(--shadow-xs__302ff433); --button-hover-background: var(--color-success600__302ff4r); --button-hover-border: transparent; --button-hover-shadow: var(--shadow-md__302ff435); --button-active-background: var(--color-success600__302ff4r); --button-active-border: transparent; --button-active-shadow: var(--shadow-xs__302ff433); --button-disabled-background: var(--color-accentMint__302ff49); --button-disabled-border: transparent; --button-disabled-color: var(--color-theme-text-disabled__302ff41b); --button-focus-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accentMint__302ff49) 32%, var(--color-theme-surface__302ff413));"
+  style="--button-padding-x: var(--spacing-5__302ff41y); --button-padding-y: var(--spacing-3__302ff41w); --button-min-height: var(--spacing-8__302ff421); --button-gap: var(--spacing-2__302ff41v); --button-font-size: var(--font-size-ui-button__302ff42l); --button-line-height: var(--font-lineHeight-ui-button__302ff431); --button-background: var(--color-accentMint__302ff49); --button-color: var(--color-brand900__302ff40); --button-border: 1px solid var(--color-accentMint__302ff49); --button-shadow: none; --button-hover-background: var(--color-brand900__302ff40); --button-hover-border: 1px solid var(--color-brand900__302ff40); --button-hover-shadow: none; --button-hover-color: var(--color-accentMint__302ff49); --button-active-background: var(--color-brand900__302ff40); --button-active-border: 1px solid var(--color-brand900__302ff40); --button-active-shadow: none; --button-active-color: var(--color-accentMint__302ff49); --button-disabled-background: var(--color-accentMint__302ff49); --button-disabled-border: 1px solid var(--color-accentMint__302ff49); --button-disabled-color: var(--color-theme-text-disabled__302ff41b); --button-focus-shadow: none; --button-cursor: pointer;"
 >
   <span
-    class="Button_content__ajw352a"
+    class="Button_content__ajw352j"
   >
     <span
       aria-label="Loading"
+      aria-live="polite"
       class="Spinner_spinner__fr316l3"
       data-lyfeguard="Spinner"
       role="status"
       style="--spinner-size: var(--spacing-7__302ff420); --spinner-stroke-width: calc(var(--spacing-1__302ff41u) * 0.75);"
     />
     <span
-      class="Button_loadingLabel__ajw352c"
+      class="Button_loadingLabel__ajw352l"
     >
       Submit
     </span>
