@@ -15,6 +15,7 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {}
   },
+  staticDirs: [],
   async viteFinal(config) {
     if (process.env.STORYBOOK_BASE_PATH) {
       config.base = process.env.STORYBOOK_BASE_PATH;

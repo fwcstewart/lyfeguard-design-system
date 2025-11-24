@@ -88,16 +88,16 @@ export const footer = style({
   background: vars.color.theme.surfaceHover,
 });
 
-export const compact = style({
-  selectors: {
-    [`& ${header}`]: {
-      padding: `${vars.spacing[3]} ${vars.spacing[4]}`,
-    },
-    [`& ${body}`]: {
-      padding: vars.spacing[4],
-    },
-    [`& ${footer}`]: {
-      padding: `${vars.spacing[3]} ${vars.spacing[4]}`,
-    },
-  },
+export const compact = style({});
+
+globalStyle(`${compact} ${header}`, {
+  padding: `${vars.spacing[3]} ${vars.spacing[4]}`,
+});
+
+globalStyle(`${compact} ${body}`, {
+  padding: vars.spacing[4],
+});
+
+globalStyle(`${compact} ${footer}`, {
+  padding: `${vars.spacing[3]} ${vars.spacing[4]}`,
 });
