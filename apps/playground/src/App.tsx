@@ -167,7 +167,7 @@ export default function App() {
                               Large
                             </Button>
                           </Cluster>
-                          <Button variant="primary" loading>
+                          <Button variant="primary" isLoading>
                             Loading
                           </Button>
                           <Button variant="primary" disabled>
@@ -249,13 +249,15 @@ export default function App() {
                           Radio Group
                         </h3>
                         <RadioGroup
+                          name="radio-options"
                           label="Select an option"
-                          defaultValue="option1"
+                          value="option1"
                           options={[
                             { value: 'option1', label: 'Option 1' },
                             { value: 'option2', label: 'Option 2' },
                             { value: 'option3', label: 'Option 3' },
                           ]}
+                          onChange={(value) => console.log('Selected:', value)}
                         />
                       </Stack>
                     </Card>
@@ -354,9 +356,9 @@ export default function App() {
                           Progress Bar
                         </h3>
                         <Stack gap="md">
-                          <ProgressBar value={65} label="Progress: 65%" />
-                          <ProgressBar value={30} label="Progress: 30%" />
-                          <ProgressBar value={90} label="Progress: 90%" />
+                          <ProgressBar progress={65} label="Progress: 65%" />
+                          <ProgressBar progress={30} label="Progress: 30%" />
+                          <ProgressBar progress={90} label="Progress: 90%" />
                         </Stack>
                       </Stack>
                     </Card>
@@ -463,17 +465,17 @@ export default function App() {
                     </h3>
                     <Cluster gap="lg" align="center" wrap>
                       <Stack gap="xs" align="center">
-                        <Avatar size="sm" name="John Doe" />
+                        <Avatar size={32} name="John Doe" />
                         <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>Small</span>
                       </Stack>
                       <Stack gap="xs" align="center">
-                        <Avatar size="md" name="Jane Smith" />
+                        <Avatar size={48} name="Jane Smith" />
                         <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>
                           Medium
                         </span>
                       </Stack>
                       <Stack gap="xs" align="center">
-                        <Avatar size="lg" name="Bob Johnson" />
+                        <Avatar size={64} name="Bob Johnson" />
                         <span style={{ fontSize: '0.875rem', color: 'var(--color-theme-text-secondary)' }}>Large</span>
                       </Stack>
                     </Cluster>
