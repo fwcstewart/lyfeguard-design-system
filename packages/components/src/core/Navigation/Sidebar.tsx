@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import * as s from './Sidebar.css';
 
 export interface SidebarItem {
@@ -43,6 +43,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlled
   const [internalActive, setInternalActive] = useState(0);
   const active = controlledActive ?? internalActive;
   const itemRefs = useRef<(HTMLAnchorElement | HTMLButtonElement | null)[]>([]);
+  const initialFocusIndex = useMemo(() => (active ?? 0), [active]);
+  const [focusIndex, setFocusIndex] = useState<number>(initialFocusIndex);
+
+  useEffect(() => {
+    setFocusIndex((current) => {
+      if (!items.length) return -1;
+      const nextIndex = Math.max(0, Math.min(active, items.length - 1));
+      return Number.isInteger(nextIndex) ? nextIndex : Math.max(0, Math.min(current, items.length - 1));
+    });
+  }, [active, items]);
 
   const handleSelect = (index: number, item: SidebarItem) => {
     if (controlledActive === undefined) {
@@ -66,7 +76,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlled
 
     const activeElement = document.activeElement as HTMLElement | null;
     const currentIndex = itemsList.findIndex((node) => node === activeElement);
-    let nextIndex = currentIndex >= 0 ? currentIndex : 0;
+    let nextIndex = currentIndex >= 0 ? currentIndex : focusIndex >= 0 ? focusIndex : 0;
 
     if (event.key === 'ArrowDown') {
       nextIndex = (currentIndex + 1 + itemsList.length) % itemsList.length;
@@ -84,6 +94,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlled
       nextIndex = itemsList.length - 1;
     }
 
+    setFocusIndex(nextIndex);
     itemsList[nextIndex]?.focus();
     event.preventDefault();
   };
@@ -108,6 +119,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, activeIndex: controlled
             aria-current={active === idx ? 'page' : undefined}
             onKeyDown={handleKeyDown}
             onClick={onClick}
+            tabIndex={focusIndex === idx ? 0 : -1}
+            onFocus={() => setFocusIndex(idx)}
             ref={(node: HTMLAnchorElement | HTMLButtonElement | null) => {
               itemRefs.current[idx] = node;
             }}

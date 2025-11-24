@@ -1,5 +1,6 @@
 import React from 'react';
 import * as s from './Card.css';
+import { CARD_TONES, CardTone } from './constants';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -20,7 +21,32 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
    * - `compact`: Reduced padding suitable for grid layouts and account items
    */
   variant?: 'default' | 'compact';
+  /**
+   * Visual tone for the card shell. Defaults to `neutral`.
+   */
+  tone?: CardTone;
 }
+
+const CARD_SECTION = Symbol('CardSection');
+
+interface CardSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+  as?: keyof JSX.IntrinsicElements;
+}
+
+const createSection = (className: string, displayName: string) => {
+  const Section = React.forwardRef<HTMLElement, CardSectionProps>(({ children, as: Component = 'div', ...props }, ref) => (
+    <Component ref={ref as React.Ref<HTMLDivElement>} className={className} data-lyfeguard={`Card.${displayName}`} {...props}>
+      {children}
+    </Component>
+  ));
+  Section.displayName = `Card${displayName}`;
+  (Section as unknown as { [CARD_SECTION]: boolean })[CARD_SECTION] = true;
+  return Section;
+};
+
+export const CardHeader = createSection(s.header, 'Header');
+export const CardContent = createSection(s.body, 'Content');
+export const CardFooter = createSection(s.footer, 'Footer');
 
 /**
  * Card component for grouping related content.
@@ -33,15 +59,22 @@ export const Card: React.FC<CardProps> = ({
   footer,
   clickable = false,
   variant = 'default',
+  tone = 'neutral',
   children,
   className,
   onKeyDown,
   onClick,
   ...props
 }) => {
+  const toneClass = s.tone[tone] ?? s.tone.neutral;
   const isInteractive = clickable || Boolean(onClick);
   const variantClass = variant === 'compact' ? s.compact : '';
-  const cardClassName = `${s.card} ${variantClass} ${clickable ? s.clickable : ''} ${className || ''}`.trim();
+  const cardClassName = `${s.card} ${toneClass} ${variantClass} ${clickable ? s.clickable : ''} ${className || ''}`.trim();
+
+  const childArray = React.Children.toArray(children);
+  const hasStructuredChildren = childArray.some(
+    (child) => React.isValidElement(child) && Boolean((child.type as { [CARD_SECTION]?: boolean })?.[CARD_SECTION])
+  );
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (isInteractive && (event.key === 'Enter' || event.key === ' ')) {
@@ -52,19 +85,30 @@ export const Card: React.FC<CardProps> = ({
     onKeyDown?.(event);
   };
 
+  const sections = hasStructuredChildren
+    ? [
+        header ? <CardHeader key="header-slot">{header}</CardHeader> : null,
+        ...childArray,
+        footer ? <CardFooter key="footer-slot">{footer}</CardFooter> : null,
+      ].filter(Boolean)
+    : [
+        header ? <CardHeader key="header">{header}</CardHeader> : null,
+        <CardContent key="content">{children}</CardContent>,
+        footer ? <CardFooter key="footer">{footer}</CardFooter> : null,
+      ].filter(Boolean);
+
   return (
     <div
       className={cardClassName.trim()}
       data-lyfeguard="Card"
+      data-tone={tone}
       {...props}
       role={isInteractive ? 'button' : props.role}
       tabIndex={isInteractive ? props.tabIndex ?? 0 : props.tabIndex}
       onKeyDown={handleKeyDown}
       onClick={onClick}
     >
-      {header && <div className={s.header}>{header}</div>}
-      <div className={s.body}>{children}</div>
-      {footer && <div className={s.footer}>{footer}</div>}
+      {sections}
     </div>
   );
 };

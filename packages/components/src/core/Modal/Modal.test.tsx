@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Modal } from './Modal';
 
@@ -58,5 +59,51 @@ describe('Modal accessibility', () => {
     last.focus();
     fireEvent.keyDown(document, { key: 'Tab' });
     expect(document.activeElement).toBe(first);
+  });
+
+  it('respects reduced motion preference by skipping exit timers', async () => {
+    vi.useFakeTimers();
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    const matchMediaSpy = vi.spyOn(window, 'matchMedia').mockImplementation((query) => ({
+      matches: query === '(prefers-reduced-motion: reduce)',
+      media: query,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }) as unknown as MediaQueryList);
+
+    const onClose = vi.fn();
+    render(
+      <Modal open onClose={onClose} title="Reduced motion">
+        <p>Body</p>
+      </Modal>,
+    );
+
+    const overlay = document.querySelector('[data-lyfeguard="Modal"]');
+    await user.click(overlay as HTMLElement);
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(vi.getTimerCount()).toBe(0);
+    matchMediaSpy.mockRestore();
+  });
+
+  it('only closes on overlay click when allowed', async () => {
+    vi.useFakeTimers();
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    const onClose = vi.fn();
+    render(
+      <Modal open onClose={onClose} title="Overlay control" disableOverlayClick>
+        <button type="button">Close inside</button>
+      </Modal>,
+    );
+
+    const overlay = document.querySelector('[data-lyfeguard="Modal"]');
+    await user.click(overlay as HTMLElement);
+    expect(onClose).not.toHaveBeenCalled();
+
+    await user.keyboard('{Escape}');
+    act(() => {
+      vi.runAllTimers();
+    });
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,10 +1,29 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyle, style, styleVariants, createVar } from '@vanilla-extract/css';
 import { vars } from '../../globals.css';
+import { CARD_TONES } from './constants';
+
+const surfaceVar = createVar();
+const surfaceHoverVar = createVar();
+const borderVar = createVar();
+const textVar = createVar();
+const accentVar = createVar();
+const focusRingVar = createVar();
+
+export const tone = styleVariants(CARD_TONES, (tokens) => ({
+  vars: {
+    [surfaceVar]: tokens.surface,
+    [surfaceHoverVar]: tokens.surfaceHover,
+    [borderVar]: tokens.border,
+    [textVar]: tokens.text,
+    [accentVar]: tokens.accent,
+    [focusRingVar]: tokens.focusRing,
+  },
+}));
 
 export const card = style({
-  background: vars.color.theme.surface,
+  background: surfaceVar,
   borderRadius: vars.radius.lg,
-  border: `1px solid ${vars.color.theme.border}`,
+  border: `1px solid ${borderVar}`,
   boxShadow: vars.shadow.sm,
   display: 'flex',
   flexDirection: 'column',
@@ -14,14 +33,14 @@ export const card = style({
   selectors: {
     '&:focus-visible': {
       outline: 'none',
-      boxShadow: `0 0 0 3px ${vars.color.accentMint_20}`,
+      boxShadow: focusRingVar,
     },
   },
 });
 
 globalStyle(`.dark ${card}`, {
-  background: vars.color.theme.surface,
-  borderColor: vars.color.theme.border,
+  background: surfaceVar,
+  borderColor: borderVar,
   boxShadow: vars.shadow.md,
 });
 
@@ -30,50 +49,64 @@ export const clickable = style({
   selectors: {
     '&:hover': {
       boxShadow: vars.shadow.lg,
-      transform: `translateY(calc(-1 * ${vars.spacing[1]}))`, // -4px
-      background: vars.color.theme.surfaceHover,
-      borderColor: vars.color.theme.borderHover,
+      transform: `translateY(calc(-1 * ${vars.spacing[1]}))`,
+      background: surfaceHoverVar,
+      borderColor: accentVar,
     },
     '&:active': {
-      transform: `translateY(calc(-1 * ${vars.spacing[1]} / 2))`, // -2px
+      transform: `translateY(calc(-1 * ${vars.spacing[1]} / 2))`,
       boxShadow: vars.shadow.md,
-      background: vars.color.theme.surfaceActive,
+      background: surfaceHoverVar,
+      borderColor: accentVar,
     },
     '&:focus-visible': {
       outline: 'none',
-      boxShadow: `0 0 0 3px ${vars.color.accentMint_20}, ${vars.shadow.lg}`,
+      boxShadow: `${focusRingVar}, ${vars.shadow.lg}`,
+    },
+  },
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      transition: 'none',
+      selectors: {
+        '&:hover': {
+          transform: 'none',
+        },
+        '&:active': {
+          transform: 'none',
+        },
+      },
     },
   },
 });
 
 globalStyle(`.dark ${clickable}`, {
   boxShadow: vars.shadow.md,
-  background: vars.color.theme.surface,
+  background: surfaceVar,
 });
 
 globalStyle(`.dark ${clickable}:hover`, {
   boxShadow: vars.shadow.lg,
-  background: vars.color.theme.surfaceHover,
-  borderColor: vars.color.theme.borderHover,
+  background: surfaceHoverVar,
+  borderColor: accentVar,
 });
 
 globalStyle(`.dark ${clickable}:active`, {
   boxShadow: vars.shadow.md,
-  background: vars.color.theme.surfaceActive,
+  background: surfaceHoverVar,
 });
 
 globalStyle(`.dark ${clickable}:focus-visible`, {
-  boxShadow: `0 0 0 3px ${vars.color.accentMint_20}, ${vars.shadow.lg}`,
+  boxShadow: `${focusRingVar}, ${vars.shadow.lg}`,
 });
 
 export const header = style({
   padding: `${vars.spacing[5]} ${vars.spacing[6]}`,
-  borderBottom: `1px solid ${vars.color.theme.border}`,
+  borderBottom: `1px solid ${borderVar}`,
   fontSize: vars.font.size.body.base,
   fontWeight: vars.font.weight.semiBold,
   lineHeight: vars.font.lineHeight.body.base,
-  color: vars.color.theme.text.primary,
-  background: 'transparent',
+  color: textVar,
+  background: surfaceVar,
 });
 
 export const body = style({
@@ -84,8 +117,8 @@ export const body = style({
 
 export const footer = style({
   padding: `${vars.spacing[5]} ${vars.spacing[6]}`,
-  borderTop: `1px solid ${vars.color.theme.border}`,
-  background: vars.color.theme.surfaceHover,
+  borderTop: `1px solid ${borderVar}`,
+  background: surfaceHoverVar,
 });
 
 export const compact = style({});

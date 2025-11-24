@@ -51,8 +51,24 @@ export const Modal: React.FC<ModalProps> = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
   const [isExiting, setIsExiting] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const titleId = title ? `modal-title-${React.useId()}` : undefined;
   const descriptionId = description ? `modal-description-${React.useId()}` : undefined;
+  const exitTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return undefined;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // Handle Escape key
   useEffect(() => {
@@ -70,12 +86,30 @@ export const Modal: React.FC<ModalProps> = ({
     };
   }, [open]);
 
+  useEffect(() => () => {
+    if (exitTimeoutRef.current) {
+      window.clearTimeout(exitTimeoutRef.current);
+    }
+  }, []);
+
   const handleClose = () => {
+    const exitDelay = prefersReducedMotion ? 0 : 200;
     setIsExiting(true);
-    setTimeout(() => {
+
+    if (exitTimeoutRef.current) {
+      window.clearTimeout(exitTimeoutRef.current);
+    }
+
+    if (exitDelay === 0) {
       onClose();
       setIsExiting(false);
-    }, 200);
+      return;
+    }
+
+    exitTimeoutRef.current = window.setTimeout(() => {
+      onClose();
+      setIsExiting(false);
+    }, exitDelay);
   };
 
   // Focus trap: keep focus within the modal
@@ -86,9 +120,9 @@ export const Modal: React.FC<ModalProps> = ({
     previousActiveElementRef.current = document.activeElement as HTMLElement;
 
     // Focus the modal after a brief delay to allow animation
-    const timeout = setTimeout(() => {
+    const timeout = window.setTimeout(() => {
       modalRef.current?.focus();
-    }, 100);
+    }, prefersReducedMotion ? 0 : 100);
 
     // Get all focusable elements within the modal
     const getFocusableElements = (element: HTMLElement): HTMLElement[] => {
@@ -134,12 +168,12 @@ export const Modal: React.FC<ModalProps> = ({
     document.addEventListener('keydown', handleTabKey);
 
     return () => {
-      clearTimeout(timeout);
+      window.clearTimeout(timeout);
       document.removeEventListener('keydown', handleTabKey);
       // Restore focus to the previously focused element
       previousActiveElementRef.current?.focus();
     };
-  }, [open]);
+  }, [open, prefersReducedMotion]);
 
   // Prevent body scroll when modal is open
   useEffect(() => {

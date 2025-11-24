@@ -8,6 +8,7 @@ import {
   navigationSeparator,
   navigationSurface,
   navigationText,
+  navigationFocusRing,
 } from './navigationTokens.css';
 
 export const sidebar = style({
@@ -56,8 +57,8 @@ export const item = style({
       transform: `translateX(calc(${vars.spacing[1]} / 2)) scale(0.98)`,
     },
     '&:focus-visible': {
-      outline: `2px solid ${navigationActiveText}`,
-      outlineOffset: '2px',
+      outline: 'none',
+      boxShadow: navigationFocusRing,
     },
   },
 });

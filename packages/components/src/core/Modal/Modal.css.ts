@@ -51,6 +51,11 @@ export const overlay = style({
       animation: `${fadeIn} ${vars.motion.duration.fast} ${vars.motion.easing.easeInOut} reverse`,
     },
   },
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      animation: 'none',
+    },
+  },
 });
 
 export const modal = style({
@@ -76,6 +81,12 @@ export const modal = style({
     },
     '&[data-exiting="true"]': {
       animation: `${slideDown} ${vars.motion.duration.fast} ${vars.motion.easing.easeInOut}`,
+    },
+  },
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      animation: 'none',
+      transform: 'none',
     },
   },
 });
