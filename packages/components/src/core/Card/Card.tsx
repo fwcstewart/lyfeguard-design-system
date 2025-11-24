@@ -34,11 +34,15 @@ interface CardSectionProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const createSection = (className: string, displayName: string) => {
-  const Section = React.forwardRef<HTMLElement, CardSectionProps>(({ children, as: Component = 'div', ...props }, ref) => (
-    <Component ref={ref as React.Ref<HTMLDivElement>} className={className} data-lyfeguard={`Card.${displayName}`} {...props}>
-      {children}
-    </Component>
-  ));
+  const Section = React.forwardRef<HTMLElement, CardSectionProps>(({ children, as: Component = 'div', ...props }, ref) => {
+    // Type assertion needed because Component is dynamic
+    const ComponentWithRef = Component as React.ElementType;
+    return (
+      <ComponentWithRef ref={ref} className={className} data-lyfeguard={`Card.${displayName}`} {...props}>
+        {children}
+      </ComponentWithRef>
+    );
+  });
   Section.displayName = `Card${displayName}`;
   (Section as unknown as { [CARD_SECTION]: boolean })[CARD_SECTION] = true;
   return Section;

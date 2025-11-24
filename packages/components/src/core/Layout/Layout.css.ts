@@ -197,3 +197,160 @@ globalStyle(`${stackWithRowDividers} > *:not(:last-child)`, {
 globalStyle(`.dark ${stackWithRowDividers} > *:not(:last-child)`, {
   borderRightColor: darkVars.color.theme.border,
 });
+
+/**
+ * Section provides semantic sectioning with consistent spacing and optional
+ * dividers. Uses CSS variables for responsive spacing and padding.
+ */
+export const section = style({
+  width: '100%',
+  marginTop: `var(--section-spacing, ${spacingTokens.none})`,
+  marginBottom: `var(--section-spacing, ${spacingTokens.none})`,
+  padding: `var(--section-padding, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      marginTop: `var(--section-spacing-sm, var(--section-spacing, ${spacingTokens.none}))`,
+      marginBottom: `var(--section-spacing-sm, var(--section-spacing, ${spacingTokens.none}))`,
+      padding: `var(--section-padding-sm, var(--section-padding, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      marginTop: `var(--section-spacing-md, var(--section-spacing-sm, var(--section-spacing, ${spacingTokens.none})))`,
+      marginBottom: `var(--section-spacing-md, var(--section-spacing-sm, var(--section-spacing, ${spacingTokens.none})))`,
+      padding: `var(--section-padding-md, var(--section-padding-sm, var(--section-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      marginTop: `var(--section-spacing-lg, var(--section-spacing-md, var(--section-spacing, ${spacingTokens.none})))`,
+      marginBottom: `var(--section-spacing-lg, var(--section-spacing-md, var(--section-spacing, ${spacingTokens.none})))`,
+      padding: `var(--section-padding-lg, var(--section-padding-md, var(--section-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      marginTop: `var(--section-spacing-xl, var(--section-spacing-lg, var(--section-spacing, ${spacingTokens.none})))`,
+      marginBottom: `var(--section-spacing-xl, var(--section-spacing-lg, var(--section-spacing, ${spacingTokens.none})))`,
+      padding: `var(--section-padding-xl, var(--section-padding-lg, var(--section-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      marginTop: `var(--section-spacing-xxl, var(--section-spacing-xl, var(--section-spacing, ${spacingTokens.none})))`,
+      marginBottom: `var(--section-spacing-xxl, var(--section-spacing-xl, var(--section-spacing, ${spacingTokens.none})))`,
+      padding: `var(--section-padding-xxl, var(--section-padding-xl, var(--section-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      marginTop: `var(--section-spacing-widescreen, var(--section-spacing-xxl, var(--section-spacing, ${spacingTokens.none})))`,
+      marginBottom: `var(--section-spacing-widescreen, var(--section-spacing-xxl, var(--section-spacing, ${spacingTokens.none})))`,
+      padding: `var(--section-padding-widescreen, var(--section-padding-xxl, var(--section-padding, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+export const sectionWithDivider = style({});
+
+globalStyle(`${sectionWithDivider}:not(:last-child)`, {
+  borderBottom: `1px solid ${vars.color.theme.border}`,
+  paddingBottom: resolveSpacing('lg'),
+  marginBottom: resolveSpacing('lg'),
+});
+
+globalStyle(`.dark ${sectionWithDivider}:not(:last-child)`, {
+  borderBottomColor: darkVars.color.theme.border,
+});
+
+/**
+ * AspectRatio maintains a consistent aspect ratio for its content.
+ * Uses CSS aspect-ratio property. The container's height is automatically
+ * calculated based on the width and aspect ratio.
+ */
+export const aspectRatio = style({
+  position: 'relative',
+  width: '100%',
+  display: 'block',
+});
+
+export const aspectRatioContain = style({});
+
+// For images, videos, and other media elements - fill container and apply object-fit
+globalStyle(`${aspectRatio} > img, ${aspectRatio} > video, ${aspectRatio} > iframe`, {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+});
+
+globalStyle(`${aspectRatioContain} > img, ${aspectRatioContain} > video, ${aspectRatioContain} > iframe`, {
+  objectFit: 'contain',
+});
+
+// For div and other block elements - fill container
+globalStyle(`${aspectRatio} > div`, {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+});
+
+/**
+ * Center horizontally centers its children within the available space.
+ */
+export const center = style({
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  padding: `var(--center-padding, ${spacingTokens.none})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      padding: `var(--center-padding-sm, var(--center-padding, ${spacingTokens.none}))`,
+    },
+    [breakpointQueries.md]: {
+      padding: `var(--center-padding-md, var(--center-padding-sm, var(--center-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.lg]: {
+      padding: `var(--center-padding-lg, var(--center-padding-md, var(--center-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xl]: {
+      padding: `var(--center-padding-xl, var(--center-padding-lg, var(--center-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.xxl]: {
+      padding: `var(--center-padding-xxl, var(--center-padding-xl, var(--center-padding, ${spacingTokens.none})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      padding: `var(--center-padding-widescreen, var(--center-padding-xxl, var(--center-padding, ${spacingTokens.none})))`,
+    },
+  },
+});
+
+export const centerAndText = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '100%',
+});
+
+/**
+ * Cluster groups items horizontally with consistent spacing and automatic wrapping.
+ */
+export const cluster = style({
+  display: 'flex',
+  flexDirection: 'row',
+  width: '100%',
+  gap: `var(--cluster-gap, ${spacingTokens.md})`,
+  '@media': {
+    [breakpointQueries.sm]: {
+      gap: `var(--cluster-gap-sm, var(--cluster-gap, ${spacingTokens.md}))`,
+    },
+    [breakpointQueries.md]: {
+      gap: `var(--cluster-gap-md, var(--cluster-gap-sm, var(--cluster-gap, ${spacingTokens.md})))`,
+    },
+    [breakpointQueries.lg]: {
+      gap: `var(--cluster-gap-lg, var(--cluster-gap-md, var(--cluster-gap, ${spacingTokens.md})))`,
+    },
+    [breakpointQueries.xl]: {
+      gap: `var(--cluster-gap-xl, var(--cluster-gap-lg, var(--cluster-gap, ${spacingTokens.md})))`,
+    },
+    [breakpointQueries.xxl]: {
+      gap: `var(--cluster-gap-xxl, var(--cluster-gap-xl, var(--cluster-gap, ${spacingTokens.md})))`,
+    },
+    [breakpointQueries.widescreen]: {
+      gap: `var(--cluster-gap-widescreen, var(--cluster-gap-xxl, var(--cluster-gap, ${spacingTokens.md})))`,
+    },
+  },
+});
