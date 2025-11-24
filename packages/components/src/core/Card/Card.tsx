@@ -14,6 +14,12 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
    * If true, adds hover styles and cursor pointer. Use with onClick for interactive cards.
    */
   clickable?: boolean;
+  /**
+   * Layout variant for the card. Defaults to `default`.
+   * - `default`: Standard card with normal padding
+   * - `compact`: Reduced padding suitable for grid layouts and account items
+   */
+  variant?: 'default' | 'compact';
 }
 
 /**
@@ -26,6 +32,7 @@ export const Card: React.FC<CardProps> = ({
   header,
   footer,
   clickable = false,
+  variant = 'default',
   children,
   className,
   onKeyDown,
@@ -33,9 +40,8 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   const isInteractive = clickable || Boolean(onClick);
-  const cardClassName = clickable
-    ? `${s.card} ${s.clickable} ${className || ''}`
-    : `${s.card} ${className || ''}`;
+  const variantClass = variant === 'compact' ? s.compact : '';
+  const cardClassName = `${s.card} ${variantClass} ${clickable ? s.clickable : ''} ${className || ''}`.trim();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (isInteractive && (event.key === 'Enter' || event.key === ' ')) {

@@ -29,13 +29,20 @@ export interface TabsProps {
    * Optional callback fired when the active tab changes.
    */
   onChange?: (index: number) => void;
+  /**
+   * Visual style variant of the tabs. Defaults to `default`.
+   * - `default`: Standard tabs with background and gradient indicator
+   * - `underline`: Active tab has Primary color underline accent
+   * - `bordered`: Bordered bottom style for mobile-friendly tabs
+   */
+  variant?: 'default' | 'underline' | 'bordered';
 }
 
 /**
  * A simple tabbed interface. Renders a horizontal list of tabs and shows the
  * associated content when a tab is selected. Controlled via `tabs` prop.
  */
-export const Tabs: React.FC<TabsProps> = ({ tabs, defaultIndex = 0, onChange }) => {
+export const Tabs: React.FC<TabsProps> = ({ tabs, defaultIndex = 0, onChange, variant = 'default' }) => {
   const tabsId = React.useId();
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -128,8 +135,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultIndex = 0, onChange }) 
   };
 
   return (
-    <div data-lyfeguard="Tabs">
-      <div className={styles.tabList} role="tablist" onKeyDown={handleKeyDown}>
+    <div data-lyfeguard="Tabs" data-variant={variant}>
+      <div className={`${styles.tabList} ${styles.tabListVariant[variant]}`} role="tablist" onKeyDown={handleKeyDown}>
         {tabs.map((tab, index) => (
           <button
             key={index}
@@ -142,7 +149,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultIndex = 0, onChange }) 
             aria-controls={`tabpanel-${tabsId}-${index}`}
             data-active={activeIndex === index}
             tabIndex={activeIndex === index ? 0 : -1}
-            className={styles.tab}
+            className={`${styles.tab} ${styles.tabVariant[variant]}`}
             onClick={() => handleSelect(index)}
             disabled={tab.isDisabled}
             type="button"

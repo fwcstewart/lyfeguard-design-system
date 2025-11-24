@@ -19,6 +19,44 @@ export const table = style({
   color: vars.color.theme.text.primary,
 });
 
+export const tableVariant = styleVariants({
+  default: {},
+  bordered: {
+    border: `1px solid ${vars.color.theme.border}`,
+    selectors: {
+      '& thead': {
+        borderBottom: `2px solid ${vars.color.theme.border}`,
+      },
+      '& tfoot': {
+        borderTop: `2px solid ${vars.color.theme.border}`,
+      },
+      '.dark &': {
+        borderColor: vars.color.theme.border,
+      },
+    },
+  },
+  divided: {
+    selectors: {
+      '& tbody tr': {
+        borderBottom: `1px solid ${vars.color.theme.border}`,
+      },
+      '& tbody tr:last-child': {
+        borderBottom: 'none',
+      },
+      '.dark & tbody tr': {
+        borderBottomColor: vars.color.theme.border,
+      },
+    },
+  },
+  centered: {
+    selectors: {
+      '& th, & td': {
+        textAlign: 'center',
+      },
+    },
+  },
+});
+
 export const headerCell = style({
   textAlign: 'left',
   ...headerTypography,
@@ -31,6 +69,13 @@ export const headerCell = style({
       background: vars.color.theme.surfaceHover,
       color: vars.color.theme.text.secondary,
       borderBottom: `1px solid ${vars.color.theme.border}`,
+    },
+    '[data-variant="bordered"] &': {
+      border: `1px solid ${vars.color.theme.border}`,
+      borderBottom: `2px solid ${vars.color.theme.border}`,
+    },
+    '[data-variant="centered"] &': {
+      textAlign: 'center',
     },
   },
 });
@@ -99,6 +144,15 @@ export const cell = style({
     '.dark &': {
       color: vars.color.theme.text.primary,
       borderBottom: `1px solid ${vars.color.theme.border}`,
+    },
+    '[data-variant="bordered"] &': {
+      border: `1px solid ${vars.color.theme.border}`,
+    },
+    '[data-variant="divided"] &': {
+      borderBottom: `1px solid ${vars.color.theme.border}`,
+    },
+    '[data-variant="centered"] &': {
+      textAlign: 'center',
     },
   },
 });

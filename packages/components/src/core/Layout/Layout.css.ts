@@ -15,11 +15,19 @@ export const container = style({
   paddingLeft: resolveSpacing('md'),
   paddingRight: resolveSpacing('md'),
   '@media': {
+    [breakpointQueries.sm]: {
+      paddingLeft: resolveSpacing('lg'),
+      paddingRight: resolveSpacing('lg'),
+    },
     [breakpointQueries.md]: {
       paddingLeft: resolveSpacing('lg'),
       paddingRight: resolveSpacing('lg'),
     },
     [breakpointQueries.lg]: {
+      paddingLeft: resolveSpacing('xl'),
+      paddingRight: resolveSpacing('xl'),
+    },
+    [breakpointQueries.xl]: {
       paddingLeft: resolveSpacing('xl'),
       paddingRight: resolveSpacing('xl'),
     },
@@ -29,6 +37,36 @@ export const container = style({
     },
   },
 });
+
+/**
+ * Container with responsive max-width support. Uses CSS custom properties
+ * to apply breakpoint-specific max-width values via inline styles.
+ */
+export const containerResponsive = style([
+  container,
+  {
+    '@media': {
+      [breakpointQueries.sm]: {
+        maxWidth: 'var(--container-max-width-sm)',
+      },
+      [breakpointQueries.md]: {
+        maxWidth: 'var(--container-max-width-md)',
+      },
+      [breakpointQueries.lg]: {
+        maxWidth: 'var(--container-max-width-lg)',
+      },
+      [breakpointQueries.xl]: {
+        maxWidth: 'var(--container-max-width-xl)',
+      },
+      [breakpointQueries.xxl]: {
+        maxWidth: 'var(--container-max-width-xxl)',
+      },
+      [breakpointQueries.widescreen]: {
+        maxWidth: 'var(--container-max-width-widescreen)',
+      },
+    },
+  },
+]);
 
 /**
  * Grid is a lightweight CSS grid wrapper. The number of columns and the gap
@@ -56,6 +94,33 @@ export const grid = style({
     },
     [breakpointQueries.widescreen]: {
       gap: `var(--grid-gap-widescreen, var(--grid-gap-xxl, var(--grid-gap, ${spacingTokens.md})))`,
+    },
+  },
+});
+
+/**
+ * GridItem with responsive span support. Uses CSS variables to apply
+ * breakpoint-specific column spans.
+ */
+globalStyle('.grid-item-responsive', {
+  '@media': {
+    [breakpointQueries.sm]: {
+      gridColumn: 'span var(--grid-item-span-sm) / span var(--grid-item-span-sm)',
+    },
+    [breakpointQueries.md]: {
+      gridColumn: 'span var(--grid-item-span-md) / span var(--grid-item-span-md)',
+    },
+    [breakpointQueries.lg]: {
+      gridColumn: 'span var(--grid-item-span-lg) / span var(--grid-item-span-lg)',
+    },
+    [breakpointQueries.xl]: {
+      gridColumn: 'span var(--grid-item-span-xl) / span var(--grid-item-span-xl)',
+    },
+    [breakpointQueries.xxl]: {
+      gridColumn: 'span var(--grid-item-span-xxl) / span var(--grid-item-span-xxl)',
+    },
+    [breakpointQueries.widescreen]: {
+      gridColumn: 'span var(--grid-item-span-widescreen) / span var(--grid-item-span-widescreen)',
     },
   },
 });

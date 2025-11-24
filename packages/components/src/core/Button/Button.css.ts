@@ -183,3 +183,128 @@ export const tertiary = style([
     },
   },
 ]);
+
+export const dark = style([
+  base,
+  {
+    background: vars.color.brand900,
+    color: vars.color.neutral0,
+    boxShadow: vars.shadow.xs,
+    selectors: {
+      '&:hover:not(:disabled), &[data-state="hover"]': {
+        background: vars.color.brand800,
+        boxShadow: vars.shadow.md,
+        transform: 'translateY(-1px)',
+      },
+      '&:active:not(:disabled), &[data-state="active"]': {
+        background: vars.color.brand800,
+        transform: 'translateY(0)',
+        boxShadow: vars.shadow.xs,
+      },
+      '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+        opacity: 0.6,
+        cursor: 'not-allowed',
+        transform: 'none',
+      },
+      '.dark &': {
+        background: vars.color.neutral900,
+        color: vars.color.neutral0,
+        selectors: {
+          '&:hover:not(:disabled), &[data-state="hover"]': {
+            background: vars.color.neutral800,
+            boxShadow: vars.shadow.md,
+          },
+          '&:focus-visible, &[data-state="focus"]': {
+            boxShadow: focusRingDark,
+          },
+        },
+      },
+    },
+  },
+]);
+
+export const danger = style([
+  base,
+  {
+    background: vars.color.error500,
+    color: vars.color.neutral0,
+    boxShadow: vars.shadow.xs,
+    selectors: {
+      '&:hover:not(:disabled), &[data-state="hover"]': {
+        background: `color-mix(in srgb, ${vars.color.error500} 90%, ${vars.color.brand900})`,
+        boxShadow: vars.shadow.md,
+        transform: 'translateY(-1px)',
+      },
+      '&:active:not(:disabled), &[data-state="active"]': {
+        background: `color-mix(in srgb, ${vars.color.error500} 85%, ${vars.color.brand900})`,
+        transform: 'translateY(0)',
+        boxShadow: vars.shadow.xs,
+      },
+      '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+        opacity: 0.6,
+        cursor: 'not-allowed',
+        transform: 'none',
+      },
+      '.dark &': {
+        background: vars.color.error500,
+        color: vars.color.neutral0,
+        selectors: {
+          '&:hover:not(:disabled), &[data-state="hover"]': {
+            background: `color-mix(in srgb, ${vars.color.error500} 90%, ${vars.color.neutral900})`,
+            boxShadow: vars.shadow.md,
+          },
+          '&:focus-visible, &[data-state="focus"]': {
+            boxShadow: focusRingDark,
+          },
+        },
+      },
+    },
+  },
+]);
+
+export const ghost = style([
+  base,
+  {
+    background: 'transparent',
+    color: vars.color.theme.text.primary,
+    paddingLeft: 0,
+    paddingRight: 0,
+    selectors: {
+      '&:hover:not(:disabled), &[data-state="hover"]': {
+        background: vars.color.theme.surfaceHover,
+        color: vars.color.theme.text.primary,
+      },
+      '&:active:not(:disabled), &[data-state="active"]': {
+        background: vars.color.theme.surfaceActive,
+        opacity: 0.9,
+      },
+      '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+        opacity: 0.6,
+        cursor: 'not-allowed',
+        color: vars.color.theme.text.disabled,
+      },
+      '&:focus-visible, &[data-state="focus"]': {
+        boxShadow: focusRingLight,
+        borderRadius: vars.radius.sm,
+      },
+      '.dark &': {
+        color: vars.color.theme.text.primary,
+        selectors: {
+          '&:hover:not(:disabled), &[data-state="hover"]': {
+            background: vars.color.theme.surfaceHover,
+            color: vars.color.theme.text.primary,
+          },
+          '&:active:not(:disabled), &[data-state="active"]': {
+            background: vars.color.theme.surfaceActive,
+          },
+          '&:focus-visible, &[data-state="focus"]': {
+            boxShadow: focusRingDark,
+          },
+          '&:disabled, &[data-state="disabled"], &[data-state="loading"]': {
+            color: vars.color.theme.text.disabled,
+          },
+        },
+      },
+    },
+  },
+]);

@@ -32,6 +32,10 @@
       "800": { "value": "#455252" },
       "900": { "value": "#2E3B3B" }
     },
+    "utility": {
+      "tertiary": { "value": "#F0EFEF" },
+      "mercury": { "value": "#EBEBEB" }
+    },
     "success": {
       "500": { "value": "#00FFB2" },
       "600": { "value": "#00E0A0" },
@@ -41,6 +45,11 @@
       "500": { "value": "#F7B539" },
       "100": { "value": "#FFF8E6" },
       "500_15": { "value": "rgba(247,181,57,0.15)" }
+    },
+    "pending": {
+      "500": { "value": "#FFA800" },
+      "100": { "value": "#FFF8E6" },
+      "500_15": { "value": "rgba(255,168,0,0.15)" }
     },
     "error": {
       "500": { "value": "#E24C4B" },

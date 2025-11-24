@@ -59,6 +59,14 @@ export interface TableProps<T> {
    * Controls vertical density of table cells. Defaults to `comfortable`.
    */
   density?: 'comfortable' | 'compact';
+  /**
+   * Visual style variant of the table. Defaults to `default`.
+   * - `default`: Standard table with subtle borders
+   * - `bordered`: Bordered headers and footers with visible borders
+   * - `divided`: Divided rows with borders between all rows
+   * - `centered`: Centered text alignment for all cells
+   */
+  variant?: 'default' | 'bordered' | 'divided' | 'centered';
 }
 
 /**
@@ -76,6 +84,7 @@ export function Table<T>({
   onSelectionChange,
   defaultSort,
   density = 'comfortable',
+  variant = 'default',
 }: TableProps<T>) {
   const [sortColumn, setSortColumn] = useState<number | null>(
     defaultSort?.columnIndex ?? null
@@ -160,8 +169,10 @@ export function Table<T>({
     }
   };
 
+  const tableClassName = `${s.table} ${s.tableVariant[variant]}`;
+
   return (
-    <table className={s.table} data-lyfeguard="Table">
+    <table className={tableClassName} data-lyfeguard="Table" data-variant={variant}>
       <thead>
         <tr>
           {selectable && (

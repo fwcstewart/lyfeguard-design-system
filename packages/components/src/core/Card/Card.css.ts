@@ -87,3 +87,17 @@ export const footer = style({
   borderTop: `1px solid ${vars.color.theme.border}`,
   background: vars.color.theme.surfaceHover,
 });
+
+export const compact = style({
+  selectors: {
+    [`& ${header}`]: {
+      padding: `${vars.spacing[3]} ${vars.spacing[4]}`,
+    },
+    [`& ${body}`]: {
+      padding: vars.spacing[4],
+    },
+    [`& ${footer}`]: {
+      padding: `${vars.spacing[3]} ${vars.spacing[4]}`,
+    },
+  },
+});

@@ -24,6 +24,24 @@ export const tabList = style({
   boxShadow: `inset 0 -2px 0 0 ${vars.color.theme.border}`,
 });
 
+export const tabListVariant = {
+  default: style({}),
+  underline: style({
+    background: 'transparent',
+    boxShadow: 'none',
+    borderBottom: `1px solid ${vars.color.theme.border}`,
+    padding: 0,
+    marginBottom: vars.spacing[5] as unknown as string,
+  }),
+  bordered: style({
+    background: 'transparent',
+    boxShadow: 'none',
+    borderBottom: `2px solid ${vars.color.theme.border}`,
+    padding: 0,
+    marginBottom: vars.spacing[5] as unknown as string,
+  }),
+};
+
 // Individual tab trigger
 export const tab = style({
   padding: `${vars.spacing[3]} ${vars.spacing[5]}` as unknown as string,
@@ -99,6 +117,63 @@ export const tab = style({
     },
   },
 });
+
+export const tabVariant = {
+  default: style({}),
+  underline: style({
+    marginBottom: 0,
+    borderRadius: 0,
+    padding: `${vars.spacing[3]} ${vars.spacing[5]}` as unknown as string,
+    selectors: {
+      '&[data-active="true"]': {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+      },
+      '&[data-active="true"]::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: `-${vars.spacing[1]}`,
+        left: 0,
+        right: 0,
+        height: '3px' as unknown as string,
+        background: vars.color.accentMint,
+        borderRadius: 0,
+        animation: `${fadeIn} ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,
+      },
+      '&:hover:not([data-active="true"]):not(:disabled)': {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+      },
+      '.dark &[data-active="true"]::after': {
+        background: vars.color.accentMint,
+      },
+    },
+  }),
+  bordered: style({
+    marginBottom: `-${vars.spacing[1]}`,
+    borderRadius: 0,
+    borderBottom: `2px solid transparent`,
+    padding: `${vars.spacing[3]} ${vars.spacing[5]}` as unknown as string,
+    selectors: {
+      '&[data-active="true"]': {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        borderBottomColor: vars.color.accentMint,
+      },
+      '&[data-active="true"]::after': {
+        display: 'none',
+      },
+      '&:hover:not([data-active="true"]):not(:disabled)': {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        borderBottomColor: vars.color.theme.border,
+      },
+      '.dark &[data-active="true"]': {
+        borderBottomColor: vars.color.accentMint,
+      },
+    },
+  }),
+};
 
 export const tabPanel = style({
   animation: `${fadeIn} ${vars.motion.duration.normal} ${vars.motion.easing.easeInOut}`,

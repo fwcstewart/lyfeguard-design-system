@@ -2,7 +2,7 @@ import React from 'react';
 import * as styles from './Button.css';
 import { Spinner } from '../Spinner/Spinner';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'dark' | 'danger' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonState = 'hover' | 'focus' | 'active' | 'disabled' | 'loading';
 
@@ -53,6 +53,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ? styles.secondary
         : variant === 'tertiary'
         ? styles.tertiary
+        : variant === 'dark'
+        ? styles.dark
+        : variant === 'danger'
+        ? styles.danger
+        : variant === 'ghost'
+        ? styles.ghost
         : styles.primary;
 
     const sizeClass =
