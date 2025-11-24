@@ -73,7 +73,14 @@ export const Stack = React.forwardRef<HTMLElement, StackProps>(
     const dividerClass =
       direction === 'row' ? s.stackWithRowDividers : s.stackWithColumnDividers;
 
-    const stackClassName = cx(s.stack, direction === 'row' && s.stackRow, dividers && dividerClass, className);
+    const shouldRenderDividers = dividers && !(direction === 'row' && wrap && wrap !== 'nowrap');
+
+    const stackClassName = cx(
+      s.stack,
+      direction === 'row' && s.stackRow,
+      shouldRenderDividers && dividerClass,
+      className,
+    );
 
     const composedStyle: React.CSSProperties = {
       alignItems: align,

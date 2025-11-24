@@ -4,6 +4,7 @@ import React from 'react';
 import { Grid } from './Grid';
 import { Stack } from './Stack';
 import { spacingTokens } from './spacing';
+import * as styles from './Layout.css';
 
 describe('Layout spacing utilities', () => {
   it('maps semantic spacing tokens to design token values', () => {
@@ -40,5 +41,18 @@ describe('Layout spacing utilities', () => {
 
     expect(grid.style.getPropertyValue('--grid-gap')).toBe(spacingTokens.xs);
     expect(grid.style.getPropertyValue('--grid-gap-md')).toBe(spacingTokens.lg);
+  });
+
+  it('omits row dividers when wrapping items to avoid broken layout', () => {
+    render(
+      <Stack data-testid="row-stack" direction="row" dividers wrap="wrap">
+        <div>One</div>
+        <div>Two</div>
+      </Stack>,
+    );
+
+    const stack = screen.getByTestId('row-stack');
+
+    expect(stack.className.includes(styles.stackWithRowDividers)).toBe(false);
   });
 });
