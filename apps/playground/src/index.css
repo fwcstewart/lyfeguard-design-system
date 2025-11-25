@@ -1,10 +1,19 @@
-/* CSS Reset for Playground */
-* {
-  box-sizing: border-box;
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
+@layer base {
+  :root {
+    --lg-playground-body-margin: 0;
+    --lg-playground-body-padding: 0;
+  }
 
+  body {
+    margin: var(--lg-playground-body-margin);
+    padding: var(--lg-playground-body-padding);
+  }
+}
