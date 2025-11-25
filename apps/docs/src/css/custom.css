@@ -8,15 +8,25 @@
  */
 
 :root {
-  /* Example: set the primary colour of the docs to the brand teal. */
-  --ifm-color-primary: #177b9a;
-  --ifm-color-primary-dark: #146a84;
-  --ifm-color-primary-darker: #115c73;
-  --ifm-color-primary-light: #1a8fb4;
-  --ifm-code-font-size: 95%;
+  --lg-docs-primary: #177b9a;
+  --lg-docs-primary-dark: #146a84;
+  --lg-docs-primary-darker: #115c73;
+  --lg-docs-primary-light: #1a8fb4;
+  --lg-docs-code-font-size: 95%;
+  --lg-docs-body-line-height: 1.6;
+}
+
+/* Map local custom properties into the Infima theme hooks so the values remain easy to maintain. */
+:root {
+  --ifm-color-primary: var(--lg-docs-primary);
+  --ifm-color-primary-dark: var(--lg-docs-primary-dark);
+  --ifm-color-primary-darker: var(--lg-docs-primary-darker);
+  --ifm-color-primary-light: var(--lg-docs-primary-light);
+  --ifm-code-font-size: var(--lg-docs-code-font-size);
 }
 
 /* Provide slightly larger line height for improved readability */
-p, li {
-  line-height: 1.6;
+p,
+li {
+  line-height: var(--lg-docs-body-line-height);
 }
