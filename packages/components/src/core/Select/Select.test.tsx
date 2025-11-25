@@ -34,6 +34,54 @@ describe('Select', () => {
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
 
+  it('renders helper text and links it for accessibility when no error', () => {
+    render(
+      <Select label="Fruits" helperText="Shown below the control">
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+      </Select>
+    );
+
+    const helper = screen.getByText('Shown below the control');
+    const selectElement = screen.getByRole('combobox', { name: 'Fruits' });
+
+    expect(helper).toBeInTheDocument();
+    expect(selectElement).toHaveAttribute('aria-describedby', helper.id);
+  });
+
+  it('prefers error messaging and marks the control invalid', () => {
+    render(
+      <Select label="Fruits" helperText="Helper" error="Something went wrong">
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+      </Select>
+    );
+
+    const error = screen.getByText('Something went wrong');
+    const selectElement = screen.getByRole('combobox', { name: 'Fruits' });
+
+    expect(error).toBeInTheDocument();
+    expect(selectElement).toHaveAttribute('aria-describedby', error.id);
+    expect(selectElement).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('prevents selection changes when readOnly', () => {
+    const handleChange = vi.fn();
+    render(
+      <Select label="Fruits" readOnly onChange={handleChange} defaultValue="apple">
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+      </Select>
+    );
+
+    const selectElement = screen.getByRole('combobox', { name: 'Fruits' }) as HTMLSelectElement;
+
+    fireEvent.change(selectElement, { target: { value: 'banana' } });
+
+    expect(handleChange).not.toHaveBeenCalled();
+    expect(selectElement).toHaveAttribute('aria-readonly', 'true');
+  });
+
   it('exposes the combobox role with an associated label', () => {
     render(
       <Select label="Fruits" aria-describedby="select-help">
